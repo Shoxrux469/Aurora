@@ -1,5 +1,12 @@
-import Image from "next/image";
+import { Main } from '@/components/component/main'
+import React from 'react'
 
-export default function HomePage() {
-  return <main className="w-full h-screen bg-zinc-200"></main>;
+const Home = () => {
+  return (
+    <div>
+      <Main />
+    </div>
+  )
 }
+
+export default Home
