@@ -3,9 +3,9 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import React from "react";
-import Footer from "../footer/Footer";
-import Header from "../header/Header";
-import MainSwiper from "../swiper/Swiper";
+import Footer from "../../components/footer/Footer";
+import Header from "../../components/header/Header";
+import MainSwiper from "../../components/swiper/Swiper";
 
 export function Main() {
   return (
