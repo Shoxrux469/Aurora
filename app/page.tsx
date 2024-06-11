@@ -1,12 +1,12 @@
-import { Main } from '@/components/component/main'
-import React from 'react'
+import { Main } from "@/pages/main/main";
+import React from "react";
 
 const Home = () => {
   return (
     <div>
       <Main />
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
