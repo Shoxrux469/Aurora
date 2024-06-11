@@ -6,7 +6,6 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { Button } from "../ui/button";
 
 const Aside = ({ side }: { side: "left" }) => {
   return (
