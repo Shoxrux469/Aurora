@@ -1,0 +1,8 @@
+.swiper-pagination-bullet {
+    width: 16px;
+    /* Adjust the width of the dots */
+    height: 16px;
+    /* Adjust the height of the dots */
+    @apply bg-secondary
+    /* Change the background color if needed */
+}
