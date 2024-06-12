@@ -40,6 +40,7 @@ const MainSwiper = () => {
       modules={[Pagination, Autoplay]}
       spaceBetween={30}
       slidesPerView={1}
+      autoplay={{ delay: 5000 }}
       pagination={{ clickable: false }}
       className="w-full h-96 mt-4 hover:scale-[1.02] duration-300 text-4xl text-secondary rounded-xl"
     >

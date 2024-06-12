@@ -1,9 +1,7 @@
-import React from 'react'
+import React from "react";
 
 const ui = () => {
-  return (
-    <div>ui</div>
-  )
-}
+  return <div>ui</div>;
+};
 
-export default ui
+export default ui;
