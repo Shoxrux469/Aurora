@@ -1,7 +1,10 @@
-import { Main } from "@/pages/main/main";
-import React from "react";
+import { Main } from '@/components/component/main'
+import ProductsService from "@/services/api/products"
 
-const Home = () => {
+const Home = async () => {
+  let res = await ProductsService.getAll()
+
+  console.log(res);
   return (
     <div>
       <Main />
