@@ -12,7 +12,7 @@ const Home = async () => {
         <p key={item.id}>{item.categories}</p>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;
