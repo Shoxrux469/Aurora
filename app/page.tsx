@@ -1,8 +1,8 @@
-import { Main } from '@/components/component/main'
-import ProductsService from "@/services/api/products"
+import { Main } from "@/pages/main/main";
+import ProductsService from "@/services/api/products";
 
 const Home = async () => {
-  let res = await ProductsService.getAll()
+  let res = await ProductsService.getAll();
 
   console.log(res);
   return (
