@@ -4,16 +4,17 @@ import makeRequest from "../makeRequest";
 import { IResponse } from "@/interfaces";
 import { IProduct } from "@/interfaces/product";
 
-let url = '/products'
+let url = "/products";
 
 class ProductsService {
   async getAll() {
-    const response = await makeRequest.get<IResponse>(url)
+    const res = await makeRequest.get(url);
 
-    let transformedData = FirestoreTransformer.transformFirebaseData(response.data.documents)
+    let transformedData = FirestoreTransformer.transformFirebaseData(
+      res.data.documents
+    );
 
-    return transformedData
+    return transformedData;
   }
 }
-
-export default new ProductsService()
+export default new ProductsService();

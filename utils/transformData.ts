@@ -22,13 +22,21 @@ export class FirestoreTransformer {
     stringValue: (value: string) => value,
     integerValue: (value: string) => parseInt(value, 10),
     booleanValue: (value: boolean) => value,
-    arrayValue: (value: { values: FirestoreValue[] }) => value.values.map(v => FirestoreTransformer.transformField(v)),
-    mapValue: (value: { fields: FirestoreFields }) => FirestoreTransformer.transformFields(value.fields),
+    arrayValue: (value: { values: FirestoreValue[] }) =>
+      value.values.map((v) => FirestoreTransformer.transformField(v)),
+    mapValue: (value: { fields: FirestoreFields }) =>
+      FirestoreTransformer.transformFields(value.fields),
   };
 
   static transformField(field: FirestoreValue): any {
-    const key = Object.keys(field).find(k => FirestoreTransformer.transformFunctions[k]);
-    return key ? FirestoreTransformer.transformFunctions[key](field[key as keyof FirestoreValue]) : null;
+    const key = Object.keys(field).find(
+      (k) => FirestoreTransformer.transformFunctions[k]
+    );
+    return key
+      ? FirestoreTransformer.transformFunctions[key](
+          field[key as keyof FirestoreValue]
+        )
+      : null;
   }
 
   static transformFields(fields: FirestoreFields): any {
@@ -43,18 +51,22 @@ export class FirestoreTransformer {
 
   static transformDocument(doc: FirestoreDocument): any {
     return {
-      id: doc.name?.split('/').pop(),
+      id: doc.name?.split("/").pop(),
       ...FirestoreTransformer.transformFields(doc.fields),
       createTime: doc.createTime,
       updateTime: doc.updateTime,
     };
   }
 
-  static transformFirebaseData(data: FirestoreDocument[] | FirestoreFields): any {
+  static transformFirebaseData(
+    data: FirestoreDocument[] | FirestoreFields
+  ): any {
     if (Array.isArray(data)) {
-      return data.map(doc => FirestoreTransformer.transformDocument(doc));
-    } else if ('fields' in data) {
-      return FirestoreTransformer.transformDocument(data as unknown as FirestoreDocument);
+      return data.map((doc) => FirestoreTransformer.transformDocument(doc));
+    } else if ("fields" in data) {
+      return FirestoreTransformer.transformDocument(
+        data as unknown as FirestoreDocument
+      );
     }
     return FirestoreTransformer.transformFields(data as FirestoreFields);
   }

@@ -1,16 +1,13 @@
-import { Main } from '@/components/component/main'
-import { IProduct } from '@/interfaces/product'
-import ProductsService from "@/services/api/products"
+import { Main } from "@/pages/main/main";
+import { IProduct } from "@/interfaces/product";
+import ProductsService from "@/services/api/products";
 
 const Home = async () => {
-  let results = await ProductsService.getAll()
+  let products = await ProductsService.getAll();
 
   return (
     <div>
       <Main />
-      {results?.map((item: IProduct) => (
-        <p key={item.id}>{item.categories}</p>
-      ))}
     </div>
   );
 };
