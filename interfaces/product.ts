@@ -1,41 +1,49 @@
-import { IImage, idType } from ".";
+import { idType } from ".";
+import { IProductCategory } from "./category";
 
-export interface IProductPrice {
-  created_at: string;
-  id: idType;
-  old_price: string
-  price: number;
-  product_id: idType;
-}
 
 export interface IPromoContent {
-  id?: idType
-  description: string
-  product_id: idType
-  image_full: string
   title: string
-  // image_id: idType
-  // image: IImage
+  description: string
+  color: string
 }
 
 export interface IProduct {
   id: idType;
-  categories: string;
-  promo_contents: IPromoContent[]
+  categories: IProductCategory;
+  promo_content: IPromoContent
   images_links: string[];
-  color_product: string | null;
-  createTime: string | null;
-  updateTime: string | null;
-  // prices: IProductPrice[];
-  // size_product: number | string | null;
+  price: number;
+  size?: number | string | null;
 }
 
-// {
-//   id: 'dW2dsq4e',
-//   categories: 'furniture',
-//
-//   images_links: ['image 1', 'image 2'],
-//   color_product: 'серый',
-//   createTime: '2024-06-13T08:54:56.997763Z',
-//   updateTime: '2024-06-13T09:26:19.524156Z'
+// let user = {
+//   id: 1,
+//   username: "example_user",
+//   email: "user@example.com",
+//   cart: {
+//     id: 101,
+//     items: [
+//       {
+//         product_id: 1,
+//         quantity: 2,
+//         name: "Product 1",
+//         price: 50.0
+//       },
+//       {
+//         product_id: 2,
+//         name: "Product 2",
+//         quantity: 1,
+//         price: 100.0
+//       }
+//     ],
+//     total_price: 200.0
+//   },
+//   orders: [
+//     {
+//       order_id: 1001,
+//       status: "completed",
+//       total_price: 150.0,
+//     }
+//   ]
 // }

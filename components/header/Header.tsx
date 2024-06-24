@@ -37,12 +37,10 @@ const Header = () => {
           </Link>
           {SHEET_SIDES.map((side) => (
             <Sheet key={side}>
-              <Button size="icon" variant="ghost">
-                <SheetTrigger>
-                  <MenuIcon className={cn("h-6 w-6 text-green-600")} />
-                </SheetTrigger>
-                <Aside side={side} />
-              </Button>
+              <SheetTrigger>
+                <MenuIcon className={cn("h-6 w-6 text-green-600")} />
+              </SheetTrigger>
+              <Aside side={side} />
             </Sheet>
           ))}
         </div>
