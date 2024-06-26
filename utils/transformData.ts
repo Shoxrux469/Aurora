@@ -22,13 +22,21 @@ export class FirestoreTransformer {
     stringValue: (value: string) => value,
     integerValue: (value: string) => parseInt(value, 10),
     booleanValue: (value: boolean) => value,
-    arrayValue: (value: { values: FirestoreValue[] }) => value.values.map(v => FirestoreTransformer.transformField(v)),
-    mapValue: (value: { fields: FirestoreFields }) => FirestoreTransformer.transformFields(value.fields),
+    arrayValue: (value: { values: FirestoreValue[] }) =>
+      value.values.map((v) => FirestoreTransformer.transformField(v)),
+    mapValue: (value: { fields: FirestoreFields }) =>
+      FirestoreTransformer.transformFields(value.fields),
   };
 
   static transformField(field: FirestoreValue): any {
-    const key = Object.keys(field).find(k => FirestoreTransformer.transformFunctions[k]);
-    return key ? FirestoreTransformer.transformFunctions[key](field[key as keyof FirestoreValue]) : null;
+    const key = Object.keys(field).find(
+      (k) => FirestoreTransformer.transformFunctions[k]
+    );
+    return key
+      ? FirestoreTransformer.transformFunctions[key](
+        field[key as keyof FirestoreValue]
+      )
+      : null;
   }
 
   static transformFields(fields: FirestoreFields): any {
@@ -43,19 +51,55 @@ export class FirestoreTransformer {
 
   static transformDocument(doc: FirestoreDocument): any {
     return {
-      id: doc.name?.split('/').pop(),
+      id: doc.name?.split("/").pop(),
       ...FirestoreTransformer.transformFields(doc.fields),
       createTime: doc.createTime,
       updateTime: doc.updateTime,
     };
   }
 
-  static transformFirebaseData(data: FirestoreDocument[] | FirestoreFields): any {
+  static transformFirebaseData(
+    data: FirestoreDocument[] | FirestoreFields
+  ): any {
     if (Array.isArray(data)) {
-      return data.map(doc => FirestoreTransformer.transformDocument(doc));
-    } else if ('fields' in data) {
-      return FirestoreTransformer.transformDocument(data as unknown as FirestoreDocument);
+      return data.map((doc) => FirestoreTransformer.transformDocument(doc));
+    } else if ("fields" in data) {
+      return FirestoreTransformer.transformDocument(
+        data as unknown as FirestoreDocument
+      );
     }
     return FirestoreTransformer.transformFields(data as FirestoreFields);
+  }
+
+  static toFirestoreFormat(data: any): FirestoreFields {
+    const transformValue = (value: any): FirestoreValue => {
+      if (typeof value === 'string') {
+        return { stringValue: value };
+      } else if (typeof value === 'number') {
+        return { integerValue: value.toString() };
+      } else if (typeof value === 'boolean') {
+        return { booleanValue: value };
+      } else if (Array.isArray(value)) {
+        return {
+          arrayValue: {
+            values: value.map(v => transformValue(v))
+          }
+        };
+      } else if (typeof value === 'object' && value !== null) {
+        return {
+          mapValue: {
+            fields: Object.fromEntries(
+              Object.entries(value).map(([k, v]) => [k, transformValue(v)])
+            )
+          }
+        };
+      } else {
+        throw new Error('Unsupported data type');
+      }
+    };
+
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key, transformValue(value)])
+    );
   }
 }

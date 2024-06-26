@@ -5,22 +5,26 @@ const makeRequest = axios.create({
   baseURL: ApiConstants.baseUrl,
 })
 
-makeRequest.interceptors.request.use(async (config) => {
-  // const token = ''
-  config.headers['Content-Type'] = "application/json"
+makeRequest.interceptors.request.use(
+  async (config) => {
+    // const token = ''
+    config.headers["Content-Type"] = "application/json";
 
-  return config
-}, (error) => {
-  return Promise.reject(error)
-})
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 makeRequest.interceptors.response.use(
   async (response) => {
-    return response
-  }, (error) => {
-    console.error('error', error);
-    return Promise.reject(error)
+    return response;
+  },
+  (error) => {
+    console.error("error", error);
+    return Promise.reject(error);
   }
-)
+);
 
 export default makeRequest;

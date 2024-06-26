@@ -3,6 +3,7 @@ import { idType } from ".";
 interface ICategoryChild {
   id: idType
   title: string
+  parent: string
 }
 
 export interface ICategory {

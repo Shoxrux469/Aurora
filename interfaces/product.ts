@@ -10,7 +10,7 @@ export interface IPromoContent {
 
 export interface IProduct {
   id: idType;
-  categories: IProductCategory;
+  category: IProductCategory;
   promo_content: IPromoContent
   images_links: string[];
   price: number;
