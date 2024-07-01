@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
+import Header from "@/components/header/Header";
+import Footer from "@/components/footer/Footer";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: "Project",
@@ -20,10 +22,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(
-        "min-h-screen mx-8 bg-background font-sans antialiased", fontSans.variable
-      )}>
+      <body
+        className={cn(
+          "min-h-screen mx-8 bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
+        <Header />
         {children}
+        <Footer />
       </body>
     </html>
   );
