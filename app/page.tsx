@@ -6,56 +6,6 @@ import { ICategory } from '@/interfaces/category';
 import CategoriesService from "@/services/api/categories"
 
 
-const electronicsCategory = {
-  id: '004',
-  name: 'Электроника',
-  children: [
-    {
-      id: '004-01',
-      title: 'Смартфоны',
-      parent: 'Электроника',
-    },
-    {
-      id: '004-02',
-      title: 'Ноутбуки',
-      parent: 'Электроника',
-    },
-    {
-      id: '004-03',
-      title: 'Телевизоры',
-      parent: 'Электроника',
-    },
-  ],
-  icon: 'https://example.com/icons/electronics-icon.png',
-};
-
-
-
-const householdAppliancesCategory = {
-  id: '005',
-  name: 'Бытовая техника',
-  children: [
-    {
-      id: '005-01',
-      title: 'Холодильники',
-      parent: 'Бытовая техника',
-    },
-    {
-      id: '005-02',
-      title: 'Стиральные машины',
-      parent: 'Бытовая техника',
-    },
-    {
-      id: '005-03',
-      title: 'Пылесосы',
-      parent: 'Бытовая техника',
-    },
-  ],
-  icon: 'https://example.com/icons/electronics-icon.png',
-};
-
-
-
 const Home = async () => {
   let products = await ProductsService.getAll() as IProduct[];
   let categories = await CategoriesService.getAll() as ICategory[]
