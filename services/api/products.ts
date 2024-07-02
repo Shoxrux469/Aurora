@@ -10,7 +10,7 @@ class ProductsService {
     const res = await makeRequest.get<IResponse>(ApiConstants.products)
     const transformedData = FirestoreTransformer.transformFirebaseData(res.data.documents)
 
-    return transformedData
+    return transformedData;
   }
 
   async postData(data: IProduct) {
