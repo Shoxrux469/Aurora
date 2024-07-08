@@ -34,8 +34,8 @@ export class FirestoreTransformer {
     );
     return key
       ? FirestoreTransformer.transformFunctions[key](
-        field[key as keyof FirestoreValue]
-      )
+          field[key as keyof FirestoreValue]
+        )
       : null;
   }
 
@@ -73,28 +73,28 @@ export class FirestoreTransformer {
 
   static toFirestoreFormat(data: any): FirestoreFields {
     const transformValue = (value: any): FirestoreValue => {
-      if (typeof value === 'string') {
+      if (typeof value === "string") {
         return { stringValue: value };
-      } else if (typeof value === 'number') {
+      } else if (typeof value === "number") {
         return { integerValue: value.toString() };
-      } else if (typeof value === 'boolean') {
+      } else if (typeof value === "boolean") {
         return { booleanValue: value };
       } else if (Array.isArray(value)) {
         return {
           arrayValue: {
-            values: value.map(v => transformValue(v))
-          }
+            values: value.map((v) => transformValue(v)),
+          },
         };
-      } else if (typeof value === 'object' && value !== null) {
+      } else if (typeof value === "object" && value !== null) {
         return {
           mapValue: {
             fields: Object.fromEntries(
               Object.entries(value).map(([k, v]) => [k, transformValue(v)])
-            )
-          }
+            ),
+          },
         };
       } else {
-        throw new Error('Unsupported data type');
+        throw new Error("Unsupported data type");
       }
     };
 

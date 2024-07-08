@@ -3,7 +3,7 @@ import { ApiConstants } from "./api/apiConstants";
 
 const makeRequest = axios.create({
   baseURL: ApiConstants.baseUrl,
-})
+});
 
 makeRequest.interceptors.request.use(
   async (config) => {
