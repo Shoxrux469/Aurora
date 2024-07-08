@@ -1,8 +1,8 @@
 import axios from "axios";
+import { ApiConstants } from "./api/apiConstants";
 
 const makeRequest = axios.create({
-  baseURL:
-    "https://firestore.googleapis.com/v1/projects/bradex-74e17/databases/(default)/documents",
+  baseURL: ApiConstants.baseUrl,
 });
 
 makeRequest.interceptors.request.use(

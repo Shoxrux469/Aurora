@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import Aside from "@/components/aside/aside";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -28,9 +29,11 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <Header />
-        {children}
-        <Footer />
+        <div>
+          <Header />
+          {children}
+          <Footer />
+        </div>
       </body>
     </html>
   );

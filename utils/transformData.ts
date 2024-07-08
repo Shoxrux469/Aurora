@@ -70,4 +70,36 @@ export class FirestoreTransformer {
     }
     return FirestoreTransformer.transformFields(data as FirestoreFields);
   }
+
+  static toFirestoreFormat(data: any): FirestoreFields {
+    const transformValue = (value: any): FirestoreValue => {
+      if (typeof value === "string") {
+        return { stringValue: value };
+      } else if (typeof value === "number") {
+        return { integerValue: value.toString() };
+      } else if (typeof value === "boolean") {
+        return { booleanValue: value };
+      } else if (Array.isArray(value)) {
+        return {
+          arrayValue: {
+            values: value.map((v) => transformValue(v)),
+          },
+        };
+      } else if (typeof value === "object" && value !== null) {
+        return {
+          mapValue: {
+            fields: Object.fromEntries(
+              Object.entries(value).map(([k, v]) => [k, transformValue(v)])
+            ),
+          },
+        };
+      } else {
+        throw new Error("Unsupported data type");
+      }
+    };
+
+    return Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [key, transformValue(value)])
+    );
+  }
 }
