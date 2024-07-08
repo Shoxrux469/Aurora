@@ -1,14 +1,16 @@
 import Product from '@/components/product/product';
-import MainSwiper from '@/components/swiper/Swiper';
+import MainSwiper from '@/components/swiper/swiper';
 import { IProduct } from '@/interfaces/product'
 import ProductsService from "@/services/api/products"
 import { ICategory } from '@/interfaces/category';
 import CategoriesService from "@/services/api/categories"
-
+import { v4 as uuid } from 'uuid';
 
 const Home = async () => {
   let products = await ProductsService.getAll() as IProduct[];
-  let categories = await CategoriesService.getAll() as ICategory[]
+  // let categories = await CategoriesService.getAll() as ICategory[]
+  // let post = await CategoriesService.postCategory(obj)
+  // let post = await ProductsService.postProduct(obj)
 
   return (
     <div className="bg-white">
@@ -26,3 +28,4 @@ const Home = async () => {
 };
 
 export default Home;
+

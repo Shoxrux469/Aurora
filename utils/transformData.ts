@@ -82,7 +82,7 @@ export class FirestoreTransformer {
       } else if (Array.isArray(value)) {
         return {
           arrayValue: {
-            values: value.map(v => transformValue(v))
+            values: value?.map(v => transformValue(v))
           }
         };
       } else if (typeof value === 'object' && value !== null) {

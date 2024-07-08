@@ -20,8 +20,8 @@ const CreateProd = ({ prod }: { prod: IProduct }) => {
         />
       </div>
       <div className="py-4">
-        <h4 className="text-lg font-bold">{prod.categories}</h4>
-        <p className="text-gray-600">{prod.color_product}</p>
+        <h4 className="text-lg font-bold">{prod.category.title}</h4>
+        <p className="text-gray-600">{prod.attributes.color}</p>
         <Button className="mt-3">View Product</Button>
       </div>
     </div>

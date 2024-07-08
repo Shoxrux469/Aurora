@@ -11,18 +11,17 @@ const Product = ({ product }: { product: IProduct }) => {
         <Image
           alt="Product"
           className="w-full"
-          height="200"
-          src="/placeholder.svg"
+          height="400"
+          width="400"
+          src={product.images_links[0]}
           style={{
-            aspectRatio: "200/200",
             objectFit: "cover",
           }}
-          width="200"
         />
       </div>
       <div className="py-4">
-        <h4 className="text-lg font-bold">{product.promo_content.title}</h4>
-        <p className="text-gray-600">{product.category.name}</p>
+        <h4 className="text-lg font-bold">{product.title}</h4>
+        <p className="text-gray-600">{product.category.title}</p>
         <Button className="mt-3">View Product</Button>
       </div>
     </div>

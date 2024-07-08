@@ -13,7 +13,3 @@ export interface ICategory {
   icon: string
 }
 
-export interface IProductCategory {
-  id: idType;
-  name: string
-}

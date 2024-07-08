@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
-import Header from "@/components/header/Header";
-import Footer from "@/components/footer/Footer";
+import Header from "@/components/header/header";
+import Footer from "@/components/footer/footer";
 import Aside from "@/components/aside/aside";
 
 const fontSans = FontSans({

@@ -1,5 +1,4 @@
 import { idType } from ".";
-import { IProductCategory } from "./category";
 
 interface IProductAttributes {
   color: string
@@ -8,15 +7,26 @@ interface IProductAttributes {
   material?: string
   model?: string
   weight?: number | string
+  width?: number
+  deepth?: number
+  height?: number
 }
 
 export interface IProduct {
-  id: idType;
-  category: IProductCategory;
+  id?: idType
+  category: {
+    title: string;
+    id: idType
+  }
   attributes: IProductAttributes
   images_links: string[]
-  price: number
-  size?: number | string | null
   title: string
   description: string
+  price: number
+  quantity: number
 }
+
+
+
+
+

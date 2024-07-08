@@ -2,23 +2,23 @@
 import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
-import { IResponse } from "@/interfaces";
 import { IProduct } from "@/interfaces/product";
+
+import { v4 as uuid } from 'uuid';
 
 class ProductsService {
   async getAll() {
-    const res = await makeRequest.get<IResponse>(ApiConstants.products)
+    const res = await makeRequest.get(ApiConstants.products)
     const transformedData = FirestoreTransformer.transformFirebaseData(res.data.documents)
 
     return transformedData;
   }
 
-  async postData(data: IProduct) {
+  async postProduct(data: IProduct) {
     const firestoreData = FirestoreTransformer.toFirestoreFormat(data)
-    const res = await makeRequest.post(ApiConstants.products, firestoreData)
+    const res = await makeRequest.post(ApiConstants.products, { fields: firestoreData })
 
     return res
   }
-
 }
 export default new ProductsService();
