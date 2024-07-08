@@ -9,7 +9,7 @@ interface ICategoryChild {
 export interface ICategory {
   id: idType;
   title: string;
-  children: ICategoryChild[];
+  subcategories: ICategoryChild[];
   icon: string;
 }
 
