@@ -4,8 +4,8 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
 import Aside from "../aside/Aside";
-import { cn } from "@/lib/utils";
 import { AlignJustify, Search, Mountain } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;

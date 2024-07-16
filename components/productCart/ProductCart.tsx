@@ -1,7 +1,5 @@
 "use client";
-
 import { IProduct } from "@/interfaces/product";
-// import Image from "next/image";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 
@@ -21,12 +19,14 @@ const ProductCart = ({ product }: { product: IProduct }) => {
           width="200"
         />
       </div>
-      <div className="py-3 space-y-1">
-        <h4 className="text-lg font-bold text-balance">{product.title}</h4>
+      <div className="py-2">
+        <h4 className="text-lg font-bold leading-tight text-balance">
+          {product.title}
+        </h4>
         <p className="text-gray-600 text-balance">
-          {product.description.slice(0, 60) + "..."}
+          {product.description.slice(0, 48) + "..."}
         </p>
-        <p className="text-gray-600 text-sm text-primary">
+        <p className="text-gray-600 text-sm my-1 text-primary">
           {product.category.title}
         </p>
         <Button>Add to cart</Button>

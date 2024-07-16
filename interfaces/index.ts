@@ -1,6 +1,6 @@
 import { FirestoreFields } from "@/utils/transformData";
 
-export type idType = number | string
+export type idType = string;
 
 export interface IImage {
   id: idType;
@@ -13,6 +13,6 @@ export interface IResponse {
   documents: {
     fields: FirestoreFields;
     createTime: string;
-    updateTime: string
-  }[]
+    updateTime: string;
+  }[];
 }
