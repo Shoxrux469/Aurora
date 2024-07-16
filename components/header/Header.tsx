@@ -1,11 +1,11 @@
 import Link from "next/link";
 import React from "react";
-import { MenuIcon, MountainIcon, SearchIcon } from "../footer/footerIcons";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
 import Aside from "../aside/aside";
 import { cn } from "@/lib/utils";
+import { AlignJustify, Search, Mountain } from "lucide-react";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
@@ -13,10 +13,19 @@ const Header = () => {
   return (
     <header className="bg-white">
       <div className="py-4 flex items-center justify-between">
-        <Link className="flex items-center" href="#">
-          <MountainIcon className="h-6 w-6 text-primary" />
-          <span className="ml-2 text-primary font-bold">Fitness</span>
-        </Link>
+        <div className="hidden lg:flex items-center gap-4">
+          {SHEET_SIDES.map((side) => (
+            <Sheet key={side}>
+              <SheetTrigger>
+                <AlignJustify size={24} className={cn("text-green-600")} />
+              </SheetTrigger>
+              <Aside side={side} />
+            </Sheet>
+          ))}
+          <Link className="text-primary font-medium" href="#">
+            Contact
+          </Link>
+        </div>
         <div className="relative w-full max-w-md">
           <Input
             className="w-full rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
@@ -28,22 +37,13 @@ const Header = () => {
             size="icon"
             variant="ghost"
           >
-            <SearchIcon className="h-5 w-5 text-gray-500" />
+            <Search size={20} className=" text-gray-500" />
           </Button>
         </div>
-        <div className="hidden lg:flex items-center gap-4">
-          <Link className="text-primary font-medium" href="#">
-            Contact
-          </Link>
-          {SHEET_SIDES.map((side) => (
-            <Sheet key={side}>
-              <SheetTrigger>
-                <MenuIcon className={cn("h-6 w-6 text-green-600")} />
-              </SheetTrigger>
-              <Aside side={side} />
-            </Sheet>
-          ))}
-        </div>
+        <Link className="flex items-center" href="#">
+          <span className="mr-2 text-primary font-bold">Fitness</span>
+          <Mountain size={24} className="text-primary" />
+        </Link>
       </div>
     </header>
   );

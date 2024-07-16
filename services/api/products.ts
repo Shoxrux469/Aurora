@@ -4,7 +4,6 @@ import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IProduct } from "@/interfaces/product";
 
-import { v4 as uuid } from 'uuid';
 
 class ProductsService {
   async getAll() {
@@ -18,7 +17,17 @@ class ProductsService {
     const firestoreData = FirestoreTransformer.toFirestoreFormat(data)
     const res = await makeRequest.post(ApiConstants.products, { fields: firestoreData })
 
-    return res
+    return res;
+  }
+
+  async GetById(id: string | number) {
+    const res = await makeRequest.get(ApiConstants.products);
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(res.data.documents);
+
+    const foundProd = transformedData?.find((prod) => prod.id === id);
+
+    return foundProd;
   }
 }
 export default new ProductsService();

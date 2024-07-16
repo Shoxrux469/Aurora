@@ -4,12 +4,11 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header/header";
 import Footer from "@/components/footer/footer";
-import Aside from "@/components/aside/aside";
 
 const fontSans = FontSans({
   subsets: ["latin"],
   variable: "--font-sans",
-})
+});
 
 export const metadata: Metadata = {
   title: "Project",
@@ -23,15 +22,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn(
-        "min-h-screen mx-8 bg-background font-sans antialiased", fontSans.variable
-      )}>
+      <body
+        className={cn(
+          "min-h-screen mx-8 bg-background font-sans antialiased",
+          fontSans.variable
+        )}
+      >
         <div>
           <Header />
           {children}
           <Footer />
         </div>
-
       </body>
     </html>
   );

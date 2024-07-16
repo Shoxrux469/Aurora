@@ -1,17 +1,17 @@
 import React from "react";
-import {
-  FacebookIcon,
-  InstagramIcon,
-  LinkedinIcon,
-  LocateIcon,
-  MailIcon,
-  PhoneIcon,
-  TwitterIcon,
-} from "./footerIcons";
 import { Button } from "../ui/button";
 import Link from "next/link";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
+import {
+  Phone,
+  Mail,
+  Locate,
+  Facebook,
+  Twitter,
+  Instagram,
+  Linkedin,
+} from "lucide-react";
 
 const Footer = () => {
   return (
@@ -21,15 +21,15 @@ const Footer = () => {
           <h4 className="text-lg font-bold text-primary">Contacts</h4>
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2 text-secondary-foreground">
-              <PhoneIcon className="h-5 w-5" />
+              <Phone size={20} />
               <span>+1 (555) 123-4567</span>
             </div>
             <div className="flex items-center gap-2">
-              <MailIcon className="h-5 w-5" />
+              <Mail size={20} />
               <span>info@fitness.com</span>
             </div>
             <div className="flex items-center gap-2">
-              <LocateIcon className="h-5 w-5" />
+              <Locate size={20} />
               <span>123 Main St, Anytown USA</span>
             </div>
           </div>
@@ -72,16 +72,16 @@ const Footer = () => {
           <h4 className="text-lg font-bold">Follow Us</h4>
           <div className="flex gap-4">
             <Link className="hover:text-gray-300" href="#">
-              <FacebookIcon className="h-6 w-6" />
+              <Facebook size={24} />
             </Link>
             <Link className="hover:text-gray-300" href="#">
-              <TwitterIcon className="h-6 w-6" />
+              <Twitter size={24} />
             </Link>
             <Link className="hover:text-gray-300" href="#">
-              <InstagramIcon className="h-6 w-6" />
+              <Instagram size={24} />
             </Link>
             <Link className="hover:text-gray-300" href="#">
-              <LinkedinIcon className="h-6 w-6" />
+              <Linkedin size={24} />
             </Link>
           </div>
           <div className="flex items-center gap-2">

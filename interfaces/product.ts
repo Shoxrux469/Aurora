@@ -1,4 +1,5 @@
 import { idType } from ".";
+import { IProductCategory } from "./category";
 
 interface IProductAttributes {
   color: string
@@ -14,10 +15,7 @@ interface IProductAttributes {
 
 export interface IProduct {
   id?: idType
-  category: {
-    title: string;
-    id: idType
-  }
+  category: IProductCategory
   attributes: IProductAttributes
   images_links: string[]
   title: string

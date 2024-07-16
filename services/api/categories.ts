@@ -7,17 +7,21 @@ import { ICategory } from "@/interfaces/category";
 
 class CategoriesService {
   async getAll() {
-    const res = await makeRequest.get<IResponse>(ApiConstants.categories)
-    const transformedData = FirestoreTransformer.transformFirebaseData(res.data.documents)
+    const res = await makeRequest.get<IResponse>(ApiConstants.categories);
+    const transformedData = FirestoreTransformer.transformFirebaseData(
+      res.data.documents
+    );
 
-    return transformedData
+    return transformedData;
   }
   async postCategory(data: ICategory) {
-    const firestoreData = FirestoreTransformer.toFirestoreFormat(data)
-    const res = await makeRequest.post(ApiConstants.categories, { fields: firestoreData })
+    const firestoreData = FirestoreTransformer.toFirestoreFormat(data);
+    const res = await makeRequest.post(ApiConstants.categories, {
+      fields: firestoreData,
+    });
 
-    return res
+    return res;
   }
 }
 
-export default new CategoriesService()
+export default new CategoriesService();

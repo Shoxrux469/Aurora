@@ -1,35 +1,33 @@
-import {
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetFooter,
-  SheetHeader,
-  SheetTitle,
-} from "@/components/ui/sheet";
+import { SheetContent } from "@/components/ui/sheet";
+import Categories from "./categories";
+import { useState } from "react";
 
 const Aside = ({ side }: { side: "left" }) => {
   return (
     <SheetContent
       side={side}
-      className="flex flex-col gap-10 rounded-tr-lg rounded-br-lg"
+      className="flex flex-col rounded-tr-lg rounded-br-lg"
     >
-      <SheetHeader>
-        <SheetTitle className="text-lg">Title</SheetTitle>
-        <SheetDescription className="text-base">
-          A little bit of water to complete a description to the title
-        </SheetDescription>
-      </SheetHeader>
-      <div>
-        <ul className="text-xl flex flex-col gap-2">
-          <li>Info 1</li>
-          <li>Info 2</li>
-          <li>Info 3</li>
-          <li>Info 4</li>
-          <li>Info 5</li>
-        </ul>
-      </div>
+      <Categories />
     </SheetContent>
   );
 };
 
 export default Aside;
+
+// <li
+//   key={ix}
+//   // onClick={}
+//   className="hover:opacity-75 ease-in-out duration-150 cursor-pointer flex items-center justify-between group"
+// >
+//   <span className="flex items-center text-balance justify-center gap-2">
+//     {categoriesIcons[category.title]}
+//     <>{category.subcategories}</>
+//   </span>
+//   <ArrowRight
+//     size={24}
+//     className={cn(
+//       "text-primary transition-transform duration-150 group-hover:translate-x-1"
+//     )}
+//   />
+// </li>
