@@ -22,8 +22,9 @@ const Header = () => {
               <Aside side={side} />
             </Sheet>
           ))}
-          <Link className="text-primary font-medium" href="#">
-            Contact
+          <Link className="flex items-center" href="#">
+            <span className="mr-2 text-primary font-bold">Fitness</span>
+            <Mountain size={24} className="text-primary" />
           </Link>
         </div>
         <div className="relative w-full max-w-md">
@@ -40,9 +41,9 @@ const Header = () => {
             <Search size={20} className=" text-gray-500" />
           </Button>
         </div>
-        <Link className="flex items-center" href="#">
-          <span className="mr-2 text-primary font-bold">Fitness</span>
-          <Mountain size={24} className="text-primary" />
+
+        <Link className="text-primary font-medium" href="#">
+          Contact
         </Link>
       </div>
     </header>

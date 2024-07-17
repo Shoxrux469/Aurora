@@ -3,14 +3,7 @@ import { IProductCategory } from "./category";
 
 interface IProductAttributes {
   color: string
-  brand?: string
-  size?: string | number
-  material?: string
-  model?: string
-  weight?: number | string
-  width?: number
-  deepth?: number
-  height?: number
+  specific?: string[]
 }
 
 export interface IProduct {

@@ -28,7 +28,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
   };
 
   return (
-    <div className="flex gap-2  ">
+    <div className="flex gap-2">
       <SwiperType
         direction="vertical"
         onSwiper={setThumbsSwiper}
@@ -37,7 +37,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="w-2/12"
+        className="w-3/12"
       >
         {images.map((imgURL, i) => (
           <SwiperSlide key={i}>
@@ -56,7 +56,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
         effect={"fade"}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[EffectFade, FreeMode, Thumbs]}
-        className="w-10/12 h-full"
+        className="w-9/12 h-full"
       >
         {images.map((imgURL, i) => (
           <SwiperSlide key={i}>

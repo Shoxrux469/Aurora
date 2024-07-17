@@ -28,11 +28,11 @@ export default function RootLayout({
           fontSans.variable
         )}
       >
-        <div>
-          <Header />
+        <Header />
+        <div className="max-w-[1200px] mx-auto py-8">
           {children}
-          <Footer />
         </div>
+        <Footer />
       </body>
     </html>
   );

@@ -21,13 +21,10 @@ class ProductsService {
   }
 
   async GetById(id: string | number) {
-    const res = await makeRequest.get(ApiConstants.products);
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
+    const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
+    const transformedData: IProduct = FirestoreTransformer.transformDocument(res.data);
 
-    const foundProd = transformedData?.find((prod) => prod.id === id);
-
-    return foundProd;
+    return transformedData;
   }
 }
 export default new ProductsService();
