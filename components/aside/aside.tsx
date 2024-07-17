@@ -1,6 +1,6 @@
 import { SheetContent } from "@/components/ui/sheet";
-import Categories from "./categories";
 import { useState } from "react";
+import Categories from "./Categories";
 
 const Aside = ({ side }: { side: "left" }) => {
   return (

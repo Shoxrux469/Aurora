@@ -22,7 +22,7 @@ const Header = () => {
               <Aside side={side} />
             </Sheet>
           ))}
-          <Link className="flex items-center" href="#">
+          <Link className="flex items-center" href="/">
             <span className="mr-2 text-primary font-bold">Fitness</span>
             <Mountain size={24} className="text-primary" />
           </Link>
