@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
-import Aside from "../aside/aside";
+import Aside from "../aside/Aside";
 import { cn } from "@/lib/utils";
 import { AlignJustify, Search, Mountain } from "lucide-react";
 
