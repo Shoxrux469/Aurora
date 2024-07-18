@@ -2,12 +2,11 @@
 import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
-import { IResponse } from "@/interfaces";
 import { IProduct } from "@/interfaces/product";
 
 class ProductsService {
   async getAll() {
-    const res = await makeRequest.get<IResponse>(ApiConstants.products);
+    const res = await makeRequest.get(ApiConstants.products);
     const transformedData = FirestoreTransformer.transformFirebaseData(
       res.data.documents
     );
@@ -23,40 +22,39 @@ class ProductsService {
   }
 
   async GetById(id: string) {
-    const res = await makeRequest.get<IResponse>(
-      // `${ApiConstants.products}/${id}.json`
+    const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
+    const transformedData: IProduct[] = FirestoreTransformer.transformDocument(
+      res.data
+    );
+
+    console.log(transformedData);
+
+    return transformedData;
+  }
+
+  async GetByTitle(text: string) {
+    const res = await makeRequest.get(
+      `${ApiConstants.products}/?title=${text}`
+    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(res.data.documents);
+
+    return transformedData;
+  }
+
+  async GetProdBySubcategoryId(id: string) {
+    const res = await makeRequest.get(
+      // `${ApiConstants.products}?where=category.id=='${id}'`
       ApiConstants.products
     );
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(res.data.documents);
 
-    const foundProd = transformedData.find((prod) => prod.id === id);
+    const filteredProds = transformedData.filter(
+      (prod) => prod.category.id === id
+    );
 
     console.log(transformedData);
-
-    return foundProd;
-  }
-
-  async GetByTitle(text: string) {
-    const res = await makeRequest.get<IResponse>(ApiConstants.products);
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
-
-    const filteredProds = transformedData?.filter(
-      (prods) => prods.title.toLowerCase() === text.toLowerCase()
-    );
-
-    return filteredProds;
-  }
-
-  async GetSubcategoryById(id: string) {
-    const res = await makeRequest.get<IResponse>(ApiConstants.products);
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
-
-    const filteredProds = transformedData?.filter(
-      (prods) => prods.category.id === id
-    );
 
     return filteredProds;
   }
