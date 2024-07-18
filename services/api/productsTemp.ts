@@ -1,22 +1,29 @@
-// let obj = {
-//   category: {
-//     title: "Приставки",
-//     id: "0a7049da-f4a"
-//   },
-//   title: 'Игровая консоль Playstation 4 Slim',
-//   description: "игровая консоль нового поколения, более мощная версия PlayStation 4. Её ключевые особенности заключаются в поддержке 4K UHD и HDR, что делает графику ярче, контрастнее, реалистичнее.",
-//   images_links: ["https://images.uzum.uz/ciludutenntd8rfd98tg/original.jpg"],
-//   price: 400,
-//   attributes: {
-//     color: 'чёрный',
-//     specific: [
-//       "ПС4 Слим 1 Тб",
-//       '8 ядерный процессор AMD Jaguar ',
-//       "ОЗУ 8Гб",
-//     ]
-//   },
-//   quantity: 6
-// }
+let obj = {
+  category: {
+    title: "Аксессуары для компьютеров",
+    id: "oeD3kr43aWe"
+  },
+  title: 'Мышь беспроводная Logitech MX Master 3S',
+  description: "Беспроводная мышь Logitech MX Master 3S в сером матовом корпусе имеет нестандартную форму. Благодаря этому ее удобно удерживать и левой, и правой руками в течение продолжительного времени. Оптический светодиодный датчик может работать в режимах 200-8000 dpi, переключаются они при помощи встроенного колесика.",
+  images_links: [
+    "https://images.uzum.uz/cleal5d6sfhvbd1idob0/original.jpg",
+    "https://images.uzum.uz/clfetvtennt1kt4dcne0/original.jpg",
+    "https://images.uzum.uz/clfetvt6sfhvbd1ikm5g/original.jpg",
+    "https://images.uzum.uz/cp3hb1ffrr80f2glj0cg/original.jpg"
+  ],
+  price: 120,
+  attributes: {
+    color: 'хром',
+    specific: [
+      "2,4 ГГц Беспроводной",
+      "Количество кнопок: 7",
+      "Количество роликов: 1",
+      "DPI: 8000",
+      "Тип интерфейса: USB"
+    ]
+  },
+  quantity: 12
+}
 
 // let obj = {
 //   title: "Игровое",
