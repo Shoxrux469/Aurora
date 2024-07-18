@@ -2,12 +2,12 @@
 import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
-import { IResponse } from "@/interfaces";
 import { ICategory } from "@/interfaces/category";
+import { IProduct } from "@/interfaces/product";
 
 class CategoriesService {
   async getAll() {
-    const res = await makeRequest.get<IResponse>(ApiConstants.categories);
+    const res = await makeRequest.get(ApiConstants.categories);
     const transformedData = FirestoreTransformer.transformFirebaseData(
       res.data.documents
     );

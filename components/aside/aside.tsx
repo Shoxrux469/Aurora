@@ -1,9 +1,6 @@
 "use server";
 import { SheetContent } from "@/components/ui/sheet";
-import SubCategories from "./SubCategories";
-import React, { useState } from "react";
-import { ICategory, ICategoryChild } from "@/interfaces/category";
-import { cn } from "@/lib/utils";
+import { ICategory } from "@/interfaces/category";
 import CategoriesService from "@/services/api/categories";
 
 import Categories from "./Categories";

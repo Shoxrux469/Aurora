@@ -20,7 +20,7 @@ const FilteredProducts: React.FC<params> = async ({
   let filteredProducts: IProduct[] = [];
 
   if (id) {
-    filteredProducts = await ProductsService.GetSubcategoryById(id);
+    filteredProducts = await ProductsService.GetProdBySubcategoryId(id);
   }
 
   // } else if (searchText) {

@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 const ProductCart = ({ product }: { product: IProduct }) => {
   const router = useRouter();
   return (
-    <div className="max-w-sm mx-auto cursor-pointer rounded-lg">
+    <div className="max-w-sm mx-auto group cursor-pointer rounded-lg">
       <div
         onClick={() => router.push(`/product/${product.id}`)}
         className="bg-gray-100 overflow-hidden rounded-lg"
       >
         <img
           alt={product.title}
-          className="w-full transition-transform rounded-lg hover:scale-105 ease-in-out"
+          className="w-full transition-transform group-hover:scale-105 rounded-lg ease-in-out"
           height="200"
           src={product.images_links[0]}
           width="200"

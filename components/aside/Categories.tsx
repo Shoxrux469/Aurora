@@ -1,6 +1,5 @@
 "use client";
 
-import { SheetContent } from "@/components/ui/sheet";
 import SubCategories from "./SubCategories";
 import React, { useState } from "react";
 import { ICategory, ICategoryChild } from "@/interfaces/category";
@@ -16,7 +15,6 @@ import {
   Mountain,
   ArrowLeft,
 } from "lucide-react";
-import { SheetDescription, SheetHeader, SheetTitle } from "../ui/sheet";
 
 type ICategoryIcons = {
   [key: string]: JSX.Element;

@@ -3,17 +3,26 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
-import Aside from "../aside/Aside";
-import { AlignJustify, Search, Mountain } from "lucide-react";
+import {
+  AlignJustify,
+  Search,
+  Mountain,
+  LogIn,
+  ShoppingBag,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+import Aside from "../aside/Aside";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
 
+  const buttonsClass =
+    "flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out";
+
   return (
     <header className="bg-white">
-      <div className="py-4 flex items-center justify-between">
-        <div className="hidden lg:flex items-center gap-4">
+      <div className="py-4 flex items-center jus1tify-between">
+        <div className="hidden lg:flex items-center gap-2">
           {SHEET_SIDES.map((side) => (
             <Sheet key={side}>
               <SheetTrigger>
@@ -22,28 +31,35 @@ const Header = () => {
               <Aside side={side} />
             </Sheet>
           ))}
-          <Link className="text-primary font-medium" href="#">
-            Contact
+          <Link className="flex items-center" href="/">
+            <span className="mr-1 text-primary text-xl font-bold">Fitness</span>
+            <Mountain size={24} className="text-primary" />
           </Link>
         </div>
-        <div className="relative w-full max-w-md">
+        <div className="relative w-full max-w-2xl">
           <Input
-            className="w-full rounded-full px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
+            className="w-full h-10 rounded-lg text-base px-4 relative z-20 py-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
             placeholder="Search products..."
             type="text"
           />
           <Button
-            className="absolute right-2 top-1/2 -translate-y-1/2"
+            className="absolute rounded-lg h-full shadow-none w-12 right-0 z-10 top-1/2 -translate-y-1/2"
             size="icon"
-            variant="ghost"
+            variant="secondary"
           >
-            <Search size={20} className=" text-gray-500" />
+            <Search size={20} className="text-gray-500" />
           </Button>
         </div>
-        <Link className="flex items-center" href="#">
-          <span className="mr-2 text-primary font-bold">Fitness</span>
-          <Mountain size={24} className="text-primary" />
-        </Link>
+        <div className="flex h-full item-center gap-2">
+          <Button variant="ghost" size="default" className={buttonsClass}>
+            <LogIn size={20} />
+            Войти
+          </Button>
+          <Button variant="ghost" size="default" className={buttonsClass}>
+            <ShoppingBag size={20} />
+            Корзина
+          </Button>
+        </div>
       </div>
     </header>
   );

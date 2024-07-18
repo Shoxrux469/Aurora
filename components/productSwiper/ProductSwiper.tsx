@@ -1,17 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-// Import Swiper React components
-import { Swiper as SwiperType, SwiperSlide } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-// import required modules
+import "./styles.css";
+
 import { EffectFade, FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper as SwiperInstance } from "swiper";
 
@@ -28,16 +27,16 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
   };
 
   return (
-    <div className="flex gap-2  ">
-      <SwiperType
+    <div className="flex gap-2">
+      <Swiper
         direction="vertical"
         onSwiper={setThumbsSwiper}
         spaceBetween={8}
-        slidesPerView={4}
+        slidesPerView={5}
         freeMode={true}
         watchSlidesProgress={true}
         modules={[FreeMode, Navigation, Thumbs]}
-        className="w-2/12"
+        className="MySwiper1 w-2/12"
       >
         {images.map((imgURL, i) => (
           <SwiperSlide key={i}>
@@ -48,8 +47,8 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
             />
           </SwiperSlide>
         ))}
-      </SwiperType>
-      <SwiperType
+      </Swiper>
+      <Swiper
         direction="horizontal"
         style={customStyle}
         spaceBetween={10}
@@ -63,7 +62,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
             <img src={imgURL} alt={`Product image ${i}`} />
           </SwiperSlide>
         ))}
-      </SwiperType>
+      </Swiper>
     </div>
   );
 };

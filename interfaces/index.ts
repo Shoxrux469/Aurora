@@ -8,11 +8,3 @@ export interface IImage {
   created_at: string;
   path: string;
 }
-
-export interface IResponse {
-  documents: {
-    fields: FirestoreFields;
-    createTime: string;
-    updateTime: string;
-  }[];
-}
