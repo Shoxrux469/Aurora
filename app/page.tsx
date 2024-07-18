@@ -14,7 +14,7 @@ const Home = async () => {
       <MainSwiper />
       <section className="mx-auto py-12">
         <h3 className="text-3xl font-bold text-center">Best Sellers</h3>
-        <div className="mt-6 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
           {products?.map((product, i) => (
             <ProductCard key={i} product={product}></ProductCard>
           ))}

@@ -1,6 +1,6 @@
 import { idType } from ".";
 
-interface ICategoryChild {
+export interface ICategoryChild {
   id: idType;
   title: string;
   parent: string;

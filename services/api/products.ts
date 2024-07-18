@@ -20,11 +20,40 @@ class ProductsService {
     return res;
   }
 
-  async GetById(id: string | number) {
+  async GetById(id: string) {
     const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
-    const transformedData: IProduct = FirestoreTransformer.transformDocument(res.data);
+    const transformedData: IProduct[] = FirestoreTransformer.transformDocument(
+      res.data
+    );
 
     return transformedData;
+  }
+
+  async GetByTitle(text: string) {
+    const res = await makeRequest.get(
+      `${ApiConstants.products}/?title=${text}`
+    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(res.data.documents);
+
+    return transformedData;
+  }
+
+  async GetProdBySubcategoryId(id: string) {
+    const res = await makeRequest.get(
+      // `${ApiConstants.products}?where=category.id=='${id}'`
+      ApiConstants.products
+    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(res.data.documents);
+
+    const filteredProds = transformedData.filter(
+      (prod) => prod.category.id === id
+    );
+
+    console.log(transformedData);
+
+    return filteredProds;
   }
 }
 export default new ProductsService();

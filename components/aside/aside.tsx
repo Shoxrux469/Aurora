@@ -1,33 +1,21 @@
+"use server";
 import { SheetContent } from "@/components/ui/sheet";
-import { useState } from "react";
+import { ICategory } from "@/interfaces/category";
+import CategoriesService from "@/services/api/categories";
+
 import Categories from "./Categories";
 
-const Aside = ({ side }: { side: "left" }) => {
+const Aside = async ({ side }: { side: "left" }) => {
+  let categories: ICategory[] = await CategoriesService.getAll();
+
   return (
     <SheetContent
       side={side}
-      className="flex flex-col rounded-tr-lg rounded-br-lg"
+      className="flex bg-zinc-100 flex-col overflow-hidden rounded-tr-lg rounded-br-lg"
     >
-      <Categories />
+      <Categories categories={categories} />
     </SheetContent>
   );
 };
 
 export default Aside;
-
-// <li
-//   key={ix}
-//   // onClick={}
-//   className="hover:opacity-75 ease-in-out duration-150 cursor-pointer flex items-center justify-between group"
-// >
-//   <span className="flex items-center text-balance justify-center gap-2">
-//     {categoriesIcons[category.title]}
-//     <>{category.subcategories}</>
-//   </span>
-//   <ArrowRight
-//     size={24}
-//     className={cn(
-//       "text-primary transition-transform duration-150 group-hover:translate-x-1"
-//     )}
-//   />
-// </li>
