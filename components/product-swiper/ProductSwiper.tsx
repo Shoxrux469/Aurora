@@ -55,7 +55,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
         effect={"fade"}
         thumbs={{ swiper: thumbsSwiper }}
         modules={[EffectFade, FreeMode, Thumbs]}
-        className="w-10/12 h-full"
+        className="w-9/12 h-full"
       >
         {images.map((imgURL, i) => (
           <SwiperSlide key={i}>

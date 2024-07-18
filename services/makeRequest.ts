@@ -7,7 +7,6 @@ const makeRequest = axios.create({
 
 makeRequest.interceptors.request.use(
   async (config) => {
-    // const token = ''
     config.headers["Content-Type"] = "application/json";
 
     return config;
