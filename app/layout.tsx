@@ -28,11 +28,11 @@ export default async function RootLayout({
           fontSans.variable
         )}
       >
-        <div>
-          <Header />
+        <Header />
+        <div className="max-w-[1440px] mx-auto">
           {children}
-          <Footer />
         </div>
+        <Footer />
       </body>
     </html>
   );

@@ -21,7 +21,7 @@ const Header = () => {
 
   return (
     <header className="bg-white">
-      <div className="py-4 flex items-center jus1tify-between">
+      <div className="py-4 flex items-center justify-between">
         <div className="hidden lg:flex items-center gap-2">
           {SHEET_SIDES.map((side) => (
             <Sheet key={side}>
