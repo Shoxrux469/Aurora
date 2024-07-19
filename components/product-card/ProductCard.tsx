@@ -7,7 +7,7 @@ import { ShoppingBag } from "lucide-react";
 const ProductCard = ({ product }: { product: IProduct }) => {
   const router = useRouter();
   return (
-    <div className="max-w-sm mx-auto group cursor-pointer rounded-lg">
+    <div className="max-w-sm mx-auto space-y-2 group cursor-pointer rounded-lg">
       <div
         onClick={() => router.push(`/product/${product.id}`)}
         className="bg-gray-100 overflow-hidden rounded-lg"
@@ -20,14 +20,28 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           width="200"
         />
       </div>
-      <div className="px-2 py-3 space-y-1">
-        <h4 className="h-16 text-lg font-bold text-balance">{product.title}</h4>
-        <div className="flex justify-between items-center">
-          <p className="text-gray-600 text-base font-medium">
+      <div className="flex flex-col justify-between h-44">
+        <div className="space-y-1 flex flex-col text-start">
+          <h4 className="text-[17px] font-bold leading-5 text-balance">
+            {product.title}
+          </h4>
+          <p className="text-balance text-base h-auto leading-5">
+            {product.description.slice(0, 70) + "..."}
+          </p>
+          <span
+            className={`font-medium 
+          ${product.quantity > 5 ? "text-primary" : "text-[#f3c326]"} 
+          `}
+          >
+            В наличии {product.quantity}
+          </span>
+        </div>
+        <div className="flex pt-3 flex-initial justify-between items-center">
+          <p className="text-lg text-primary font-medium">
             ${product.price}.00
           </p>
-          <Button>
-            Add to &nbsp;<ShoppingBag />
+          <Button variant="outline" size="icon">
+            <ShoppingBag />
           </Button>
         </div>
       </div>
