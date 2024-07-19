@@ -29,7 +29,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
             {product.description.slice(0, 70) + "..."}
           </p>
           <span
-            className={`font-medium 
+            className={`font-medium text-base
           ${product.quantity > 5 ? "text-primary" : "text-[#f3c326]"} 
           `}
           >

@@ -3,6 +3,7 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IProduct } from "@/interfaces/product";
+import axios from "axios";
 
 class ProductsService {
   async getAll() {
@@ -23,41 +24,46 @@ class ProductsService {
     return res;
   }
 
-  async GetById(id: string) {
+  async getById(id: string) {
     const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
-    const transformedData: IProduct = FirestoreTransformer.transformDocument(
-      res.data
-    );
+    const transformedData: IProduct = FirestoreTransformer.transformDocument(res.data);
 
     return transformedData;
   }
 
-  async GetByTitle(text: string) {
+  async getByTitle(text: string) {
     const res = await makeRequest.get(
       `${ApiConstants.products}/?title<=${text}`
     );
-    
+
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(res.data.documents);
 
     return transformedData;
   }
 
-  async GetProdsBySubcategoryId(id: string) {
-    const res = await makeRequest.get(
-      // `${ApiConstants.products}?where=category.id=='${id}'`
-      ApiConstants.products
+  async getByCategoryId(categoryId: string) {
+    let res = await makeRequest.post(
+      `${ApiConstants.baseUrl}:runQuery`,
+      {
+        'structuredQuery': {
+          'from': [{ 'collectionId': "products" }],
+          'where': {
+            'fieldFilter': {
+              'field': { 'fieldPath': "category.id" },
+              'op': "EQUAL",
+              'value': { 'stringValue': categoryId },
+            },
+          },
+        },
+      }
     );
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
 
-    const filteredProds = transformedData.filter(
-      (prod) => prod.category.id === id
+    const transformedData: IProduct[] = FirestoreTransformer.transformFirebaseData(
+      res.data.map((doc: any) => doc.document)
     );
 
-    console.log(transformedData);
-
-    return filteredProds;
+    return transformedData;
   }
 }
 export default new ProductsService();

@@ -18,7 +18,7 @@ const FilteredProducts: React.FC<params> = async ({ params: { id } }: params) =>
   let filteredProducts: IProduct[] = [];
 
   if (id) {
-    filteredProducts = await ProductsService.GetProdsBySubcategoryId(id);
+    filteredProducts = await ProductsService.getByCategoryId(id);
   }
 
   // } else if (searchText) {
