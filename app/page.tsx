@@ -5,7 +5,6 @@ import { ICategory } from "@/interfaces/category";
 import CategoriesService from "@/services/api/categories";
 import ProductCard from "@/components/product-card/ProductCard";
 
-
 const Home = async () => {
   let products = await ProductsService.getAll() as IProduct[];
 

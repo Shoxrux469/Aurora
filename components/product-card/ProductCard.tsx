@@ -21,7 +21,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         />
       </div>
       <div className="px-2 py-3 space-y-1">
-        <h4 className="h-16 text-lg font-bold text-balance">{product.title}</h4>
+        <h4 className="min-h-16 text-lg font-bold text-balance">{product.title}</h4>
         <div className="flex justify-between items-center">
           <p className="text-gray-600 text-base font-medium">
             ${product.price}.00

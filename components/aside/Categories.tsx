@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 
 import {
   ArrowRight,
+  ChevronRight,
   Watch,
   Gamepad2,
   Headphones,
@@ -27,18 +28,17 @@ interface ICategoryState {
 
 const Categories = ({ categories }: { categories: ICategory[] }) => {
   const [isChild, setIsChild] = useState<ICategoryState | null>(null);
-
   let categoryIconClass = cn("opacity-70 text-primary");
 
   const categoriesIcons: ICategoryIcons = {
     "Умные часы и фитнес браслеты": (
-      <Watch size={20} className={categoryIconClass} />
+      <Watch size={24} className={categoryIconClass} />
     ),
-    Игровое: <Gamepad2 size={20} className={categoryIconClass} />,
+    Игровое: <Gamepad2 size={24} className={categoryIconClass} />,
     "Наушники и аудиотехника": (
-      <Headphones size={20} className={categoryIconClass} />
+      <Headphones size={24} className={categoryIconClass} />
     ),
-    "Компьютерная техника": <Laptop size={20} className={categoryIconClass} />,
+    "Компьютерная техника": <Laptop size={24} className={categoryIconClass} />,
   };
 
   const transitionVariants = {
@@ -60,15 +60,15 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
             transition={{ duration: 0.2 }}
           >
             <div className="mt-4 mb-3 space-y-2">
-              <div className="flex text-primary items-end">
+              <div className="mb-5 flex text-primary items-end">
                 <Mountain size={42} />
                 <h2 className="text-3xl ml-1">Fitness</h2>
               </div>
-              <p className="text-lg text-balance">
+              <p className="text-lg text-balance italic font-medium ">
                 Откройте для себя совершенство с каждой покупкой
               </p>
             </div>
-            <ul className="text-lg flex flex-col gap-3">
+            <ul className="mt-6 text-lg flex flex-col gap-3">
               {categories.map((category, i) => (
                 <li
                   key={i}
@@ -84,7 +84,7 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
                     {categoriesIcons[category.title]}
                     {category.title}
                   </span>
-                  <ArrowRight
+                  <ChevronRight
                     size={24}
                     className={cn(
                       "text-primary transition-transform duration-150 group-hover:translate-x-1"
@@ -103,7 +103,7 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
             variants={transitionVariants}
             transition={{ duration: 0.2 }}
           >
-            <div className="flex py-2 border-b-2 border-zinc-300 items-center gap-2 mt-4">
+            <div className="flex py-2 items-center gap-2 mt-4">
               <ArrowLeft
                 size={25}
                 onClick={() => setIsChild(null)}
@@ -111,7 +111,8 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
               />
               <h2 className="text-xl text-balance">Главное меню</h2>
             </div>
-            <h1 className="text-2xl text-balance mt-2 font-semibold">
+            <div className="separator"></div>
+            <h1 className="text-2xl text-balance mt-2 font-semibold italic">
               {isChild.categoryTitle}
             </h1>
             <SubCategories subcategories={isChild.categoryChild} />
