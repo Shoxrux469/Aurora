@@ -9,9 +9,15 @@ import "swiper/css/free-mode";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 
-import "./styles.css";
+import "./index.css";
 
-import { EffectFade, FreeMode, Navigation, Thumbs } from "swiper/modules";
+import {
+  EffectFade,
+  FreeMode,
+  Navigation,
+  // Pagination,
+  Thumbs,
+} from "swiper/modules";
 import { Swiper as SwiperInstance } from "swiper";
 
 interface ProductSwiperProps {
@@ -21,13 +27,8 @@ interface ProductSwiperProps {
 const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperInstance | null>(null);
 
-  const customStyle: React.CSSProperties & { [key: string]: string } = {
-    "--swiper-navigation-color": "#fff",
-    "--swiper-pagination-color": "#fff",
-  };
-
   return (
-    <div className="flex gap-2">
+    <div className="flex h-full gap-2">
       <Swiper
         direction="vertical"
         onSwiper={setThumbsSwiper}
@@ -50,12 +51,12 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
       </Swiper>
       <Swiper
         direction="horizontal"
-        style={customStyle}
-        spaceBetween={10}
+        navigation={true}
+        spaceBetween={3}
         effect={"fade"}
         thumbs={{ swiper: thumbsSwiper }}
-        modules={[EffectFade, FreeMode, Thumbs]}
-        className="w-9/12 h-full"
+        modules={[EffectFade, FreeMode, Navigation, Thumbs]}
+        className="w-10/12 h-full"
       >
         {images.map((imgURL, i) => (
           <SwiperSlide key={i}>

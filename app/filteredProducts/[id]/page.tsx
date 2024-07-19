@@ -1,7 +1,7 @@
 import React from "react";
 import ProductsService from "@/services/api/products";
 import { IProduct } from "@/interfaces/product";
-import ProductCart from "@/components/productCart/ProductCart";
+import ProductCart from "@/components/product-card/ProductCard";
 
 interface params {
   params: {
@@ -20,7 +20,7 @@ const FilteredProducts: React.FC<params> = async ({
   let filteredProducts: IProduct[] = [];
 
   if (id) {
-    filteredProducts = await ProductsService.GetProdBySubcategoryId(id);
+    filteredProducts = await ProductsService.GetProdsBySubcategoryId(id);
   }
 
   // } else if (searchText) {
