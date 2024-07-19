@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 
 const Footer = () => {
+  const LinkClass = "hover:underline w-fit";
+
   return (
     <footer className={cn("bg-background")}>
       <div className="mx-auto py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -37,16 +39,16 @@ const Footer = () => {
         <div className="space-y-4">
           <h4 className="text-lg font-bold text-primary">Catalog</h4>
           <nav className="grid gap-2 text-secondary-foreground">
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Treadmills
             </Link>
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Ellipticals
             </Link>
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Bikes
             </Link>
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Weights
             </Link>
           </nav>
@@ -54,16 +56,16 @@ const Footer = () => {
         <div className="space-y-4">
           <h4 className="text-lg font-bold text-primary">Company</h4>
           <nav className="grid gap-2 text-secondary-foreground">
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               About Us
             </Link>
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Careers
             </Link>
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Blog
             </Link>
-            <Link className="hover:underline" href="#">
+            <Link className={LinkClass} href="#">
               Contact
             </Link>
           </nav>
@@ -71,16 +73,16 @@ const Footer = () => {
         <div className="space-y-4 text-primary">
           <h4 className="text-lg font-bold">Follow Us</h4>
           <div className="flex gap-4">
-            <Link className="hover:text-gray-300" href="#">
+            <Link href="#">
               <Facebook size={24} />
             </Link>
-            <Link className="hover:text-gray-300" href="#">
+            <Link href="#">
               <Twitter size={24} />
             </Link>
-            <Link className="hover:text-gray-300" href="#">
+            <Link href="#">
               <Instagram size={24} />
             </Link>
-            <Link className="hover:text-gray-300" href="#">
+            <Link href="#">
               <Linkedin size={24} />
             </Link>
           </div>

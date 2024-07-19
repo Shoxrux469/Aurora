@@ -2,7 +2,7 @@ import { ICategoryChild } from "@/interfaces/category";
 import React from "react";
 import { useRouter } from "next/navigation";
 
-const SubCategories = ({
+const AsideSubcategories = ({
   subcategories,
 }: {
   subcategories: ICategoryChild[];
@@ -30,4 +30,4 @@ const SubCategories = ({
   );
 };
 
-export default SubCategories;
+export default AsideSubcategories;

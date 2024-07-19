@@ -2,7 +2,6 @@ import React from "react";
 import ProductsService from "@/services/api/products";
 import { IProduct } from "@/interfaces/product";
 import ProductCard from "@/components/product-card/ProductCard";
-ProductCard
 
 interface params {
   params: {
@@ -19,7 +18,7 @@ const FilteredProducts: React.FC<params> = async ({ params: { id } }: params) =>
   let filteredProducts: IProduct[] = [];
 
   if (id) {
-    filteredProducts = await ProductsService.GetProdBySubcategoryId(id);
+    filteredProducts = await ProductsService.GetProdsBySubcategoryId(id);
   }
 
   // } else if (searchText) {

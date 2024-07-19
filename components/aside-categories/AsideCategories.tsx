@@ -1,6 +1,6 @@
 "use client";
 
-import SubCategories from "./SubCategories";
+import AsideSubcategories from "../aside-subcategories/AsideSubcategories";
 import React, { useState } from "react";
 import { ICategory, ICategoryChild } from "@/interfaces/category";
 import { cn } from "@/lib/utils";
@@ -26,7 +26,7 @@ interface ICategoryState {
   categoryChild: ICategoryChild[];
 }
 
-const Categories = ({ categories }: { categories: ICategory[] }) => {
+const AsideCategories = ({ categories }: { categories: ICategory[] }) => {
   const [isChild, setIsChild] = useState<ICategoryState | null>(null);
   let categoryIconClass = cn("opacity-70 text-primary");
 
@@ -115,7 +115,7 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
             <h1 className="text-2xl text-balance mt-2 font-semibold italic">
               {isChild.categoryTitle}
             </h1>
-            <SubCategories subcategories={isChild.categoryChild} />
+            <AsideSubcategories subcategories={isChild.categoryChild} />
           </motion.div>
         )}
       </AnimatePresence>
@@ -123,4 +123,4 @@ const Categories = ({ categories }: { categories: ICategory[] }) => {
   );
 };
 
-export default Categories;
+export default AsideCategories;

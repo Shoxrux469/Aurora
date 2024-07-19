@@ -1,0 +1,26 @@
+.mySwiper1 .swiper-slide {
+    opacity: 0.4;
+}
+
+.mySwiper1 .swiper-slide-thumb-active {
+    opacity: 1;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+    font-size: 16px;
+}
