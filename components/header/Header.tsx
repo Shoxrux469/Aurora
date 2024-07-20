@@ -3,15 +3,10 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
-import {
-  AlignJustify,
-  Search,
-  Mountain,
-  LogIn,
-  ShoppingBag,
-} from "lucide-react";
+import { AlignJustify, Mountain, LogIn, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Aside from "../aside/Aside";
+import HeaderSearcher from "../header-searcher/HeaderSearcher";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
@@ -36,20 +31,7 @@ const Header = () => {
             <Mountain size={24} className="text-primary" />
           </Link>
         </div>
-        <div className="relative w-full max-w-2xl">
-          <Input
-            className="w-full h-10 rounded-lg text-base px-4 relative z-20 py-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
-            placeholder="Search products..."
-            type="text"
-          />
-          <Button
-            className="absolute rounded-lg h-full shadow-none w-12 right-0 z-10 top-1/2 -translate-y-1/2"
-            size="icon"
-            variant="secondary"
-          >
-            <Search size={20} className="text-gray-500" />
-          </Button>
-        </div>
+        <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
           <Button variant="ghost" size="default" className={buttonsClass}>
             <LogIn size={20} />

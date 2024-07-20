@@ -33,31 +33,47 @@ class ProductsService {
   }
 
   async GetByTitle(text: string) {
-    const res = await makeRequest.get(
-      `${ApiConstants.products}/?title<=${text}`
-    );
-    
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}/runQuery`, {
+      structuredQuery: {
+        from: [{ collectionId: "products" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "title" },
+            op: "LESS_THAN_OR_EQUAL",
+            value: { stringValue: text },
+          },
+        },
+      },
+    });
+
     const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
+      FirestoreTransformer.transformFirebaseData(
+        res.data.map((doc: any) => doc.document)
+      );
 
     return transformedData;
   }
 
   async GetProdsBySubcategoryId(id: string) {
-    const res = await makeRequest.get(
-      // `${ApiConstants.products}?where=category.id=='${id}'`
-      ApiConstants.products
-    );
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}/runQuery`, {
+      structuredQuery: {
+        from: [{ collectionId: "products" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "category.id" },
+            op: "EQUAL",
+            value: { stringValue: id },
+          },
+        },
+      },
+    });
+
     const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
+      FirestoreTransformer.transformFirebaseData(
+        res.data.map((doc: any) => doc.document)
+      );
 
-    const filteredProds = transformedData.filter(
-      (prod) => prod.category.id === id
-    );
-
-    console.log(transformedData);
-
-    return filteredProds;
+    return transformedData;
   }
 }
 export default new ProductsService();

@@ -5,12 +5,16 @@ import ProductCart from "@/components/product-card/ProductCard";
 
 interface params {
   params: {
-    id: string;
+    id?: string;
+  };
+  searchParams: {
+    text?: string;
   };
 }
 
 const FilteredProducts: React.FC<params> = async ({
   params: { id },
+  searchParams: { text },
 }: params) => {
   // const subcategory = searchParams.get("category");
   // const searchText = searchParams.get("searchText");
@@ -19,8 +23,14 @@ const FilteredProducts: React.FC<params> = async ({
 
   let filteredProducts: IProduct[] = [];
 
+  // if (id) {
+  //   filteredProducts = await ProductsService.GetProdsBySubcategoryId(id);
+  // }
+
   if (id) {
     filteredProducts = await ProductsService.GetProdsBySubcategoryId(id);
+  } else if (text) {
+    filteredProducts = await ProductsService.GetByTitle(text);
   }
 
   // } else if (searchText) {
