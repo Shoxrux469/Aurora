@@ -1,7 +1,7 @@
 import React from "react";
 import ProductsService from "@/services/api/products";
 import { IProduct } from "@/interfaces/product";
-import ProductCart from "@/components/product-card/ProductCard";
+import ProductCard from "@/components/product-card/ProductCard";
 
 interface params {
   params: {
@@ -48,7 +48,7 @@ const FilteredProducts: React.FC<params> = async ({
           <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {filteredProducts.length > 0 ? (
               filteredProducts.map((product, i) => (
-                <ProductCart key={i} product={product} />
+                <ProductCard key={i} product={product} />
               ))
             ) : (
               <p className="text-3xl">No products found</p>
