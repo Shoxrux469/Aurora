@@ -1,7 +1,7 @@
 import MainSwiper from "@/components/swiper/Swiper";
 import { IProduct } from "@/interfaces/product";
 import ProductsService from "@/services/api/products";
-  import ProductCard from "@/components/product-card/ProductCard";
+import ProductCard from "@/components/product-card/ProductCard";
 
 const Home = async () => {
   let products = await ProductsService.getAll() as IProduct[];

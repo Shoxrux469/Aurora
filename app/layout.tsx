@@ -29,9 +29,7 @@ export default async function RootLayout({
         )}
       >
         <Header />
-        <div className="max-w-[1440px] mx-auto">
-          {children}
-        </div>
+        <div className="max-w-[1440px] mx-auto">{children}</div>
         <Footer />
       </body>
     </html>

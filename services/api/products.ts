@@ -31,13 +31,24 @@ class ProductsService {
     return transformedData;
   }
 
-  async getByTitle(text: string) {
-    const res = await makeRequest.get(
-      `${ApiConstants.products}/?title<=${text}`
-    );
+  async GetByTitle(text: string) {
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}/runQuery`, {
+      structuredQuery: {
+        from: [{ collectionId: "products" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "title" },
+            op: "LESS_THAN_OR_EQUAL",
+            value: { stringValue: text },
+          },
+        },
+      },
+    });
 
     const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
+      FirestoreTransformer.transformFirebaseData(
+        res.data.map((doc: any) => doc.document)
+      );
 
     return transformedData;
   }
