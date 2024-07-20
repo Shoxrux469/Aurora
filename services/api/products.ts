@@ -3,6 +3,7 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IProduct } from "@/interfaces/product";
+import axios from "axios";
 
 class ProductsService {
   async getAll() {
@@ -23,7 +24,7 @@ class ProductsService {
     return res;
   }
 
-  async GetById(id: string) {
+  async getById(id: string) {
     const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
     const transformedData: IProduct = FirestoreTransformer.transformDocument(
       res.data
