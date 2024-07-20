@@ -33,7 +33,7 @@ class ProductsService {
   }
 
   async GetByTitle(text: string) {
-    let res = await makeRequest.post(`${ApiConstants.baseUrl}/runQuery`, {
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "products" }],
         where: {
@@ -46,6 +46,8 @@ class ProductsService {
       },
     });
 
+    console.log(res.data + "AND SOMETHING ELSE");
+
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(
         res.data.map((doc: any) => doc.document)
@@ -55,7 +57,7 @@ class ProductsService {
   }
 
   async GetProdsBySubcategoryId(id: string) {
-    let res = await makeRequest.post(`${ApiConstants.baseUrl}/runQuery`, {
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "products" }],
         where: {

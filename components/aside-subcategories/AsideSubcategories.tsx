@@ -18,7 +18,9 @@ const AsideSubcategories = ({
             className="cursor-pointer flex items-center justify-between group"
           >
             <button
-              onClick={() => router.push(`/filteredProducts/${subcategory.id}`)}
+              onClick={() =>
+                router.push(`/filteredProducts/id/${subcategory.id}`)
+              }
               className="flex items-center hover:opacity-75 ease-in-out duration-150 text-balance text-lg justify-center gap-3"
             >
               {subcategory.title}
