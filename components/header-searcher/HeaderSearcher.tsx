@@ -8,13 +8,13 @@ import { useRouter } from "next/navigation";
 const HeaderSearcher = () => {
   const router = useRouter();
 
-  const handleKeyUp = (e: any) => {
+  const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      router.push(`/filteredProducts?text=${e.target.value}`);
-      // <SearchPage /arr={searchHintGoods} />
-      // navigate("/searcher", { state: { arr: searchHintGoods } })
+      const text = e.currentTarget.value;
+      router.push(`/filteredProducts/text/${encodeURIComponent(text)}`);
     }
   };
+  
   return (
     <div className="relative w-full max-w-2xl">
       <Input

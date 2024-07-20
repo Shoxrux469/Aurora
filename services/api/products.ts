@@ -26,13 +26,15 @@ class ProductsService {
 
   async getById(id: string) {
     const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
-    const transformedData: IProduct = FirestoreTransformer.transformDocument(res.data);
+    const transformedData: IProduct = FirestoreTransformer.transformDocument(
+      res.data
+    );
 
     return transformedData;
   }
 
   async GetByTitle(text: string) {
-    let res = await makeRequest.post(`${ApiConstants.baseUrl}/runQuery`, {
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "products" }],
         where: {
@@ -45,6 +47,8 @@ class ProductsService {
       },
     });
 
+    console.log(res.data + "AND SOMETHING ELSE");
+
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(
         res.data.map((doc: any) => doc.document)
@@ -53,26 +57,24 @@ class ProductsService {
     return transformedData;
   }
 
-  async getByCategoryId(categoryId: string) {
-    let res = await makeRequest.post(
-      `${ApiConstants.baseUrl}:runQuery`,
-      {
-        'structuredQuery': {
-          'from': [{ 'collectionId': "products" }],
-          'where': {
-            'fieldFilter': {
-              'field': { 'fieldPath': "category.id" },
-              'op': "EQUAL",
-              'value': { 'stringValue': categoryId },
-            },
+  async GetProdsBySubcategoryId(id: string) {
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
+      structuredQuery: {
+        from: [{ collectionId: "products" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "category.id" },
+            op: "EQUAL",
+            value: { stringValue: id },
           },
         },
-      }
-    );
+      },
+    });
 
-    const transformedData: IProduct[] = FirestoreTransformer.transformFirebaseData(
-      res.data.map((doc: any) => doc.document)
-    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(
+        res.data.map((doc: any) => doc.document)
+      );
 
     return transformedData;
   }

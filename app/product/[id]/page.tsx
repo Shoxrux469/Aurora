@@ -24,8 +24,10 @@ const ProductPage = async ({ params: { id } }: params) => {
   } = (await ProductsService.getById(id)) as IProduct;
 
   let relatedProducts = (
-    await ProductsService.getByCategoryId(category.id)
-  ).filter((prod) => prod.id !== id).slice(0, 5) as IProduct[];
+    await ProductsService.GetProdsBySubcategoryId(category.id)
+  )
+    .filter((prod) => prod.id !== id)
+    .slice(0, 5) as IProduct[];
 
   return (
     <>
