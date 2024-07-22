@@ -33,7 +33,7 @@ class ProductsService {
     return transformedData;
   }
 
-  async GetByTitle(text: string) {
+  async getByTitle(text: string) {
     let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "products" }],
@@ -57,7 +57,7 @@ class ProductsService {
     return transformedData;
   }
 
-  async GetProdsBySubcategoryId(id: string) {
+  async getBySubcategoryid(id: string) {
     let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "products" }],
