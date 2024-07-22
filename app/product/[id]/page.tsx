@@ -5,6 +5,7 @@ import React from "react";
 import ProductsService from "@/services/api/products";
 import ProductInfo from "@/components/product-info/ProductInfo";
 import ProductCard from "@/components/product-card/ProductCard";
+import { Separator } from "@/components/ui/separator";
 
 interface params {
   params: {
@@ -45,7 +46,7 @@ const ProductPage = async ({ params: { id } }: params) => {
         </div>
       </section>
 
-      <div className="separator my-20"></div>
+      <Separator className="mt-20" />
 
       <section className="product-description py-8 max-w-[70%] mx-auto">
         <p className="text-base text-zinc-700">{description}</p>
