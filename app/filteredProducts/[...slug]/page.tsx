@@ -14,9 +14,9 @@ const FilteredProducts = async ({ params: { slug } }: params) => {
 
   if (slug && slug.length > 0) {
     if (slug[0] === "id") {
-      filteredProducts = await ProductsService.GetProdsBySubcategoryId(slug[1]);
+      filteredProducts = await ProductsService.getBySubcategoryid(slug[1]);
     } else if (slug[0] === "text") {
-      filteredProducts = await ProductsService.GetByTitle(
+      filteredProducts = await ProductsService.getByTitle(
         decodeURIComponent(slug[1])
       );
     }
