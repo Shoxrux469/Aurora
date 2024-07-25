@@ -5,10 +5,10 @@ import { Button } from "../ui/button";
 import { LogIn } from "lucide-react";
 import LoginForm from "../login-form/LoginForm";
 import SigninForm from "../signin-form/SigninForm";
+import { SessionProvider, signIn } from "next-auth/react";
 
 const LoginModal = () => {
   const [isLogged, setIsLogged] = useState<boolean>(true);
-
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,11 +22,13 @@ const LoginModal = () => {
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[380px]">
-        {isLogged ? (
-          <LoginForm setIsLogged={setIsLogged} />
-        ) : (
-          <SigninForm setIsLogged={setIsLogged} />
-        )}
+        <SessionProvider>
+          {isLogged ? (
+            <LoginForm setIsLogged={setIsLogged} />
+          ) : (
+            <SigninForm setIsLogged={setIsLogged} />
+          )}
+        </SessionProvider>
       </DialogContent>
     </Dialog>
   );

@@ -6,10 +6,9 @@ import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
-import UsersService from "@/services/api/users";
 import { useToast } from "../ui/use-toast";
-import { signIn } from "next-auth/react";
-
+import { signIn, useSession } from "next-auth/react";
+import { authOptions } from "@/lib/auth";
 interface Props {
   setIsLogged: (logged: boolean) => void;
 }
@@ -25,29 +24,20 @@ const LoginForm = ({ setIsLogged }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
   const { toast } = useToast();
+  const { data: session } = useSession();
 
-  const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
-    const result = await signIn("credentials", {
-      email: email,
-      password: password,
-      redirect: false,
+  const onSubmit: SubmitHandler<Inputs> = async (user) => {
+    const res = await signIn("credentials", {
+      email: user.email,
+      password: user.password,
+      redirect: true,
     });
-    if (result?.error) {
-      toast({
-        title: "Ошибка входа",
-        description: result.error,
-        variant: "destructive",
-      });
-    } else {
-      toast({
-        title: "Успешный вход",
-        description: "Вы успешно вошли в аккаунт",
-        variant: "default",
-      });
-    }
+
+    console.log(res);
   };
+
+  console.log(session);
 
   return (
     <>
@@ -61,36 +51,42 @@ const LoginForm = ({ setIsLogged }: Props) => {
         <div className="space-y-5">
           <Input
             {...register("email", {
-              required: true,
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              required: "Email Address is required",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Введите действительный адрес электронной почты",
+              },
             })}
-            style={
-              errors.email?.type === "pattern" ? InputErrorStyle : undefined
-            }
-            id={"email"}
+            style={errors.email ? InputErrorStyle : undefined}
+            id="email"
             placeholder="Эмайл"
           />
-          {errors.email?.type === "required" && (
+          {errors.email && (
             <span role="alert" className="text-xs">
-              Email Address is required
+              {errors.email.message}
             </span>
           )}
           <Input
             {...register("password", {
-              required: true,
-              pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              minLength: 6,
+              required: "Password is required",
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                message:
+                  "Пароль должен содержать как минимум 8 символов, включая буквы и цифры",
+              },
+              minLength: {
+                value: 6,
+                message: "Пароль должен быть не менее 6 символов",
+              },
             })}
-            id={"password"}
+            id="password"
             aria-invalid={errors.password ? "true" : "false"}
-            style={
-              errors.password?.type === "pattern" ? InputErrorStyle : undefined
-            }
+            style={errors.password ? InputErrorStyle : undefined}
             placeholder="Пароль"
           />
-          {errors.password?.type === "required" && (
-            <span role="alert" className="text-xs mt-0">
-              Password is required
+          {errors.password && (
+            <span role="alert" className="text-xs">
+              {errors.password.message}
             </span>
           )}
 

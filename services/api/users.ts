@@ -31,7 +31,7 @@ class UsersService {
     const allData = {
       ...data,
       cart: [],
-      ordsers: [],
+      orders: [],
     };
 
     const firestoreData = FirestoreTransformer.toFirestoreFormat(allData);

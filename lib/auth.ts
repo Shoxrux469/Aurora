@@ -1,12 +1,13 @@
 import { NextAuthOptions, User } from "next-auth";
-import { AdapterUser } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
-import UsersService from "@/services/api/users";
-import { useToast } from "@/components/ui/use-toast";
 import CredentialsProvider from "next-auth/providers/credentials";
+import UsersService from "@/services/api/users";
 import { IUser } from "@/interfaces/user";
+// const { toast } = useToast();
 
-const { toast } = useToast();
+interface CurrentUser extends User {
+  password?: string | null;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -16,67 +17,57 @@ export const authOptions: NextAuthOptions = {
     }),
     CredentialsProvider({
       type: "credentials",
-      credentials: {
-        email: { label: "Email", type: "email" },
-        password: { label: "Password", type: "password" },
-      },
+      credentials: {},
       async authorize(credentials, req) {
-        try {
-          const { email, password } = credentials as {
-            email: string;
-            password: string;
-          };
+        const { email, password } = credentials as {
+          email: string;
+          password: string;
+        };
+        const currentUser = (await UsersService.getByEmail(email)) as IUser[];
 
-          const user: IUser[] = await UsersService.getByEmail(email);
-
-          console.log(user);
-
-          if (user.length === 0) {
-            toast({
-              title: "Пользователь не найден!",
-              description:
-                "Пользователь с таким Эмайл адресом не найден, пожалуйста зарегистрируйтесь и повторите снова",
-              variant: "default",
-            });
-            return null;
-          }
-          if (user && user[0].password === credentials?.password) {
-            return { email, password };
-          }
-        } catch (error) {
-          throw new Error("Invalid credentials");
+        if (currentUser.length === 0) {
+          return null;
+        }
+        if (currentUser[0].password === password) {
+          return {
+            id: currentUser[0].id,
+            email: currentUser[0].email,
+            name: currentUser[0].name,
+            orders: currentUser[0].orders,
+            cart: currentUser[0].cart,
+          } as User;
+        } else {
+          return null;
         }
       },
     }),
   ],
 
   callbacks: {
-    async signIn({ user }: { user: User }) {
+    async signIn({ user }: { user: CurrentUser }) {
       try {
-        const userExists = await UsersService.getByEmail(user.email as string);
-        if (userExists.length === 0) {
-          toast({
-            title: "Пользователь не найден!",
-            description:
-              "Пользователь с таким Эмайл адресом не найден, пожалуйста зарегистрируйтесь и повторите снова",
-            variant: "default",
-          });
+        const currentUser = await UsersService.getByEmail(user.email as string);
+        console.log(currentUser);
+        if (currentUser.length === 0) {
+          console.log("User wasn't found");
           return false;
         }
+        if (currentUser[0].password !== user.password) {
+          return false;
+        }
+        localStorage.setItem("user", JSON.stringify(currentUser[0]));
         return true;
       } catch (error) {
-        toast({
-          title: "Ошибка",
-          description:
-            "Произошла ошибка при проверке существования пользователя",
-          variant: "destructive",
-        });
-        return false;
+        console.log("Error during user lookup:", error);
+        return false; // Indicate failure to sign in
       }
     },
 
     async session({ session }) {
       return session;
     },
+  },
+  pages: {
+    signIn: "@/components/login-form/LoginForm",
   },
 };

@@ -42,15 +42,17 @@ const SigninForm = ({ setIsLogged }: Props) => {
   ];
 
   const onSubmit: SubmitHandler<Inputs> = async (data: User) => {
-    try {
-      signIn("credentials");
-    } catch (error) {
-      toast({
-        title: "Ошибка",
-        description: "Произошла ошибка при проверке существования пользователя",
-        variant: "destructive",
-      });
-    }
+    console.log(data);
+
+    // try {
+    //   signIn("credentials");
+    // } catch (error) {
+    //   toast({
+    //     title: "Ошибка",
+    //     description: "Произошла ошибка при проверке существования пользователя",
+    //     variant: "destructive",
+    //   });
+    // }
   };
 
   return (

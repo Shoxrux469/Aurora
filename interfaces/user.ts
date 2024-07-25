@@ -24,8 +24,10 @@ export interface IUser {
   email: string;
   password: string;
   orders: IUserOrder[];
-  name: {
-    name: string;
-    surname: string;
-  };
+  name:
+    | {
+        name: string;
+        surname: string;
+      }
+    | string;
 }
