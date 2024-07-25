@@ -5,6 +5,7 @@ import { Check, Heart, Dot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { paymentIcons } from "@/constants";
+import { Separator } from "../ui/separator";
 
 interface props {
   title: string;
@@ -18,7 +19,7 @@ const ProductInfo = ({ title, price, specific, quantity }: props) => {
   return (
     <div className="p-2">
       <h2 className="text-2xl font-medium">{title}</h2>
-      <div className="separator"></div>
+      <Separator className="my-4" />
       <div>
         <span className="font-medium text-zinc-500">Цена:</span>
         <p className="text-2xl font-medium tracking-wider">${price}.00</p>
@@ -44,9 +45,11 @@ const ProductInfo = ({ title, price, specific, quantity }: props) => {
         </Button>
       </div>
 
-      <div className="mt-10 p-3 rounded-xl border border-zinc-300">
+      <div className="mt-10 p-3 rounded-xl border border-border">
         <div className="px-1 text-sm font-medium">Быстрая доставка</div>
-        <div className="separator"></div>
+
+        <Separator className="my-4" />
+
         <div className="px-1 text-sm font-medium">
           Безопасная оплата удобным способом
           <div className="flex gap-2">
@@ -55,7 +58,9 @@ const ProductInfo = ({ title, price, specific, quantity }: props) => {
             ))}
           </div>
         </div>
-        <div className="separator"></div>
+
+        <Separator className="my-4" />
+
         <div className="px-1 text-sm font-medium">
           Простой и быстрый возврат
         </div>

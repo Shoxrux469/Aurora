@@ -4,12 +4,13 @@ import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IProduct } from "@/interfaces/product";
 import { User } from "next-auth";
+import { IUser } from "@/interfaces/user";
 
 class UsersService {
   async getByEmail(email: string) {
     let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
-        from: [{ collectionId: "products" }],
+        from: [{ collectionId: "users" }],
         where: {
           fieldFilter: {
             field: { fieldPath: "email" },
@@ -20,19 +21,22 @@ class UsersService {
       },
     });
 
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(
-        res.data.map((doc: any) => doc.document)
-      );
+    const transformedData: IUser[] = FirestoreTransformer.transformFirebaseData(
+      res.data.map((doc: any) => doc.document)
+    );
 
     return transformedData;
   }
   async postUser(data: User) {
-    const firestoreData = FirestoreTransformer.toFirestoreFormat(data);
+    const allData = {
+      ...data,
+      cart: [],
+      ordsers: [],
+    };
+
+    const firestoreData = FirestoreTransformer.toFirestoreFormat(allData);
     const res = await makeRequest.post(ApiConstants.users, {
-      id: data.id,
-      name: data.name,
-      email: data.email,
+      fields: firestoreData,
     });
 
     return res;

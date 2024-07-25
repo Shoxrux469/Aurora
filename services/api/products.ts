@@ -3,7 +3,6 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IProduct } from "@/interfaces/product";
-import axios from "axios";
 
 class ProductsService {
   async getAll() {
@@ -46,8 +45,6 @@ class ProductsService {
         },
       },
     });
-
-    console.log(res.data + "AND SOMETHING ELSE");
 
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(

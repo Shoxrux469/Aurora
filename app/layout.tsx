@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default async function RootLayout({
         <Header />
         <div className="max-w-[1440px] mx-auto">{children}</div>
         <Footer />
+        <Toaster  />
       </body>
     </html>
   );
