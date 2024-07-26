@@ -32,7 +32,7 @@ const Header = () => {
             </Sheet>
           ))}
           <Link className="flex items-center" href="/">
-            <span className="mr-1 text-primary text-xl font-bold">Fitness</span>
+            <span className="mr-1 text-primary text-xl font-bold">TechShop</span>
             <Mountain size={24} className="text-primary" />
           </Link>
         </div>
