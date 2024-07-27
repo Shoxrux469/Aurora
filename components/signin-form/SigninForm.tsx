@@ -1,36 +1,33 @@
 import React from "react";
 import { DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import Link from "next/link";
 import { Separator } from "../ui/separator";
-import { Facebook, Linkedin } from "lucide-react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
-import UsersService from "@/services/api/users";
-import { User } from "next-auth";
 import { useToast } from "../ui/use-toast";
-import { signIn } from "next-auth/react";
+import UsersService from "@/services/api/users";
 
+import { signIn, useSession } from "next-auth/react";
+import { Facebook, Linkedin } from "lucide-react";
 interface Props {
   setIsLogged: (logged: boolean) => void;
 }
 
 type Inputs = {
-  id: string;
-  name: string;
   email: string;
   password: string;
 };
 
-const SigninForm = ({ setIsLogged }: Props) => {
+const SignUpForm = ({ setIsLogged }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-
   const { toast } = useToast();
+  // const { data: session } = useSession();
 
   const socialButtons = [
     {
@@ -41,25 +38,26 @@ const SigninForm = ({ setIsLogged }: Props) => {
     { icon: <Linkedin color="#71717a" />, ariaLabel: "LinkedIn" },
   ];
 
-  const onSubmit: SubmitHandler<Inputs> = async (data: User) => {
-    console.log(data);
-
-    // try {
-    //   signIn("credentials");
-    // } catch (error) {
-    //   toast({
-    //     title: "Ошибка",
-    //     description: "Произошла ошибка при проверке существования пользователя",
-    //     variant: "destructive",
-    //   });
-    // }
+  const onSubmit: SubmitHandler<Inputs> = async (user) => {
+    try {
+      const res = await signIn("credentials", {
+        email: user.email,
+        password: user.password,
+        redirect: false,
+      });
+      console.log(res);
+    } catch (error) {
+      console.error(error);
+    }
+    // let relatedProducts = await UsersService.getByEmail("test@gmail.com");
+    // console.log(relatedProducts);
   };
 
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="text-center text-3xl font-medium">
-          Регистрация
+        <DialogTitle className="text-center mb-3 text-3xl font-medium">
+          Вход в аккаунт
         </DialogTitle>
       </DialogHeader>
 
@@ -70,7 +68,7 @@ const SigninForm = ({ setIsLogged }: Props) => {
             variant="outline"
             size="icon"
             className="p-2 rounded-full"
-            aria-label={ariaLabel}
+            onClick={() => signIn("google")}
           >
             {icon}
           </Button>
@@ -80,70 +78,68 @@ const SigninForm = ({ setIsLogged }: Props) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="space-y-5">
           <Input
-            {...register("name", {
-              required: true,
-              minLength: 3,
-              maxLength: 15,
-            })}
-            // aria-invalid={errors.name ? "true" : "false"}
-            placeholder="Имя"
-            id={"name"}
-          />
-          {errors.name?.type === "required" && (
-            <span role="alert" className="text-xs">
-              Name is required
-            </span>
-          )}
-          <Input
             {...register("email", {
-              required: true,
-              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              required: "Email Address is required",
+              pattern: {
+                value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                message: "Введите действительный адрес электронной почты",
+              },
             })}
-            style={
-              errors.email?.type === "pattern" ? InputErrorStyle : undefined
-            }
-            id={"email"}
-            // aria-invalid={errors.email ? "true" : "false"}
+            style={errors.email ? InputErrorStyle : undefined}
+            id="email"
             placeholder="Эмайл"
           />
-          {errors.email?.type === "required" && (
+          {errors.email && (
             <span role="alert" className="text-xs">
-              Email Address is required
+              {errors.email.message}
             </span>
           )}
           <Input
             {...register("password", {
-              required: true,
-              pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-              minLength: 6,
+              required: "Password is required",
+              pattern: {
+                value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+                message:
+                  "Пароль должен содержать как минимум 8 символов, включая буквы и цифры",
+              },
+              minLength: {
+                value: 6,
+                message: "Пароль должен быть не менее 6 символов",
+              },
             })}
-            id={"password"}
+            id="password"
             aria-invalid={errors.password ? "true" : "false"}
-            style={
-              errors.password?.type === "pattern" ? InputErrorStyle : undefined
-            }
+            style={errors.password ? InputErrorStyle : undefined}
             placeholder="Пароль"
           />
-          {errors.password?.type === "required" && (
-            <span role="alert" className="text-xs mt-0">
-              Password is required
+          {errors.password && (
+            <span role="alert" className="text-xs">
+              {errors.password.message}
             </span>
           )}
-          <Button className="w-full" size="lg">
-            Зарегистрироваться
+
+          <Button type="submit" className="w-full" size="lg">
+            Войти
           </Button>
         </div>
       </form>
+
+      <Link
+        href="/reset"
+        className="block w-fit mx-auto text-center text-sm text-blue-600"
+      >
+        Забыли пароль?
+      </Link>
       <Separator />
       <DialogFooter>
         <div className="text-sm">
-          У вас уже есть аккаунт? &nbsp;
+          У вас нет аккаунта? &nbsp;
           <Button
-            onClick={() => setIsLogged(true)}
+            onClick={() => setIsLogged(false)}
             variant="link"
             className="text-sm px-0 text-blue-600"
           >
-            Войти в аккаунт
+            Создать аккаунт
           </Button>
         </div>
       </DialogFooter>
@@ -151,4 +147,4 @@ const SigninForm = ({ setIsLogged }: Props) => {
   );
 };
 
-export default SigninForm;
+export default SignUpForm;

@@ -7,9 +7,8 @@ import { IProduct } from "@/interfaces/product";
 class ProductsService {
   async getAll() {
     const res = await makeRequest.get(ApiConstants.products);
-    const transformedData = FirestoreTransformer.transformFirebaseData(
-      res.data.documents
-    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(res.data.documents);
 
     return transformedData;
   }
@@ -33,25 +32,13 @@ class ProductsService {
   }
 
   async getByTitle(text: string) {
-    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
-      structuredQuery: {
-        from: [{ collectionId: "products" }],
-        where: {
-          fieldFilter: {
-            field: { fieldPath: "title" },
-            op: "LESS_THAN_OR_EQUAL",
-            value: { stringValue: text },
-          },
-        },
-      },
-    });
+    const products: IProduct[] = await this.getAll();
 
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(
-        res.data.map((doc: any) => doc.document)
-      );
+    const res = products.filter((prod) =>
+      prod.title.toLocaleLowerCase().includes(text.toLocaleLowerCase())
+    );
 
-    return transformedData;
+    return res;
   }
 
   async getBySubcategoryid(id: string) {

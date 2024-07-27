@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { LogIn } from "lucide-react";
-import LoginForm from "../login-form/LoginForm";
-import SigninForm from "../signin-form/SigninForm";
+import SignInForm from "../signin-form/SignInForm";
+import SignUpForm from "../signup-form/SignUpForm";
 import { SessionProvider, signIn } from "next-auth/react";
 
 const LoginModal = () => {
@@ -24,9 +24,9 @@ const LoginModal = () => {
       <DialogContent className="max-w-[380px]">
         <SessionProvider>
           {isLogged ? (
-            <LoginForm setIsLogged={setIsLogged} />
+            <SignInForm setIsLogged={setIsLogged} />
           ) : (
-            <SigninForm setIsLogged={setIsLogged} />
+            <SignUpForm setIsLogged={setIsLogged} />
           )}
         </SessionProvider>
       </DialogContent>

@@ -30,7 +30,6 @@ class UsersService {
   async postUser(data: User) {
     const allData = {
       ...data,
-      cart: [],
       orders: [],
     };
 

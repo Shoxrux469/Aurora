@@ -7,9 +7,7 @@ import ProductCard from "@/components/product-card/ProductCard";
 const Home = async () => {
   let products = (await ProductsService.getAll()) as IProduct[];
 
-  // let relatedProducts = await UsersService.getByEmail(
-  // "mamadsaidovsohruh07@gmail.com"
-  // );
+  console.log(products);
 
   return (
     <div className="bg-white">
@@ -28,29 +26,27 @@ const Home = async () => {
 
 export default Home;
 
+// try {
+//   const existingUsers = await UsersService.getByEmail(data.email!);
 
+//   if (existingUsers.length > 0) {
+//     toast({
+//       title: "Пользователь уже существует!",
+//       description:
+//         "Пользователь с таким Эмайлом уже существует, пожалуйста попробуйте войти в аккаунт",
+//       variant: "default",
+//     });
+//     return;
+//   }
 
-    // try {
-    //   const existingUsers = await UsersService.getByEmail(data.email!);
-
-    //   if (existingUsers.length > 0) {
-    //     toast({
-    //       title: "Пользователь уже существует!",
-    //       description:
-    //         "Пользователь с таким Эмайлом уже существует, пожалуйста попробуйте войти в аккаунт",
-    //       variant: "default",
-    //     });
-    //     return;
-    //   }
-
-    //   // You can proceed with user registration here
-    //   // const user = await UsersService.postUser(data);
-    //   // console.log(user);
-    // } catch (error) {
-    //   console.error("Error checking user existence:", error);
-    //   toast({
-    //     title: "Ошибка",
-    //     description: "Произошла ошибка при проверке существования пользователя",
-    //     variant: "destructive",
-    //   });
-    // }
+//   // You can proceed with user registration here
+//   // const user = await UsersService.postUser(data);
+//   // console.log(user);
+// } catch (error) {
+//   console.error("Error checking user existence:", error);
+//   toast({
+//     title: "Ошибка",
+//     description: "Произошла ошибка при проверке существования пользователя",
+//     variant: "destructive",
+//   });
+// }
