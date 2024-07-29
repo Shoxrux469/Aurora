@@ -20,13 +20,13 @@ const Header = () => {
     "flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out";
 
   return (
-    <header className="bg-white">
+    <header className="bg-white px-8">
       <div className="py-4 flex items-center justify-between">
         <div className="hidden lg:flex items-center gap-2">
           {SHEET_SIDES.map((side) => (
             <Sheet key={side}>
               <SheetTrigger>
-                <AlignJustify size={24} className={cn("text-green-600")} />
+                <AlignJustify size={24} className={cn("text-primary")} />
               </SheetTrigger>
               <Aside side={side} />
             </Sheet>

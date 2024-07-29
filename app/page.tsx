@@ -1,13 +1,13 @@
 import MainSwiper from "@/components/swiper/Swiper";
 import { IProduct } from "@/interfaces/product";
 import ProductsService from "@/services/api/products";
-  import ProductCard from "@/components/product-card/ProductCard";
+import ProductCard from "@/components/product-card/ProductCard";
 
 const Home = async () => {
   let products = await ProductsService.getAll() as IProduct[];
 
   return (
-    <div className="bg-white">
+    <div className="bg-white container px-8">
       <MainSwiper />
       <section className="mx-auto py-12">
         <h3 className="text-3xl font-bold text-center">Best Sellers</h3>

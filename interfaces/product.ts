@@ -7,7 +7,7 @@ interface IProductAttributes {
 }
 
 export interface IProduct {
-  id?: idType
+  id: idType
   category: IProductCategory
   attributes: IProductAttributes
   images_links: string[]
@@ -17,7 +17,6 @@ export interface IProduct {
   quantity: number
 }
 
-
-
-
-
+export interface ICartProduct extends IProduct {
+  cartQuantity: number
+}

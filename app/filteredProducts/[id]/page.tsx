@@ -27,7 +27,7 @@ const FilteredProducts: React.FC<params> = async ({ params: { id } }: params) =>
   // }
 
   return (
-    <div>
+    <div className="container px-8">
       {id && (
         <>
           <h1 className="text-3xl text-primary text-center w-full font-semibold">
