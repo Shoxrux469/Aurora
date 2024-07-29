@@ -25,14 +25,14 @@ export default async function RootLayout({
     <html lang="en">
       <body
         className={cn(
-          "min-h-screen mx-8 bg-background font-sans antialiased",
+          "min-h-screen mx-8 font-sans antialiased",
           fontSans.variable
         )}
       >
         <Header />
         <div className="max-w-[1440px] mx-auto">{children}</div>
         <Footer />
-        <Toaster  />
+        <Toaster />
       </body>
     </html>
   );

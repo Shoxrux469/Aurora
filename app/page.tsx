@@ -10,7 +10,7 @@ const Home = async () => {
   console.log(products);
 
   return (
-    <div className="bg-white">
+    <div>
       <MainSwiper />
       <section className="mx-auto py-12">
         <h3 className="text-3xl font-bold text-center">Best Sellers</h3>
