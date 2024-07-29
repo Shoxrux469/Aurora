@@ -23,9 +23,9 @@ const ProductPage = async ({ params: { id } }: params) => {
     description,
   } = (await ProductsService.getById(id)) as IProduct;
 
-  let relatedProducts = (
-    await ProductsService.getByCategoryId(category.id)
-  ).filter((prod) => prod.id !== id).slice(0, 5) as IProduct[];
+  let relatedProducts = (await ProductsService.getBySubcategoryid(category.id))
+    .filter((prod) => prod.id !== id)
+    .slice(0, 5) as IProduct[];
 
   return (
     <div className="container px-8">

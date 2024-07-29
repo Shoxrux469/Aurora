@@ -7,9 +7,8 @@ import { IProduct } from "@/interfaces/product";
 class ProductsService {
   async getAll() {
     const res = await makeRequest.get(ApiConstants.products);
-    const transformedData = FirestoreTransformer.transformFirebaseData(
-      res.data.documents
-    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(res.data.documents);
 
     return transformedData;
   }
@@ -25,42 +24,41 @@ class ProductsService {
 
   async getById(id: string) {
     const res = await makeRequest.get(`${ApiConstants.products}/${id}`);
-    const transformedData: IProduct = FirestoreTransformer.transformDocument(res.data);
+    const transformedData: IProduct = FirestoreTransformer.transformDocument(
+      res.data
+    );
 
     return transformedData;
   }
 
   async getByTitle(text: string) {
-    const res = await makeRequest.get(
-      `${ApiConstants.products}/?title<=${text}`
+    const products: IProduct[] = await this.getAll();
+
+    const res = products.filter((prod) =>
+      prod.title.toLocaleLowerCase().includes(text.toLocaleLowerCase())
     );
 
-    const transformedData: IProduct[] =
-      FirestoreTransformer.transformFirebaseData(res.data.documents);
-
-    return transformedData;
+    return res;
   }
 
-  async getByCategoryId(categoryId: string) {
-    let res = await makeRequest.post(
-      `${ApiConstants.baseUrl}:runQuery`,
-      {
-        'structuredQuery': {
-          'from': [{ 'collectionId': "products" }],
-          'where': {
-            'fieldFilter': {
-              'field': { 'fieldPath': "category.id" },
-              'op': "EQUAL",
-              'value': { 'stringValue': categoryId },
-            },
+  async getBySubcategoryid(id: string) {
+    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
+      structuredQuery: {
+        from: [{ collectionId: "products" }],
+        where: {
+          fieldFilter: {
+            field: { fieldPath: "category.id" },
+            op: "EQUAL",
+            value: { stringValue: id },
           },
         },
-      }
-    );
+      },
+    });
 
-    const transformedData: IProduct[] = FirestoreTransformer.transformFirebaseData(
-      res.data.map((doc: any) => doc.document)
-    );
+    const transformedData: IProduct[] =
+      FirestoreTransformer.transformFirebaseData(
+        res.data.map((doc: any) => doc.document)
+      );
 
     return transformedData;
   }

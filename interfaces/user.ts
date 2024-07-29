@@ -11,12 +11,23 @@ export interface IUserCart {
   totalPrice: string;
 }
 
+export interface IUserOrder {
+  orderDate: Date;
+  price: string;
+  items: IUserCartItem;
+  orderId: idType;
+}
+
 export interface IUser {
   id: idType;
   cart: IUserCart;
   email: string;
-  name: {
-    name: string;
-    surname: string;
-  };
+  password: string;
+  orders: IUserOrder[];
+  name:
+    | {
+        name: string;
+        surname: string;
+      }
+    | string;
 }
