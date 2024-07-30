@@ -1,7 +1,6 @@
 import MainSwiper from "@/components/swiper/Swiper";
 import { IProduct } from "@/interfaces/product";
 import ProductsService from "@/services/api/products";
-import UsersService from "@/services/api/users";
 import ProductCard from "@/components/product-card/ProductCard";
 
 const Home = async () => {
@@ -10,7 +9,7 @@ const Home = async () => {
   console.log(products);
 
   return (
-    <div>
+    <div className="bg-white container px-8">
       <MainSwiper />
       <section className="mx-auto py-12">
         <h3 className="text-3xl font-bold text-center">Best Sellers</h3>

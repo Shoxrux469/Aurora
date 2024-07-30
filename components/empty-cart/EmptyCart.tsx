@@ -1,6 +1,3 @@
-"use client";
-
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
@@ -19,7 +16,7 @@ const EmptyCart = () => {
         поиск
       </p>
 
-      <Button variant="black" onClick={() => router.push("/")}>
+      <Button variant="purple" onClick={() => router.push("/")}>
         На главную
       </Button>
     </div>

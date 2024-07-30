@@ -2,10 +2,21 @@
 import { IProduct } from "@/interfaces/product";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { ShoppingBag } from "lucide-react";
+import { ShoppingCartIcon } from "lucide-react";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   const router = useRouter();
+
+  const addToCart = (product: IProduct) => {
+    const cart: IProduct[] = JSON.parse(localStorage.getItem("cart") || "[]")
+    const productExists = cart.some(item => item.id === product.id)
+
+    if (!productExists) {
+      cart.push(product)
+      localStorage.setItem("cart", JSON.stringify(cart))
+    }
+  }
+
   return (
     <div className="max-w-sm mx-auto space-y-2 group cursor-pointer rounded-lg">
       <div
@@ -20,28 +31,25 @@ const ProductCard = ({ product }: { product: IProduct }) => {
           width="200"
         />
       </div>
-      <div className="flex flex-col justify-between h-44">
+      <div className="h-32 flex flex-col justify-between">
         <div className="space-y-1 flex flex-col text-start">
-          <h4 className="text-[17px] font-bold leading-5 text-balance">
+          <h4 className="text-base font-medium leading-5 text-balance">
             {product.title}
           </h4>
-          <p className="text-balance text-base h-auto leading-5">
-            {product.description.slice(0, 70) + "..."}
-          </p>
           <span
-            className={`font-medium text-base
-          ${product.quantity > 5 ? "text-primary" : "text-[#f3c326]"} 
-          `}
+            className="text-base font-medium text-purple-600"
           >
             В наличии {product.quantity}
           </span>
         </div>
-        <div className="flex pt-3 flex-initial justify-between items-center">
-          <p className="text-lg text-primary font-medium">
-            ${product.price}.00
-          </p>
-          <Button variant="outline" size="icon">
-            <ShoppingBag />
+        <div className="flex items-end justify-between mt-4">
+          <span className="font-bold text-lg text-primary">${product.price}.00</span>
+          <Button
+            size="icon"
+            className="flex gap-1 bg-primary"
+            onClick={() => addToCart(product)}
+          >
+            <ShoppingCartIcon size={20} />
           </Button>
         </div>
       </div>

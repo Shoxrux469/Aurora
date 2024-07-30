@@ -1,4 +1,3 @@
-"use server";
 import ProductSwiper from "@/components/product-swiper/ProductSwiper";
 import { IProduct } from "@/interfaces/product";
 import React from "react";
@@ -29,8 +28,8 @@ const ProductPage = async ({ params: { id } }: params) => {
     .slice(0, 5) as IProduct[];
 
   return (
-    <>
-      <section className="product-overview flex gap-8">
+    <div className="container px-8">
+      <section className="product-overview flex gap-8 pt-8">
         <div className="h-full w-1/2">
           <ProductSwiper images={images_links}></ProductSwiper>
         </div>
@@ -60,7 +59,7 @@ const ProductPage = async ({ params: { id } }: params) => {
           ))}
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
