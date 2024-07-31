@@ -14,7 +14,7 @@ interface props {
 const CartProduct = ({ item, onDelete, onIncrease, onDecrease }: props) => {
   return (
     <div className="flex items-start space-x-4 ">
-      <Image
+      <Image  
         src={item.images_links[0]}
         alt="Product Image"
         width={240}

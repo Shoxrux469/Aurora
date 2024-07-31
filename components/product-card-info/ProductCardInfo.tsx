@@ -1,20 +1,10 @@
 "use client";
 import { IProduct } from "@/interfaces/product";
-import React from "react";
 import { Button } from "../ui/button";
 import { ShoppingCartIcon } from "lucide-react";
+import addToCart from "@/utils/addToCart";
 
 const ProductCardInfo = ({ product }: { product: IProduct }) => {
-  const addToCart = (product: IProduct) => {
-    const cart: IProduct[] = JSON.parse(localStorage.getItem("cart") || "[]");
-    const productExists = cart.some((item) => item.id === product.id);
-
-    if (!productExists) {
-      cart.push(product);
-      localStorage.setItem("cart", JSON.stringify(cart));
-    }
-  };
-
   return (
     <div className="h-32 flex flex-col justify-between">
       <div className="space-y-1 flex flex-col text-start">

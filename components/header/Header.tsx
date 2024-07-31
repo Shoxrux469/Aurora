@@ -10,9 +10,6 @@ import Aside from "../aside/aside";
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
 
-  const buttonsClass =
-    "flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out";
-
   return (
     <header className="bg-white px-8">
       <div className="py-4 flex items-center justify-between">

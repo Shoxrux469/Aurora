@@ -6,10 +6,8 @@ import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
-import { useToast } from "../ui/use-toast";
-import UsersService from "@/services/api/users";
 
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { Facebook, Linkedin } from "lucide-react";
 interface Props {
   setIsLogged: (logged: boolean) => void;
@@ -26,7 +24,6 @@ const SignUpForm = ({ setIsLogged }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  const { toast } = useToast();
   // const { data: session } = useSession();
 
   const socialButtons = [

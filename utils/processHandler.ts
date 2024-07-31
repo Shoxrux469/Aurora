@@ -4,14 +4,10 @@ export function handleProgress(
   progressEvent: AxiosProgressEvent,
   onProgress: (progress: number) => void
 ) {
-  if (progressEvent.lengthComputable) {
+  if (progressEvent.total) {
     const percentCompleted = Math.round(
-      (progressEvent.loaded / progressEvent.total!) * 100
+      (progressEvent.loaded / progressEvent.total) * 100
     );
-    console.log(onProgress);
-
     onProgress(percentCompleted);
-  } else {
-    onProgress(0);
   }
 }

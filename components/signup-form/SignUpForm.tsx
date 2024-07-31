@@ -7,8 +7,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
 import UsersService from "@/services/api/users";
 import { User } from "next-auth";
-import { useToast } from "../ui/use-toast";
 import { signIn } from "next-auth/react";
+import { toast } from "../ui/use-toast";
 
 interface Props {
   setIsLogged: (logged: boolean) => void;
@@ -28,7 +28,6 @@ const SigninForm = ({ setIsLogged }: Props) => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const { toast } = useToast();
 
   const onSubmit: SubmitHandler<Inputs> = async (data: User) => {
     // console.log(data);
