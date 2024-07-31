@@ -7,7 +7,6 @@ import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "framer-motion";
 
 import {
-  ArrowRight,
   ChevronRight,
   Watch,
   Gamepad2,

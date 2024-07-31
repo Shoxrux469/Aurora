@@ -45,7 +45,7 @@ const SignUpForm = ({ setIsLogged }: Props) => {
         password: user.password,
         redirect: false,
       });
-      console.log(res);
+      // console.log(res);
     } catch (error) {
       console.error(error);
     }

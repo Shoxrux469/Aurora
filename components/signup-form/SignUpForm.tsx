@@ -31,7 +31,7 @@ const SigninForm = ({ setIsLogged }: Props) => {
   const { toast } = useToast();
 
   const onSubmit: SubmitHandler<Inputs> = async (data: User) => {
-    console.log(data);
+    // console.log(data);
 
     try {
       signIn("credentials");

@@ -3,9 +3,9 @@ import React from "react";
 import { Sheet, SheetTrigger } from "../ui/sheet";
 import { AlignJustify, Search, Mountain, ShoppingBag } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Aside from "../aside/Aside";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
 import LoginModal from "../login-modal/LoginModal";
+import Aside from "../aside/aside";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
@@ -26,7 +26,9 @@ const Header = () => {
             </Sheet>
           ))}
           <Link className="flex items-center" href="/">
-            <span className="mr-1 text-primary text-xl font-bold">TechShop</span>
+            <span className="mr-1 text-primary text-xl font-bold">
+              TechShop
+            </span>
             <Mountain size={24} className="text-primary" />
           </Link>
         </div>

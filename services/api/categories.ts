@@ -3,21 +3,25 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { ICategory } from "@/interfaces/category";
-import { IProduct } from "@/interfaces/product";
+import { AxiosProgressEvent } from "axios";
+import { handleProgress } from "@/utils/processHandler";
 
 class CategoriesService {
-  async getAll() {
-    const res = await makeRequest.get(ApiConstants.categories);
-    const transformedData = FirestoreTransformer.transformFirebaseData(
-      res.data.documents
-    );
+  async getAll(onProgress: (progress: number) => void): Promise<ICategory[]> {
+    const res = await makeRequest.get(ApiConstants.categories, {
+      onDownloadProgress: (event: AxiosProgressEvent) =>
+        handleProgress(event, onProgress),
+    });
 
-    return transformedData;
+    return FirestoreTransformer.transformFirebaseData(res.data.documents);
   }
-  async postCategory(data: ICategory) {
+
+  async postCategory(data: ICategory, onProgress: (progress: number) => void) {
     const firestoreData = FirestoreTransformer.toFirestoreFormat(data);
     const res = await makeRequest.post(ApiConstants.categories, {
       fields: firestoreData,
+      onUploadProgress: (event: AxiosProgressEvent) =>
+        handleProgress(event, onProgress),
     });
 
     return res;

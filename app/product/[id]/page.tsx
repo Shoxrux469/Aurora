@@ -5,6 +5,7 @@ import ProductsService from "@/services/api/products";
 import ProductInfo from "@/components/product-info/ProductInfo";
 import ProductCard from "@/components/product-card/ProductCard";
 import { Separator } from "@/components/ui/separator";
+import Loading from "@/app/loading";
 
 interface params {
   params: {
@@ -21,9 +22,15 @@ const ProductPage = async ({ params: { id } }: params) => {
     category,
     images_links,
     description,
-  } = (await ProductsService.getById(id)) as IProduct;
+  } = (await ProductsService.getById(id, (progress) => (
+    <Loading value={progress} />
+  ))) as IProduct;
 
-  let relatedProducts = (await ProductsService.getBySubcategoryid(category.id))
+  let relatedProducts = (
+    await ProductsService.getBySubcategoryid(category.id, (progress) => (
+      <Loading value={progress} />
+    ))
+  )
     .filter((prod) => prod.id !== id)
     .slice(0, 5) as IProduct[];
 

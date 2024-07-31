@@ -2,6 +2,7 @@ import React from "react";
 import ProductsService from "@/services/api/products";
 import { IProduct } from "@/interfaces/product";
 import ProductCart from "@/components/product-card/ProductCard";
+import Loading from "@/app/loading";
 
 interface params {
   params: {
@@ -14,10 +15,14 @@ const FilteredProducts = async ({ params: { slug } }: params) => {
 
   if (slug && slug.length > 0) {
     if (slug[0] === "id") {
-      filteredProducts = await ProductsService.getBySubcategoryid(slug[1]);
+      filteredProducts = await ProductsService.getBySubcategoryid(
+        slug[1],
+        (progress) => <Loading value={progress} />
+      );
     } else if (slug[0] === "text") {
       filteredProducts = await ProductsService.getByTitle(
-        decodeURIComponent(slug[1])
+        decodeURIComponent(slug[1]),
+        (progress) => <Loading value={progress} />
       );
     }
   }

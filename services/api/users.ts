@@ -2,13 +2,16 @@
 import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
-import { IProduct } from "@/interfaces/product";
-import { User } from "next-auth";
 import { IUser } from "@/interfaces/user";
+import { AxiosProgressEvent } from "axios";
+import { handleProgress } from "@/utils/processHandler";
 
 class UsersService {
-  async getByEmail(email: string) {
-    let res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
+  async getByEmail(
+    email: string,
+    onProgress: (progress: number) => void
+  ): Promise<IUser[]> {
+    const res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "users" }],
         where: {
@@ -19,6 +22,8 @@ class UsersService {
           },
         },
       },
+      onDownloadProgress: (event: AxiosProgressEvent) =>
+        handleProgress(event, onProgress),
     });
 
     const transformedData: IUser[] = FirestoreTransformer.transformFirebaseData(
@@ -27,7 +32,8 @@ class UsersService {
 
     return transformedData;
   }
-  async postUser(data: User) {
+
+  async postUser(data: IUser, onProgress: (progress: number) => void) {
     const allData = {
       ...data,
       orders: [],
@@ -36,6 +42,8 @@ class UsersService {
     const firestoreData = FirestoreTransformer.toFirestoreFormat(allData);
     const res = await makeRequest.post(ApiConstants.users, {
       fields: firestoreData,
+      onUploadProgress: (event: AxiosProgressEvent) =>
+        handleProgress(event, onProgress),
     });
 
     return res;
