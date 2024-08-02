@@ -9,7 +9,7 @@ const addToCart = (product: IProduct) => {
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
     toast({
-      title: "Выполнено!",
+      title: "Добавлено!",
       description: "Данный товар был успешно добавлен в корзину",
       variant: "constructive",
     });

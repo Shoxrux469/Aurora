@@ -1,7 +1,7 @@
 "use client";
 
-import EmptyCart from "@/components/empty-cart/EmptyCart";
-import React, { useEffect, useState } from "react";
+import EmptyCard from "@/components/empty-card/EmptyCard";
+import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
 import CartProduct from "@/components/cart-product/CartProduct";
 import CheckoutCard from "@/components/checkout-card/CheckoutCard";
@@ -43,7 +43,14 @@ const CartPage = () => {
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  if (isEmpty) return <EmptyCart />;
+  if (isEmpty)
+    return (
+      <EmptyCard
+        title="В корзине пока нет товаров"
+        description="Начните с подборок на главной странице или найдите нужный товар через
+        поиск"
+      />
+    );
 
   return (
     <section className="pt-8 pb-40 bg-muted">

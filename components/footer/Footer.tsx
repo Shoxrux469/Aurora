@@ -3,7 +3,13 @@ import { Button } from "../ui/button";
 import Link from "next/link";
 import { Input } from "../ui/input";
 import { cn } from "@/lib/utils";
-import { catalogLinks, companyLinks, contactInfo, socialLinks } from "@/constants";
+import {
+  catalogLinks,
+  companyLinks,
+  contactInfo,
+  ShopName,
+  socialLinks,
+} from "@/constants";
 
 const Footer = () => {
   const LinkClass = "hover:underline w-fit";
@@ -68,7 +74,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="text-primary bg-background py-4 text-center text-sm">
-        © 2024 Fitness. All rights reserved.
+        © 2024 {ShopName}. All rights reserved.
       </div>
     </footer>
   );

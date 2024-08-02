@@ -69,7 +69,3 @@
 		@apply bg-background text-foreground;
 	}
 }
-
-.separator {
-	@apply w-full border-b border-gray-300 my-4;
-}

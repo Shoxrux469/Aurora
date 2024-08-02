@@ -1,11 +1,19 @@
 import Link from "next/link";
 import React from "react";
 import { Sheet, SheetTrigger } from "../ui/sheet";
-import { AlignJustify, Search, Mountain, ShoppingBag } from "lucide-react";
+import {
+  AlignJustify,
+  Search,
+  Mountain,
+  ShoppingBag,
+  ListOrdered,
+  LayoutList,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
 import LoginModal from "../login-modal/LoginModal";
 import Aside from "../aside/aside";
+import { ShopName } from "@/constants";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
@@ -24,7 +32,7 @@ const Header = () => {
           ))}
           <Link className="flex items-center" href="/">
             <span className="mr-1 text-primary text-xl font-bold">
-              TechShop
+              {ShopName}
             </span>
             <Mountain size={24} className="text-primary" />
           </Link>
@@ -38,6 +46,13 @@ const Header = () => {
           >
             <ShoppingBag size={20} />
             Корзина
+          </Link>
+          <Link
+            href="user-info/orders"
+            className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground"
+          >
+            <LayoutList size={20} />
+            Заказы
           </Link>
         </div>
       </div>

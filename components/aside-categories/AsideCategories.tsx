@@ -1,5 +1,4 @@
 "use client";
-
 import AsideSubcategories from "../aside-subcategories/AsideSubcategories";
 import React, { useState } from "react";
 import { ICategory, ICategoryChild } from "@/interfaces/category";
@@ -15,6 +14,8 @@ import {
   Mountain,
   ArrowLeft,
 } from "lucide-react";
+import { Separator } from "../ui/separator";
+import { ShopName } from "@/constants";
 
 type ICategoryIcons = {
   [key: string]: JSX.Element;
@@ -59,15 +60,15 @@ const AsideCategories = ({ categories }: { categories: ICategory[] }) => {
             transition={{ duration: 0.2 }}
           >
             <div className="mt-4 mb-3 space-y-2">
-              <div className="mb-5 flex text-primary items-end">
+              <div className="mb-0 flex text-primary items-end">
                 <Mountain size={42} />
-                <h2 className="text-3xl ml-1">Fitness</h2>
+                <h2 className="text-3xl ml-1">{ShopName}</h2>
               </div>
               <p className="text-lg text-balance italic font-medium ">
                 Откройте для себя совершенство с каждой покупкой
               </p>
             </div>
-            <ul className="mt-6 text-lg flex flex-col gap-3">
+            <ul className="mt-4 text-lg flex flex-col gap-3">
               {categories.map((category, i) => (
                 <li
                   key={i}
@@ -110,7 +111,7 @@ const AsideCategories = ({ categories }: { categories: ICategory[] }) => {
               />
               <h2 className="text-xl text-balance">Главное меню</h2>
             </div>
-            <div className="separator"></div>
+            <Separator />
             <h1 className="text-2xl text-balance mt-2 font-semibold italic">
               {isChild.categoryTitle}
             </h1>
