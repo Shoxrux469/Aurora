@@ -13,13 +13,18 @@ const CartPage = () => {
   let isEmpty = cartItems.length === 0
 
   useEffect(() => {
-    let cart = localStorage.getItem("cart")
+    let cart = localStorage.getItem("cart");
     if (cart) {
-      let arr = JSON.parse(cart).map((item: IProduct) => ({
-        ...item,
-        cartQuantity: 1
-      }))
-      setCartItems(arr)
+      try {
+        let arr = JSON.parse(cart).map((item: ICartProduct) => ({
+          ...item,
+          cartQuantity: item.cartQuantity || 1
+        }));
+        setCartItems(arr);
+      } catch (error) {
+        console.error("Failed to parse cart items:", error);
+        setCartItems([]);
+      }
     }
   }, []);
 
@@ -42,6 +47,13 @@ const CartPage = () => {
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   }
+  const handleQuantityChange = (id: idType, quantity: number) => {
+    const updatedCart = cartItems.map(item =>
+      item.id === id ? { ...item, cartQuantity: quantity } : item
+    )
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  }
 
   if (isEmpty) return <EmptyCart />
 
@@ -61,6 +73,7 @@ const CartPage = () => {
                   onDelete={handleDelete}
                   onIncrease={handleIncrease}
                   onDecrease={handleDecrease}
+                  onQuantityChange={handleQuantityChange}
                 />
               ))}
             </div>
