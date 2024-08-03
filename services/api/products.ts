@@ -3,7 +3,6 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IProduct } from "@/interfaces/product";
-import axios from "axios";
 
 class ProductsService {
   async getAll() {

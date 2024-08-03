@@ -7,7 +7,7 @@ const Home = async () => {
   let products = await ProductsService.getAll() as IProduct[];
 
   return (
-    <div className="bg-white">
+    <div className="bg-white container px-8">
       <MainSwiper />
       <section className="mx-auto py-12">
         <h3 className="text-3xl font-bold text-center">Best Sellers</h3>

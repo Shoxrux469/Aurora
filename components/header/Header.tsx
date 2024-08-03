@@ -3,9 +3,15 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
-import { AlignJustify, Mountain, LogIn, ShoppingBag } from "lucide-react";
+import {
+  AlignJustify,
+  Search,
+  Mountain,
+  ShoppingBag,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import Aside from "../aside/Aside";
+import LoginForm from "../login-form/LoginForm";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
 
 const Header = () => {
@@ -15,32 +21,31 @@ const Header = () => {
     "flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out";
 
   return (
-    <header className="bg-white">
+    <header className="bg-white px-8">
       <div className="py-4 flex items-center justify-between">
         <div className="hidden lg:flex items-center gap-2">
           {SHEET_SIDES.map((side) => (
             <Sheet key={side}>
               <SheetTrigger>
-                <AlignJustify size={24} className={cn("text-green-600")} />
+                <AlignJustify size={24} className={cn("text-primary")} />
               </SheetTrigger>
               <Aside side={side} />
             </Sheet>
           ))}
           <Link className="flex items-center" href="/">
-            <span className="mr-1 text-primary text-xl font-bold">Fitness</span>
+            <span className="mr-1 text-primary text-xl font-bold">TechShop</span>
             <Mountain size={24} className="text-primary" />
           </Link>
         </div>
         <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
-          <Button variant="ghost" size="default" className={buttonsClass}>
-            <LogIn size={20} />
-            Войти
-          </Button>
-          <Button variant="ghost" size="default" className={buttonsClass}>
+          <LoginForm />
+          <Link
+            href='/cart'
+            className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground">
             <ShoppingBag size={20} />
             Корзина
-          </Button>
+          </Link>
         </div>
       </div>
     </header>
