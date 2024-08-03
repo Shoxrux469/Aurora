@@ -11,7 +11,7 @@ const addToCart = (product: IProduct) => {
     toast({
       title: "Добавлено!",
       description: "Данный товар был успешно добавлен в корзину",
-      variant: "constructive",
+      variant: "default",
     });
   } else {
     toast({

@@ -1,5 +1,4 @@
 import { Progress } from "@/components/ui/progress";
-import React from "react";
 
 const Loading = ({ value }: { value?: number }) => {
   return ( 

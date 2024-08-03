@@ -16,7 +16,7 @@ const ProductCardInfo = ({ product }: { product: IProduct }) => {
         </span>
       </div>
       <div className="flex items-end justify-between mt-4">
-        <span className="font-bold text-lg text-primary">
+        <span className="font-bold text-lg text-primary"> 
           ${product.price}.00
         </span>
         <Button

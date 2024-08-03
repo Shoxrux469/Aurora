@@ -1,4 +1,4 @@
-import Profile from "@/app/profile/page";
+import Profile from "@/components/profile/page";
 import Orders from "@/components/orders/Orders";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
@@ -33,18 +33,18 @@ const UserInfo: React.FC<UserInfoProps> = ({ params }) => {
     <section>
       <Tabs
         defaultValue={defaultTab}
-        className="container pt-8 pb-32 bg-muted px-8 grid grid-cols-1 lg:grid-cols-4 gap-4 relative"
+        className="container pt-6 pb-32 bg-muted px-8 grid grid-cols-1 lg:grid-cols-4 gap-4 relative"
       >
         <div className="col-span-1 px-2 py-2 rounded-xl bg-white">
-          <TabsList className="h-fit px-3 flex flex-col space-y-2">
+          <TabsList className="h-fit px-3 flex flex-col py-2 space-y-2">
             {TABS.map((tab) => (
               <TabsTrigger
                 key={tab.value}
                 value={tab.value}
-                className="w-full text-base"
+                className="w-full gap-1 text-lg"
               >
-                  {tab.icon}
-                  <p>{tab.label}</p>
+                {tab.icon}
+                <p>{tab.label}</p>
               </TabsTrigger>
             ))}
           </TabsList>

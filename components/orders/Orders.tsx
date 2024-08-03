@@ -5,7 +5,7 @@ const Orders = () => {
   return (
     <Tabs defaultValue="active" className="bg-white px-4 py-3 rounded-xl">
       <h1 className="text-3xl mb-4">Ваши Заказы</h1>
-      <TabsList className="flex items-center justify-center w-fit">
+      <TabsList className="flex items-center gap-1 justify-center w-fit">
         <TabsTrigger value="active">Активные</TabsTrigger>
         <TabsTrigger value="archive">Архив</TabsTrigger>
         <TabsTrigger value="unpaid">Неоплаченные</TabsTrigger>

@@ -32,7 +32,6 @@ export default async function RootLayout({
         )}
       >
         <Header />
-        {/* <Loading /> */}
         <Suspense fallback={<Loading />}>{children}</Suspense>
         <Footer />
         <Toaster />

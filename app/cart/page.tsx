@@ -1,5 +1,4 @@
 "use client";
-
 import EmptyCard from "@/components/empty-card/EmptyCard";
 import { useEffect, useState } from "react";
 import { Separator } from "@/components/ui/separator";
