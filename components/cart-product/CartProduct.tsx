@@ -31,6 +31,10 @@ const CartProduct = ({ item, onDelete, onIncrease, onDecrease, onQuantityChange 
     if (!isNaN(newQuantity)) {
       onQuantityChange(item.id, newQuantity)
     }
+    if (newQuantity > item.quantity) {
+      onQuantityChange(item.id, item.quantity)
+      setInputQuantity(item.quantity)
+    }
   }
 
   return (
