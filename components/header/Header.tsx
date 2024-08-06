@@ -3,21 +3,16 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
-import {
-  AlignJustify,
-  Search,
-  Mountain,
-  ShoppingBag,
-} from "lucide-react";
+import { AlignJustify, Search, Mountain, ShoppingBag, User2Icon } from "lucide-react";
 import { cn } from "@/lib/utils";
 import Aside from "../aside/Aside";
 import LoginForm from "../login-form/LoginForm";
+import { getCurrentUser } from "@/lib/auth";
+import Logout from "../logout/Logout";
 
-const Header = () => {
+const Header = async () => {
+  const session = await getCurrentUser()
   const SHEET_SIDES = ["left"] as const;
-
-  const buttonsClass =
-    "flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out";
 
   return (
     <header className="bg-white px-8">
@@ -51,13 +46,28 @@ const Header = () => {
           </Button>
         </div>
         <div className="flex h-full item-center gap-2">
-          <LoginForm />
           <Link
             href='/cart'
-            className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground">
+            className="flex items-center h-full text-zinc-800 rounded-sm gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground">
             <ShoppingBag size={20} />
             Корзина
           </Link>
+
+          {session?.user ? (
+            <>
+              <Button
+                variant="ghost"
+                size="default"
+                className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out"
+              >
+                <User2Icon size={20} />
+                {session.user.name?.split(' ')[0]}
+              </Button>
+              <Logout />
+            </>
+          ) : (
+            <LoginForm />
+          )}
         </div>
       </div>
     </header>

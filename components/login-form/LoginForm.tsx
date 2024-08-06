@@ -1,3 +1,5 @@
+'use client'
+
 import React from 'react'
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 import { Button } from '../ui/button'
@@ -5,8 +7,17 @@ import { Facebook, Linkedin, LogIn } from 'lucide-react'
 import { Input } from '../ui/input'
 import Link from 'next/link'
 import { Separator } from '../ui/separator'
+import { signIn } from 'next-auth/react'
 
 const LoginForm = () => {
+  const handleSingIn = async () => {
+    try {
+      await signIn('google')
+    } catch (error) {
+      throw error
+    }
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -24,7 +35,12 @@ const LoginForm = () => {
         </DialogHeader>
 
         <div className='flex items-center place-content-center gap-5'>
-          <Button variant="outline" size="icon" className='p-2 rounded-full'>
+          <Button
+            variant="outline"
+            size="icon"
+            className='p-2 rounded-full'
+            onClick={handleSingIn}
+          >
             <span className='text-zinc-500 text-xl'>G</span>
           </Button>
           <Button variant="outline" size="icon" className='p-2 rounded-full'>
