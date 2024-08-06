@@ -3,10 +3,8 @@ import React from "react";
 import { Sheet, SheetTrigger } from "../ui/sheet";
 import {
   AlignJustify,
-  Search,
   Mountain,
   ShoppingBag,
-  ListOrdered,
   LayoutList,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -48,7 +46,7 @@ const Header = () => {
             Корзина
           </Link>
           <Link
-            href="user-info/orders"
+            href="/user-info/orders"
             className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground"
           >
             <LayoutList size={20} />

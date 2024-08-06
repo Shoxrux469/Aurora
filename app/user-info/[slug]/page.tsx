@@ -8,7 +8,6 @@ interface UserInfoProps {
   params: { slug: string };
 }
 
-// Define your tabs configuration
 const TABS = [
   {
     value: "orders",

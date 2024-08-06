@@ -9,6 +9,7 @@ import {
 import { Button } from "../ui/button";
 import { Separator } from "../ui/separator";
 import { ICartProduct } from "@/interfaces/product";
+import { useRouter } from "next/navigation";
 
 interface props {
   cartItems: ICartProduct[];
@@ -16,6 +17,7 @@ interface props {
 
 const CheckoutCard = ({ cartItems }: props) => {
   const [totalPrice, setTotalPrice] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -53,6 +55,7 @@ const CheckoutCard = ({ cartItems }: props) => {
           variant="purple"
           size="lg"
           className="w-full bg-purple-600 text-white"
+          onClick={() => router.push("/order-products/")}
         >
           Оформить заказ
         </Button>

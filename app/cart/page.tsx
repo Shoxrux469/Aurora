@@ -5,7 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import CartProduct from "@/components/cart-product/CartProduct";
 import CheckoutCard from "@/components/checkout-card/CheckoutCard";
 import { idType } from "@/interfaces";
-import { ICartProduct, IProduct } from "@/interfaces/product";
+import { ICartProduct } from "@/interfaces/product";
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
@@ -14,11 +14,16 @@ const CartPage = () => {
   useEffect(() => {
     let cart = localStorage.getItem("cart");
     if (cart) {
-      let arr = JSON.parse(cart).map((item: IProduct) => ({
-        ...item,
-        cartQuantity: 1,
-      }));
-      setCartItems(arr);
+      try {
+        let arr = JSON.parse(cart).map((item: ICartProduct) => ({
+          ...item,
+          cartQuantity: item.cartQuantity || 1,
+        }));
+        setCartItems(arr);
+      } catch (error) {
+        console.error("Failed to parse cart items:", error);
+        setCartItems([]);
+      }
     }
   }, []);
 
@@ -37,6 +42,13 @@ const CartPage = () => {
   const handleDecrease = (id: idType) => {
     const updatedCart = cartItems.map((item) =>
       item.id === id ? { ...item, cartQuantity: item.cartQuantity - 1 } : item
+    );
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+  const handleQuantityChange = (id: idType, quantity: number) => {
+    const updatedCart = cartItems.map((item) =>
+      item.id === id ? { ...item, cartQuantity: quantity } : item
     );
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -67,6 +79,7 @@ const CartPage = () => {
                   onDelete={handleDelete}
                   onIncrease={handleIncrease}
                   onDecrease={handleDecrease}
+                  onQuantityChange={handleQuantityChange}
                 />
               ))}
             </div>
