@@ -36,7 +36,11 @@ const CartProduct = ({
     if (!isNaN(newQuantity)) {
       onQuantityChange(item.id, newQuantity);
     }
-  };
+    if (newQuantity > item.quantity) {
+      onQuantityChange(item.id, item.quantity)
+      setInputQuantity(item.quantity)
+    }
+  }
 
   return (
     <div className="flex items-start space-x-4 ">

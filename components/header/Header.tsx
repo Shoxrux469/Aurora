@@ -13,7 +13,8 @@ import LoginModal from "../login-modal/LoginModal";
 import Aside from "../aside/aside";
 import { ShopName } from "@/constants";
 
-const Header = () => {
+const Header = async () => {
+  const session = await getCurrentUser()
   const SHEET_SIDES = ["left"] as const;
 
   return (
@@ -37,21 +38,28 @@ const Header = () => {
         </div>
         <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
-          <LoginModal />
           <Link
-            href="/cart"
-            className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground"
-          >
+            href='/cart'
+            className="flex items-center h-full text-zinc-800 rounded-sm gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground">
             <ShoppingBag size={20} />
             Корзина
           </Link>
-          <Link
-            href="/user-info/orders"
-            className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground"
-          >
-            <LayoutList size={20} />
-            Заказы
-          </Link>
+
+          {session?.user ? (
+            <>
+              <Button
+                variant="ghost"
+                size="default"
+                className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out"
+              >
+                <User2Icon size={20} />
+                {session.user.name?.split(' ')[0]}
+              </Button>
+              <Logout />
+            </>
+          ) : (
+            <LoginForm />
+          )}
         </div>
       </div>
     </header>
