@@ -1,28 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
-import { Button } from '../ui/button'
-import { Separator } from '../ui/separator'
-import { ICartProduct } from '@/interfaces/product'
+import React, { useEffect, useState } from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card";
+import { Button } from "../ui/button";
+import { Separator } from "../ui/separator";
+import { ICartProduct } from "@/interfaces/product";
+import { useRouter } from "next/navigation";
 
 interface props {
-  cartItems: ICartProduct[]
+  cartItems: ICartProduct[];
 }
 
 const CheckoutCard = ({ cartItems }: props) => {
   const [totalPrice, setTotalPrice] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     const calculateTotalPrice = () => {
-      const total = cartItems.reduce((acc, value) => acc + value.price * value.cartQuantity, 0)
-      setTotalPrice(total)
-    }
-    calculateTotalPrice()
+      const total = cartItems.reduce(
+        (acc, value) => acc + value.price * value.cartQuantity,
+        0
+      );
+      setTotalPrice(total);
+    };
+    calculateTotalPrice();
   }, [cartItems]);
 
   return (
-    <Card className='bg-white border-none h-fit shadow-md sticky top-4'>
+    <Card className="bg-white border-none h-fit shadow-md sticky top-4">
       <CardHeader>
-        <CardTitle className='mb-7 text-2xl font-medium'>Ваш заказ</CardTitle>
+        <CardTitle className="mb-7 text-2xl font-medium">Ваш заказ</CardTitle>
         <Separator />
       </CardHeader>
       <CardContent>
@@ -43,10 +54,14 @@ const CheckoutCard = ({ cartItems }: props) => {
         <Button
           variant="purple"
           size="lg"
-          className="w-full bg-purple-600 text-white">Оформить заказ</Button>
+          className="w-full bg-purple-600 text-white"
+          onClick={() => router.push("/order-products/")}
+        >
+          Оформить заказ
+        </Button>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
-export default CheckoutCard
+export default CheckoutCard;
