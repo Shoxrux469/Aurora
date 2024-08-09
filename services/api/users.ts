@@ -19,14 +19,11 @@ class UsersService {
       },
     });
 
-    console.log(res.data);
-    // console.log(res.data[0].document.fields);
-
     const transformedData: IUser[] = FirestoreTransformer.transformFirebaseData(
       res.data.map((doc: any) => doc.document)
     );
 
-    console.log(transformedData[0]);
+    console.log(transformedData);
 
     return transformedData[0];
   }

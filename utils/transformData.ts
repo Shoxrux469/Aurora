@@ -34,8 +34,8 @@ export class FirestoreTransformer {
     );
     return key
       ? FirestoreTransformer.transformFunctions[key](
-          field[key as keyof FirestoreValue]
-        )
+        field[key as keyof FirestoreValue]
+      )
       : null;
   }
 
@@ -62,7 +62,6 @@ export class FirestoreTransformer {
     data: FirestoreDocument[] | FirestoreFields
   ): any {
     if (Array.isArray(data)) {
-      // console.log(data);
       return data.map((doc) => FirestoreTransformer.transformDocument(doc));
     } else if ("fields" in data) {
       return FirestoreTransformer.transformDocument(
