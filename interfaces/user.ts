@@ -1,3 +1,4 @@
+import { User } from "next-auth";
 import { idType } from ".";
 
 interface IUserCartItem {
@@ -18,16 +19,11 @@ export interface IUserOrder {
   orderId: idType;
 }
 
-export interface IUser {
+export interface IUser extends User {
   id: idType;
-  cart: IUserCart;
-  email: string;
+  cart?: IUserCart;
+  email?: string;
   password: string;
-  orders: IUserOrder[];
-  name:
-    | {
-        name: string;
-        surname: string;
-      }
-    | string;
+  orders?: IUserOrder[];
+  name:string 
 }

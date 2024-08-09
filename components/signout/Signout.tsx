@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { LogOutIcon } from 'lucide-react'
-import { Button } from '../ui/button'
-import { signOut } from 'next-auth/react'
+import { LogOutIcon } from "lucide-react";
+import { Button } from "../ui/button";
+import { signOut } from "next-auth/react";
 
-const Logout = () => {
+const SignOut = () => {
   return (
     <Button
       variant="ghost"
@@ -15,7 +15,7 @@ const Logout = () => {
       <LogOutIcon size={20} />
       Выйти
     </Button>
-  )
-}
+  );
+};
 
-export default Logout
+export default SignOut;

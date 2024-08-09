@@ -18,7 +18,7 @@ type Inputs = {
   password: string;
 };
 
-const SignUpForm = ({ setIsLogged }: Props) => {
+const SignInForm = ({ setIsLogged }: Props) => {
   const {
     register,
     handleSubmit,
@@ -26,25 +26,24 @@ const SignUpForm = ({ setIsLogged }: Props) => {
   } = useForm<Inputs>();
   // const { data: session } = useSession();
 
-  const socialButtons = [
-    {
-      icon: <span className="text-zinc-500 text-xl">G</span>,
-      ariaLabel: "Google",
-    },
-    { icon: <Facebook color="#71717a" />, ariaLabel: "Facebook" },
-    { icon: <Linkedin color="#71717a" />, ariaLabel: "LinkedIn" },
-  ];
+  const handleSingIn = async () => {
+    try {
+      await signIn("google");
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const onSubmit: SubmitHandler<Inputs> = async (user) => {
     try {
-      const res = await signIn("credentials", {
+      await signIn("credentials", {
         email: user.email,
         password: user.password,
         redirect: false,
       });
-      // console.log(res);
     } catch (error) {
       console.error(error);
+      throw error;
     }
     // let relatedProducts = await UsersService.getByEmail("test@gmail.com");
     // console.log(relatedProducts);
@@ -53,23 +52,26 @@ const SignUpForm = ({ setIsLogged }: Props) => {
   return (
     <>
       <DialogHeader>
-        <DialogTitle className="text-center mb-3 text-3xl font-medium">
+        <DialogTitle className="text-center text-3xl font-medium">
           Вход в аккаунт
         </DialogTitle>
       </DialogHeader>
 
       <div className="flex items-center justify-center gap-5">
-        {socialButtons.map(({ icon, ariaLabel }, index) => (
-          <Button
-            key={index}
-            variant="outline"
-            size="icon"
-            className="p-2 rounded-full"
-            onClick={() => signIn("google")}
-          >
-            {icon}
-          </Button>
-        ))}
+        <Button
+          variant="outline"
+          size="icon"
+          className="p-2 rounded-full"
+          // onClick={handleSingIn}
+        >
+          <span className="text-zinc-500 text-xl">G</span>
+        </Button>
+        <Button variant="outline" size="icon" className="p-2 rounded-full">
+          <Facebook color="#71717a" />
+        </Button>
+        <Button variant="outline" size="icon" className="p-2 rounded-full">
+          <Linkedin color="#71717a" />
+        </Button>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -144,4 +146,4 @@ const SignUpForm = ({ setIsLogged }: Props) => {
   );
 };
 
-export default SignUpForm;
+export default SignInForm;

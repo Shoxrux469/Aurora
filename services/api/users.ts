@@ -7,10 +7,7 @@ import { AxiosProgressEvent } from "axios";
 import { handleProgress } from "@/utils/processHandler";
 
 class UsersService {
-  async getByEmail(
-    email: string,
-    onProgress: (progress: number) => void
-  ): Promise<IUser[]> {
+  async getByEmail(email: string): Promise<IUser> {
     const res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "users" }],
@@ -22,20 +19,22 @@ class UsersService {
           },
         },
       },
-      onDownloadProgress: (event: AxiosProgressEvent) =>
-        handleProgress(event, onProgress),
     });
 
+    // console.log(res.data);
+ 
     const transformedData: IUser[] = FirestoreTransformer.transformFirebaseData(
       res.data.map((doc: any) => doc.document)
     );
 
-    return transformedData;
+    console.log(transformedData[0]);
+
+    return transformedData[0];
   }
 
-  async postUser(data: IUser, onProgress: (progress: number) => void) {
+  async postUser(user: IUser, onProgress?: (progress: number) => void) {
     const allData = {
-      ...data,
+      ...user,
       orders: [],
     };
 

@@ -66,7 +66,7 @@ class ProductsService {
               field: { fieldPath: "category.id" },
               op: "EQUAL",
               value: { stringValue: id },
-            },
+            }, 
           },
         },
       },
@@ -75,6 +75,8 @@ class ProductsService {
           handleProgress(progressEvent, onProgress),
       }
     );
+
+    console.log(res.data);
 
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(

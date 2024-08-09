@@ -21,17 +21,14 @@ type Inputs = {
   password: string;
 };
 
-const SigninForm = ({ setIsLogged }: Props) => {
+const SignUpForm = ({ setIsLogged }: Props) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
 
-
   const onSubmit: SubmitHandler<Inputs> = async (data: User) => {
-    // console.log(data);
-
     try {
       signIn("credentials");
     } catch (error) {
@@ -125,4 +122,4 @@ const SigninForm = ({ setIsLogged }: Props) => {
   );
 };
 
-export default SigninForm;
+export default SignUpForm;

@@ -6,15 +6,20 @@ import {
   Mountain,
   ShoppingBag,
   LayoutList,
+  User2Icon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
 import LoginModal from "../login-modal/LoginModal";
 import Aside from "../aside/aside";
-import { ShopName } from "@/constants";
+import { headerLinks, ShopName } from "@/constants";
+import { getCurrentUser } from "@/lib/auth";
+import { Button } from "../ui/button";
+import SignOut from "../signout/Signout";
+import SignInForm from "../signin-form/SigninForm";
 
 const Header = async () => {
-  const session = await getCurrentUser()
+  const user = await getCurrentUser();
   const SHEET_SIDES = ["left"] as const;
 
   return (
@@ -38,28 +43,26 @@ const Header = async () => {
         </div>
         <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
-          <Link
-            href='/cart'
-            className="flex items-center h-full text-zinc-800 rounded-sm gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground">
+          <Link href="/cart" className={headerLinks}>
             <ShoppingBag size={20} />
             Корзина
           </Link>
 
-          {session?.user ? (
+          {user ? (
             <>
-              <Button
-                variant="ghost"
-                size="default"
-                className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out"
-              >
+              <Link href="/user-info/profile" className={headerLinks}>
                 <User2Icon size={20} />
-                {session.user.name?.split(' ')[0]}
-              </Button>
-              <Logout />
+                {user.name?.split(" ")[0]}
+              </Link>
             </>
           ) : (
-            <LoginForm />
+            <LoginModal />
           )}
+          <Link href="/user-info/orders" className={headerLinks}>
+            <LayoutList size={20} />
+            Заказы
+          </Link>
+          <SignOut />
         </div>
       </div>
     </header>
