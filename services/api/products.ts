@@ -76,7 +76,7 @@ class ProductsService {
       }
     );
 
-    console.log(res.data);
+    // console.log(res.data);
 
     const transformedData: IProduct[] =
       FirestoreTransformer.transformFirebaseData(

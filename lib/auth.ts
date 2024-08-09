@@ -26,7 +26,9 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         try {
           // console.log(credentials);
-          const user = await UsersService.getByEmail(credentials!.email);
+          const user = await UsersService.getByEmail(
+            credentials!.email as string
+          );
           console.log("USER" + user);
           if (user) {
             if (credentials!.password === user.password) {

@@ -6,8 +6,6 @@ import { Separator } from "../ui/separator";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
 import UsersService from "@/services/api/users";
-import { User } from "next-auth";
-import { signIn } from "next-auth/react";
 import { toast } from "../ui/use-toast";
 
 interface Props {
@@ -28,13 +26,22 @@ const SignUpForm = ({ setIsLogged }: Props) => {
     formState: { errors },
   } = useForm<Inputs>();
 
-  const onSubmit: SubmitHandler<Inputs> = async (data: User) => {
-    try {
-      signIn("credentials");
-    } catch (error) {
+  const onSubmit: SubmitHandler<Inputs> = async (user) => {
+    const userExist = await UsersService.getByEmail(user.email);
+    console.log(userExist);
+
+    if (!userExist) {
+      await UsersService.postUser(user);
       toast({
-        title: "Ошибка",
-        description: "Произошла ошибка при проверке существования пользователя",
+        title: "Успешно!",
+        description:
+          "Регистрация прошла успешно, теперь в можете войти в аккаунт!",
+        variant: "default",
+      });
+    } else {
+      toast({
+        title: "Ошибка!",
+        description: "Пользователь с таким эмайлом уже существует!",
         variant: "destructive",
       });
     }

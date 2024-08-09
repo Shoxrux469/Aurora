@@ -3,8 +3,6 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IUser } from "@/interfaces/user";
-import { AxiosProgressEvent } from "axios";
-import { handleProgress } from "@/utils/processHandler";
 
 class UsersService {
   async getByEmail(email: string): Promise<IUser> {
@@ -21,8 +19,9 @@ class UsersService {
       },
     });
 
-    // console.log(res.data);
- 
+    console.log(res.data);
+    // console.log(res.data[0].document.fields);
+
     const transformedData: IUser[] = FirestoreTransformer.transformFirebaseData(
       res.data.map((doc: any) => doc.document)
     );
@@ -32,7 +31,7 @@ class UsersService {
     return transformedData[0];
   }
 
-  async postUser(user: IUser, onProgress?: (progress: number) => void) {
+  async postUser(user: IUser) {
     const allData = {
       ...user,
       orders: [],
@@ -41,8 +40,6 @@ class UsersService {
     const firestoreData = FirestoreTransformer.toFirestoreFormat(allData);
     const res = await makeRequest.post(ApiConstants.users, {
       fields: firestoreData,
-      onUploadProgress: (event: AxiosProgressEvent) =>
-        handleProgress(event, onProgress),
     });
 
     return res;

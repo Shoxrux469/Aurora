@@ -62,7 +62,7 @@ const SignInForm = ({ setIsLogged }: Props) => {
           variant="outline"
           size="icon"
           className="p-2 rounded-full"
-          // onClick={handleSingIn}
+          onClick={handleSingIn}
         >
           <span className="text-zinc-500 text-xl">G</span>
         </Button>
