@@ -28,16 +28,21 @@ class UsersService {
     return transformedData[0];
   }
 
-  async postUser(user: IUser) {
-    const allData = {
-      ...user,
-      orders: [],
-    };
+  async postUser({ id, name, password, email }: IUser) {
+    const firestoreData = FirestoreTransformer.toFirestoreFormat({
+      id,
+      name,
+      email,
+      password,
+    });
 
-    const firestoreData = FirestoreTransformer.toFirestoreFormat(allData);
+    console.log(firestoreData);
+
     const res = await makeRequest.post(ApiConstants.users, {
       fields: firestoreData,
     });
+ 
+    console.log("RESULT" + res);
 
     return res;
   }

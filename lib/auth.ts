@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions);
 
-  console.log("SESSION" + session);
+  // console.log("SESSION" + session);
 
   const user: IUser = session?.user as IUser;
 

@@ -22,8 +22,8 @@ export interface IUserOrder {
 export interface IUser extends User {
   id: idType;
   cart?: IUserCart;
-  email?: string;
+  email: string;
   password: string;
   orders?: IUserOrder[];
-  name:string 
+  name: string;
 }

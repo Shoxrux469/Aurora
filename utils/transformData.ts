@@ -34,8 +34,8 @@ export class FirestoreTransformer {
     );
     return key
       ? FirestoreTransformer.transformFunctions[key](
-        field[key as keyof FirestoreValue]
-      )
+          field[key as keyof FirestoreValue]
+        )
       : null;
   }
 

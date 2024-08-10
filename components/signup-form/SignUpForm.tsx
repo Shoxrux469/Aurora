@@ -28,7 +28,6 @@ const SignUpForm = ({ setIsLogged }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (user) => {
     const userExist = await UsersService.getByEmail(user.email);
-    console.log(userExist);
 
     if (!userExist) {
       await UsersService.postUser(user);
@@ -64,8 +63,8 @@ const SignUpForm = ({ setIsLogged }: Props) => {
               maxLength: 15,
             })}
             // aria-invalid={errors.name ? "true" : "false"}
-            placeholder="Имя"
             id={"name"}
+            placeholder="Имя"
           />
           {errors.name?.type === "required" && (
             <span role="alert" className="text-xs">
@@ -96,7 +95,7 @@ const SignUpForm = ({ setIsLogged }: Props) => {
               minLength: 6,
             })}
             id={"password"}
-            aria-invalid={errors.password ? "true" : "false"}
+            // aria-invalid={errors.password ? "true" : "false"}
             style={
               errors.password?.type === "pattern" ? InputErrorStyle : undefined
             }
