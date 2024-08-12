@@ -24,6 +24,7 @@ const SignUpForm = ({ setIsLogged }: Props) => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (user) => {
@@ -38,6 +39,7 @@ const SignUpForm = ({ setIsLogged }: Props) => {
             "Регистрация прошла успешно, теперь в можете войти в аккаунт!",
           variant: "default",
         });
+        reset();
       } else {
         toast({
           title: "Ошибка!",
