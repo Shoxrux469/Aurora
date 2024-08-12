@@ -27,22 +27,27 @@ const SignUpForm = ({ setIsLogged }: Props) => {
   } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (user) => {
-    const userExist = await UsersService.getByEmail(user.email);
+    try {
+      const userExist = await UsersService.getByEmail(user.email);
 
-    if (!userExist) {
-      await UsersService.postUser(user);
-      toast({
-        title: "Успешно!",
-        description:
-          "Регистрация прошла успешно, теперь в можете войти в аккаунт!",
-        variant: "default",
-      });
-    } else {
-      toast({
-        title: "Ошибка!",
-        description: "Пользователь с таким эмайлом уже существует!",
-        variant: "destructive",
-      });
+      if (!userExist) {
+        await UsersService.postUser(user);
+        toast({
+          title: "Успешно!",
+          description:
+            "Регистрация прошла успешно, теперь в можете войти в аккаунт!",
+          variant: "default",
+        });
+      } else {
+        toast({
+          title: "Ошибка!",
+          description: "Пользователь с таким эмайлом уже существует!",
+          variant: "destructive",
+        });
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   };
 
@@ -106,7 +111,7 @@ const SignUpForm = ({ setIsLogged }: Props) => {
               Password is required
             </span>
           )}
-          <Button className="w-full" size="lg">
+          <Button type="submit" className="w-full" size="lg">
             Зарегистрироваться
           </Button>
         </div>

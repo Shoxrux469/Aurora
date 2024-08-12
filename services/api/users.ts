@@ -3,9 +3,10 @@ import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IUser } from "@/interfaces/user";
+import bcrypt from "bcryptjs";
 
 class UsersService {
-  async getByEmail(email: string): Promise<IUser> {
+  async getByEmail(email: string): Promise<IUser | null> {
     const res = await makeRequest.post(`${ApiConstants.baseUrl}:runQuery`, {
       structuredQuery: {
         from: [{ collectionId: "users" }],
@@ -19,21 +20,28 @@ class UsersService {
       },
     });
 
-    const transformedData: IUser[] = FirestoreTransformer.transformFirebaseData(
-      res.data.map((doc: any) => doc.document)
-    );
+    console.log(res.data[0].document);
 
-    console.log(transformedData);
+    if (res.data[0].document) {
+      const transformedData: IUser[] =
+        FirestoreTransformer.transformFirebaseData(
+          res.data.map((doc: any) => doc.document)
+        );
 
-    return transformedData[0];
+      console.log(transformedData);
+
+      return transformedData[0];
+    } else {
+      return null;
+    }
   }
 
-  async postUser({ id, name, password, email }: IUser) {
+  async postUser(user: IUser) {
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+
     const firestoreData = FirestoreTransformer.toFirestoreFormat({
-      id,
-      name,
-      email,
-      password,
+      ...user,
+      password: hashedPassword,
     });
 
     console.log(firestoreData);
@@ -41,8 +49,8 @@ class UsersService {
     const res = await makeRequest.post(ApiConstants.users, {
       fields: firestoreData,
     });
- 
-    console.log("RESULT" + res);
+
+    console.log(res);
 
     return res;
   }

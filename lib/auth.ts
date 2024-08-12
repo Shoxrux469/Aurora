@@ -5,6 +5,7 @@ import GoogleProvider from "next-auth/providers/google";
 import UsersService from "@/services/api/users";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { toast } from "@/components/ui/use-toast";
+import bcrypt from "bcryptjs";
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -29,20 +30,24 @@ export const authOptions: NextAuthOptions = {
           const user = await UsersService.getByEmail(
             credentials!.email as string
           );
-          console.log("USER" + user);
+          // console.log("USER" + user);
           if (user) {
-            if (credentials!.password === user.password) {
-              console.log("USER" + user);
+            const isPasswordValid = await bcrypt.compare(
+              credentials!.password,
+              user.password
+            );
+
+            if (isPasswordValid) {
               return user;
             }
             return null;
           } else {
-            // toast({
-            //   title: "Аккаунт не найден!",
-            //   description:
-            //     "Пользователь с таким эмайлом не существует, пожалуйста зарегистрируйтесь и повторите снова",
-            //   variant: "default",
-            // });
+            toast({
+              title: "Аккаунт не найден!",
+              description:
+                "Пользователь с таким эмайлом не существует, пожалуйста зарегистрируйтесь и повторите снова!",
+              variant: "destructive",
+            });
             return null;
           }
         } catch (error) {
@@ -95,9 +100,6 @@ export const authOptions: NextAuthOptions = {
 export async function getCurrentUser() {
   const session = await getServerSession(authOptions);
 
-  // console.log("SESSION" + session);
-
-  const user: IUser = session?.user as IUser;
-
+  const user = session?.user as IUser;
   return user;
 }

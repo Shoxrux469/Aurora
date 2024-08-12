@@ -23,9 +23,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
-    <html lang="en">  
+    <html lang="en">
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",

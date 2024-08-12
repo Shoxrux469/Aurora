@@ -51,7 +51,7 @@ export class FirestoreTransformer {
 
   static transformDocument(doc: FirestoreDocument): any {
     return {
-      id: doc.name?.split("/").pop(),
+      id: doc?.name?.split("/").pop(),
       ...FirestoreTransformer.transformFields(doc.fields),
       createTime: doc.createTime,
       updateTime: doc.updateTime,

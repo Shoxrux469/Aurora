@@ -24,7 +24,6 @@ const SignInForm = ({ setIsLogged }: Props) => {
     handleSubmit,
     formState: { errors },
   } = useForm<Inputs>();
-  // const { data: session } = useSession();
 
   const handleSingIn = async () => {
     try {
@@ -36,19 +35,20 @@ const SignInForm = ({ setIsLogged }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (user) => {
     try {
-      await signIn("credentials", {
+      const res = await signIn("credentials", {
         email: user.email,
         password: user.password,
         redirect: false,
       });
+
+      if (res?.ok) {
+        window.location.reload();
+      }
     } catch (error) {
       console.error(error);
       throw error;
     }
-    // let relatedProducts = await UsersService.getByEmail("test@gmail.com");
-    // console.log(relatedProducts);
   };
-
   return (
     <>
       <DialogHeader>
