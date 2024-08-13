@@ -25,7 +25,7 @@ const TABS = [
   },
 ];
 const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
-  const session = await getCurrentUser();
+  const user = await getCurrentUser();
 
   // Set the default tab or fall back to the first one
   const defaultTab = TABS.some((tab) => tab.value === params.slug)
@@ -33,35 +33,41 @@ const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
     : TABS[0].value;
 
   return (
-    <section>
-      <Tabs
-        defaultValue={defaultTab}
-        className="container pt-6 pb-32 bg-muted px-8 grid grid-cols-1 lg:grid-cols-4 gap-4 relative"
-      >
-        <div className="col-span-1 px-2 py-2 rounded-xl bg-white">
-          <TabsList className="h-fit px-3 flex flex-col py-2 space-y-2">
-            {TABS.map((tab) => (
-              <TabsTrigger key={tab.value} value={tab.value} className="w-full">
-                <Link
-                  href={tab.value}
-                  className="flex gap-1 text-lg items-center"
+    user && (
+      <section>
+        <Tabs
+          defaultValue={defaultTab}
+          className="container pt-6 pb-32 bg-muted px-8 grid grid-cols-1 lg:grid-cols-4 gap-4 relative"
+        >
+          <div className="col-span-1 px-2 py-2 rounded-xl bg-white">
+            <TabsList className="h-fit px-3 flex flex-col py-2 space-y-2">
+              {TABS.map((tab) => (
+                <TabsTrigger
+                  key={tab.value}
+                  value={tab.value}
+                  className="w-full"
                 >
-                  {tab.icon}
-                  <p>{tab.label}</p>
-                </Link>
-              </TabsTrigger>
+                  <Link
+                    href={tab.value}
+                    className="flex gap-1 text-lg items-center"
+                  >
+                    {tab.icon}
+                    <p>{tab.label}</p>
+                  </Link>
+                </TabsTrigger>
+              ))}
+            </TabsList>
+          </div>
+          <div className="col-span-3">
+            {TABS.map((tab) => (
+              <TabsContent key={tab.value} value={tab.value}>
+                {tab.component}
+              </TabsContent>
             ))}
-          </TabsList>
-        </div>
-        <div className="col-span-3">
-          {TABS.map((tab) => (
-            <TabsContent key={tab.value} value={tab.value}>
-              {tab.component}
-            </TabsContent>
-          ))}
-        </div>
-      </Tabs>
-    </section>
+          </div>
+        </Tabs>
+      </section>
+    )
   );
 };
 

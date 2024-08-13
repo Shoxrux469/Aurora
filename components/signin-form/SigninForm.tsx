@@ -6,9 +6,12 @@ import Link from "next/link";
 import { Separator } from "../ui/separator";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
+import UsersService from "@/services/api/users";
+import bcrypt from "bcryptjs";
 
 import { signIn } from "next-auth/react";
 import { Facebook, Linkedin } from "lucide-react";
+import { toast } from "../ui/use-toast";
 interface Props {
   setIsLogged: (logged: boolean) => void;
 }
@@ -35,14 +38,31 @@ const SignInForm = ({ setIsLogged }: Props) => {
 
   const onSubmit: SubmitHandler<Inputs> = async (user) => {
     try {
-      const res = await signIn("credentials", {
-        email: user.email,
-        password: user.password,
-        redirect: false,
-      });
+      const userExist = await UsersService.getByEmail(user.email as string);
 
-      if (res?.ok) {
-        window.location.reload();
+      if (userExist) {
+        const isPasswordValid = await bcrypt.compare(
+          user!.password,
+          userExist!.password
+        );
+
+        if (isPasswordValid) {
+          const res = await signIn("credentials", {
+            email: user.email,
+            password: user.password,
+            redirect: false,
+          });
+          if (res?.ok) {
+            window.location.reload();
+          }
+        } else {
+          toast({
+            title: "Неверный пароль!",
+            description:
+              "Введенный пароль был неверный, если вы забыли пароль восстановите его и повторите снова!",
+            variant: "destructive",
+          });
+        }
       }
     } catch (error) {
       console.error(error);

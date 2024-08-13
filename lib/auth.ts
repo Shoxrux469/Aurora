@@ -26,30 +26,11 @@ export const authOptions: NextAuthOptions = {
       },
       async authorize(credentials) {
         try {
-          // console.log(credentials);
           const user = await UsersService.getByEmail(
             credentials!.email as string
           );
-          // console.log("USER" + user);
-          if (user) {
-            const isPasswordValid = await bcrypt.compare(
-              credentials!.password,
-              user.password
-            );
 
-            if (isPasswordValid) {
-              return user;
-            }
-            return null;
-          } else {
-            toast({
-              title: "Аккаунт не найден!",
-              description:
-                "Пользователь с таким эмайлом не существует, пожалуйста зарегистрируйтесь и повторите снова!",
-              variant: "destructive",
-            });
-            return null;
-          }
+          return user;
         } catch (error) {
           console.error("Error during credentials authentication:", error);
           return null;
@@ -62,12 +43,12 @@ export const authOptions: NextAuthOptions = {
       try {
         const userExists = await UsersService.getByEmail(user.email as string);
         console.log("USEREXISTS" + userExists);
-        if (userExists) {
-          return true;
-        } else {
-          await UsersService.postUser(user as IUser);
-          return true;
-        }
+        // if (userExists) {
+        return true;
+        // } else {
+        // await UsersService.postUser(user as IUser);
+        // return true;
+        // }
       } catch (error) {
         console.log("THERE IS AN ERROR" + error);
         return false;

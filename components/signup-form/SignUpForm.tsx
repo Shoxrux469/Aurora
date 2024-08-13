@@ -69,7 +69,6 @@ const SignUpForm = ({ setIsLogged }: Props) => {
               minLength: 3,
               maxLength: 15,
             })}
-            // aria-invalid={errors.name ? "true" : "false"}
             id={"name"}
             placeholder="Имя"
           />

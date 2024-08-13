@@ -26,4 +26,9 @@ export interface IUser extends User {
   password: string;
   orders?: IUserOrder[];
   name: string;
+  surname?: string;
+  middlename?: string;
+  birthdate?: string;
+  phone?: string;
+  gender?: "Мужской" | "Женский" | undefined;
 }

@@ -4,6 +4,7 @@ import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
 import { IUser } from "@/interfaces/user";
 import bcrypt from "bcryptjs";
+import { toast } from "@/components/ui/use-toast";
 
 class UsersService {
   async getByEmail(email: string): Promise<IUser | null> {
@@ -19,9 +20,6 @@ class UsersService {
         },
       },
     });
-
-    console.log(res.data[0].document);
-
     if (res.data[0].document) {
       const transformedData: IUser[] =
         FirestoreTransformer.transformFirebaseData(
@@ -32,16 +30,26 @@ class UsersService {
 
       return transformedData[0];
     } else {
+      toast({
+        title: "Аккаунт не найден!",
+        description:
+          "Пользователь с таким эмайлом не существует, пожалуйста зарегистрируйтесь и повторите снова!",
+        variant: "destructive",
+      });
       return null;
     }
   }
 
+  
+
   async postUser(user: IUser) {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
+    console.log(user);
+    const hashedPassword = await bcrypt.hash(user?.password, 10);
+    const thirdPartyProvder = 0;
 
     const firestoreData = FirestoreTransformer.toFirestoreFormat({
       ...user,
-      password: hashedPassword,
+      password: hashedPassword || thirdPartyProvder,
     });
 
     console.log(firestoreData);
