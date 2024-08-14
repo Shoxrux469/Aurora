@@ -14,9 +14,6 @@ import LoginModal from "../login-modal/LoginModal";
 import Aside from "../aside/aside";
 import { headerLinks, ShopName } from "@/constants";
 import { getCurrentUser } from "@/lib/auth";
-import { Button } from "../ui/button";
-import SignOut from "../signout/Signout";
-import SignInForm from "../signin-form/SigninForm";
 
 const Header = async () => {
   const user = await getCurrentUser();
@@ -62,7 +59,6 @@ const Header = async () => {
             <LayoutList size={20} />
             Заказы
           </Link>
-          <SignOut />
         </div>
       </div>
     </header>

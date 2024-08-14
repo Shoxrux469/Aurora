@@ -4,8 +4,12 @@ import { AdapterUser } from "next-auth/adapters";
 import GoogleProvider from "next-auth/providers/google";
 import UsersService from "@/services/api/users";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { toast } from "@/components/ui/use-toast";
-import bcrypt from "bcryptjs";
+
+interface IUserData extends IUser {
+  password: string;
+  createTime: string;
+  updateTime: string;
+}
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -30,7 +34,10 @@ export const authOptions: NextAuthOptions = {
             credentials!.email as string
           );
 
-          return user;
+          const { createTime, updateTime, password, ...profileData } =
+            user as IUserData;
+
+          return profileData;
         } catch (error) {
           console.error("Error during credentials authentication:", error);
           return null;
@@ -41,37 +48,24 @@ export const authOptions: NextAuthOptions = {
   callbacks: {
     async signIn({ user }: { user: AdapterUser | User }) {
       try {
-        const userExists = await UsersService.getByEmail(user.email as string);
-        console.log("USEREXISTS" + userExists);
-        // if (userExists) {
         return true;
-        // } else {
-        // await UsersService.postUser(user as IUser);
-        // return true;
-        // }
       } catch (error) {
         console.log("THERE IS AN ERROR" + error);
         return false;
       }
     },
     async session({ session, token }) {
-      console.log("Session callback - token:", token);
-      session.user = {
-        email: token.email,
-        name: token.name,
-      };
-      console.log("Session callback - session:", session);
+      // console.log("Session callback - token:", token);
+      session.user = token.user as IUser;
+      // console.log("Session callback - session:", session);
 
       return session;
     },
     async jwt({ token, user }) {
-      console.log("JWT callback - user:", user);
+      // console.log("JWT callback - user:", user);
       if (user) {
-        token.user = {
-          email: user.email,
-          name: user.name,
-        };
-        console.log("JWT callback - token:", token);
+        token.user = user;
+        // console.log("JWT callback - token:", token);
       }
       return token;
     },
@@ -82,5 +76,6 @@ export async function getCurrentUser() {
   const session = await getServerSession(authOptions);
 
   const user = session?.user as IUser;
+
   return user;
 }

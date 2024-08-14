@@ -19,6 +19,20 @@ export interface IUserOrder {
   orderId: idType;
 }
 
+export type UserGender = "Мужской" | "Женский" | "";
+
+export interface IUserPatchForm {
+  id: string;
+  surname?: string;
+  name: string;
+  middlename?: string;
+  password: string;
+  birthdate?: string;
+  gender?: UserGender;
+  email: string;
+  phone?: string;
+}
+
 export interface IUser extends User {
   id: idType;
   cart?: IUserCart;

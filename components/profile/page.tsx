@@ -1,7 +1,6 @@
 import React from "react";
 import MyDataForm from "../my-data-form/MyDataForm";
 import { getCurrentUser } from "@/lib/auth";
-import EmptyCard from "../empty-card/EmptyCard";
 
 const Profile = async () => {
   const user = await getCurrentUser();

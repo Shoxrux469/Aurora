@@ -2,7 +2,7 @@
 import makeRequest from "../makeRequest";
 import { FirestoreTransformer } from "@/utils/transformData";
 import { ApiConstants } from "./apiConstants";
-import { IUser } from "@/interfaces/user";
+import { IUser, IUserPatchForm } from "@/interfaces/user";
 import bcrypt from "bcryptjs";
 import { toast } from "@/components/ui/use-toast";
 
@@ -40,8 +40,6 @@ class UsersService {
     }
   }
 
-  
-
   async postUser(user: IUser) {
     console.log(user);
     const hashedPassword = await bcrypt.hash(user?.password, 10);
@@ -61,6 +59,34 @@ class UsersService {
     console.log(res);
 
     return res;
+  }
+  async patchUser(user: IUserPatchForm) {
+    try {
+      const userId = user.id;
+      if (!userId) {
+        throw new Error("User ID is required to update user data.");
+      }
+
+      const { id, ...userWithoutId } = user;
+
+      const firestoreData =
+        FirestoreTransformer.toFirestoreFormat(userWithoutId);
+
+      const res = await makeRequest.patch(`${ApiConstants.users}/${userId}`, {
+        fields: firestoreData,
+      });
+
+      console.log(res);
+
+      return res;
+    } catch (error) {
+      toast({
+        title: "Ошибка обновления!",
+        description: "Произошла ошибка при обновлении данных!",
+        variant: "destructive",
+      });
+      throw error;
+    }
   }
 }
 
