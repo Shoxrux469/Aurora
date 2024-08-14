@@ -2,11 +2,13 @@
 
 import EmptyCart from '@/components/empty-cart/EmptyCart'
 import React, { useEffect, useState } from 'react'
-import { Separator } from '@/components/ui/separator'
-import CartProduct from '@/components/cart-product/CartProduct'
 import CheckoutCard from '@/components/checkout-card/CheckoutCard'
-import { idType } from '@/interfaces'
-import { ICartProduct, IProduct } from '@/interfaces/product'
+import { ICartProduct } from '@/interfaces/product'
+import { Input } from '@/components/ui/input'
+import CartItemsList from '@/components/cart-items-list/CartItemsList'
+import DeliveryMethodsCard from '@/components/delivery-methods-card/DeliveryMethodsCard'
+import UserDataCard from '@/components/user-data-card/UserDataCard'
+import PaymentMethods from '@/components/payment-methods/PaymentMethods'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
@@ -28,60 +30,38 @@ const CartPage = () => {
     }
   }, []);
 
-  const handleDelete = (id: idType) => {
-    const updatedCart = cartItems.filter(item => item.id !== id)
-    setCartItems(updatedCart)
-    localStorage.setItem("cart", JSON.stringify(updatedCart))
-  }
-  const handleIncrease = (id: idType) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id ? { ...item, cartQuantity: item.cartQuantity + 1 } : item
-    );
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  }
-  const handleDecrease = (id: idType) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id ? { ...item, cartQuantity: item.cartQuantity - 1 } : item
-    );
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  }
-  const handleQuantityChange = (id: idType, quantity: number) => {
-    const updatedCart = cartItems.map(item =>
-      item.id === id ? { ...item, cartQuantity: quantity } : item
-    )
-    setCartItems(updatedCart);
-    localStorage.setItem("cart", JSON.stringify(updatedCart));
-  }
-
   if (isEmpty) return <EmptyCart />
 
   return (
-    <section className='pt-8 pb-40 bg-muted'>
-      <div className="container px-8 grid grid-cols-1 lg:grid-cols-3 gap-4 relative">
-        <div className="lg:col-span-2">
-          <div className="p-4 rounded-xl bg-white shadow-md">
-            <h2 className="text-2xl font-medium">Корзина</h2>
-            <p className='mb-5 font-thin italic'>{cartItems.length} товар</p>
-            <Separator />
-            <div className="pt-6 space-y-4">
-              {cartItems?.map((item, idx) => (
-                <CartProduct
-                  key={idx}
-                  item={item}
-                  onDelete={handleDelete}
-                  onIncrease={handleIncrease}
-                  onDecrease={handleDecrease}
-                  onQuantityChange={handleQuantityChange}
-                />
-              ))}
+    <div className="pt-8 pb-12 bg-muted">
+      <section className="container px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+        <div className="lg:col-span-2 space-y-5 ">
+          <CartItemsList cartItems={cartItems} setCartItems={setCartItems} />
+          <DeliveryMethodsCard cartItems={cartItems} />
+
+          <div className='flex gap-5'>
+            <PaymentMethods />
+            <UserDataCard />
+          </div>
+
+          <div className="p-6 rounded-xl bg-white shadow-md">
+            <h2 className="text-2xl font-medium">Паспортные данные</h2>
+
+            <div className='py-4 grid grid-cols-2 gap-4'>
+              <div>
+                <span className='text-sm text-zinc-500'>Серия и номер паспорта *</span>
+                <Input className='h-11 mt-1.5 border rounded-md' />
+              </div>
+              <div>
+                <span className='text-sm text-zinc-500'>ПИНФЛ *</span>
+                <Input className='h-11 mt-1.5 border rounded-md' />
+              </div>
             </div>
           </div>
         </div>
         <CheckoutCard cartItems={cartItems} />
-      </div>
-    </section>
+      </section>
+    </div>
   )
 }
 
