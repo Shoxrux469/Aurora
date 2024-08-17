@@ -1,12 +1,12 @@
-'use client'
+"use client";
 
-import React, { useCallback, useRef, useState } from 'react';
-import { GoogleMap, Marker } from '@react-google-maps/api';
-import { Button } from '@/components/ui/button';
+import React, { useCallback, useRef, useState } from "react";
+import { GoogleMap, Marker } from "@react-google-maps/api";
+import { Button } from "@/components/ui/button";
 
 const containerStyle = {
-  width: '100%',
-  height: '400px',
+  width: "100%",
+  height: "400px",
 };
 
 const defaultCenter = {
@@ -31,23 +31,26 @@ const Map: React.FC<MapProps> = ({ onLocationSelect }) => {
     setMap(null);
   }, []);
 
-  const handleMapClick = useCallback((event: google.maps.MapMouseEvent) => {
-    if (event.latLng) {
-      const lat = event.latLng.lat();
-      const lng = event.latLng.lng();
-      onLocationSelect(lat, lng);
-      setSelectedLocation({ lat, lng });
+  const handleMapClick = useCallback(
+    (event: google.maps.MapMouseEvent) => {
+      if (event.latLng) {
+        const lat = event.latLng.lat();
+        const lng = event.latLng.lng();
+        onLocationSelect(lat, lng);
+        setSelectedLocation({ lat, lng });
 
-      if (markerRef.current) {
-        markerRef.current.setPosition({ lat, lng });
-      } else if (map) {
-        markerRef.current = new google.maps.Marker({
-          position: { lat, lng },
-          map,
-        });
+        if (markerRef.current) {
+          markerRef.current.setPosition({ lat, lng });
+        } else if (map) {
+          markerRef.current = new google.maps.Marker({
+            position: { lat, lng },
+            map,
+          });
+        }
       }
-    }
-  }, [onLocationSelect, map]);
+    },
+    [onLocationSelect, map]
+  );
 
   const handleGetCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
@@ -79,18 +82,14 @@ const Map: React.FC<MapProps> = ({ onLocationSelect }) => {
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {selectedLocation && (
-          <Marker position={selectedLocation} />
-        )}
+        {selectedLocation && <Marker position={selectedLocation} />}
       </GoogleMap>
 
       <div className="mt-4 flex justify-center">
-        <Button onClick={handleGetCurrentLocation}>
-          Use Current Location
-        </Button>
+        <Button onClick={handleGetCurrentLocation}>Use Current Location</Button>
       </div>
     </div>
-  )
+  );
 };
 
 export default Map;
