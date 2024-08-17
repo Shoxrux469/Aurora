@@ -55,10 +55,12 @@ const Header = async () => {
           ) : (
             <LoginModal />
           )}
-          <Link href="/user-info/orders" className={headerLinks}>
-            <LayoutList size={20} />
-            Заказы
-          </Link>
+          {user && (
+            <Link href="/user-info/orders" className={headerLinks}>
+              <LayoutList size={20} />
+              Заказы
+            </Link>
+          )}
         </div>
       </div>
     </header>

@@ -1,5 +1,5 @@
 import React from "react";
-import MyDataForm from "../my-data-form/MyDataForm";
+import ProfileForm from "../profile-form/ProfileForm";
 import { getCurrentUser } from "@/lib/auth";
 
 const Profile = async () => {
@@ -7,7 +7,7 @@ const Profile = async () => {
   return (
     <div className="bg-white px-7 pt-5 pb-8 rounded-xl">
       <h1 className="text-3xl pb-10">Профиль</h1>
-      <MyDataForm user={user} />
+      <ProfileForm user={user} />
     </div>
   );
 };

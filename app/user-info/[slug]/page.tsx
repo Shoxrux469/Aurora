@@ -27,7 +27,6 @@ const TABS = [
 const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
   const user = await getCurrentUser();
 
-  // Set the default tab or fall back to the first one
   const defaultTab = TABS.some((tab) => tab.value === params.slug)
     ? params.slug
     : TABS[0].value;
@@ -60,7 +59,7 @@ const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
           </div>
           <div className="col-span-3">
             {TABS.map((tab) => (
-              <TabsContent key={tab.value} value={tab.value}>
+              <TabsContent className="mt-0" key={tab.value} value={tab.value}>
                 {tab.component}
               </TabsContent>
             ))}
