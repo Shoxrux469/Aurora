@@ -2,8 +2,10 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Edit2Icon } from "lucide-react";
 import { Input } from "../ui/input";
+import { getCurrentUser } from "@/lib/auth";
 
-const UserDataCard = () => {
+const UserDataCard = async () => {
+  const user = await getCurrentUser();
   return (
     <div className="flex-1 p-6 rounded-xl bg-white shadow-md">
       <div className="flex justify-between">
@@ -17,7 +19,7 @@ const UserDataCard = () => {
           <span className="text-sm text-zinc-500">Имя *</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={"Name"}
+            defaultValue={user.name}
             readOnly
           />
         </div>
@@ -25,15 +27,15 @@ const UserDataCard = () => {
           <span className="text-sm text-zinc-500">Фамилия *</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={"Name"}
+            defaultValue={user.surname}
             readOnly
           />
         </div>
         <div>
-          <span className="text-sm text-zinc-500">Отчество *</span>
+          <span className="text-sm text-zinc-500">Отчество</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={"Name"}
+            defaultValue={user.middlename && "Middlename"}
             readOnly
           />
         </div>

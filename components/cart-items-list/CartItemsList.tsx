@@ -52,7 +52,16 @@ const CartItemsList = ({ cartItems, setCartItems }: props) => {
         <AccordionTrigger className="my-0 py-0">
           <div className="flex flex-col items-start">
             <h2 className="text-2xl font-medium">Корзина</h2>
-            <p className="mb-5 font-thin italic">{cartItems.length} товар</p>
+            <p className="mb-5 font-thin italic">
+              {cartItems.length}{" "}
+              {cartItems.length === 1 ? (
+                <span>товар</span>
+              ) : cartItems.length >= 2 && cartItems.length <= 4 ? (
+                <span>товара</span>
+              ) : (
+                <span>товаров</span>
+              )}
+            </p>
           </div>
         </AccordionTrigger>
         <AccordionContent className="pt-6 space-y-4">
