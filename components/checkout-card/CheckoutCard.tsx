@@ -4,7 +4,7 @@ import { Button } from '../ui/button'
 import { ICartProduct } from '@/interfaces/product'
 
 interface props {
-  cartItems: ICartProduct[]
+  cartItems: ICartProduct[];
 }
 
 const CheckoutCard = ({ cartItems }: props) => {
@@ -12,10 +12,13 @@ const CheckoutCard = ({ cartItems }: props) => {
 
   useEffect(() => {
     const calculateTotalPrice = () => {
-      const total = cartItems.reduce((acc, value) => acc + value.price * value.cartQuantity, 0)
-      setTotalPrice(total)
-    }
-    calculateTotalPrice()
+      const total = cartItems.reduce(
+        (acc, value) => acc + value.price * value.cartQuantity,
+        0
+      );
+      setTotalPrice(total);
+    };
+    calculateTotalPrice();
   }, [cartItems]);
 
   return (
@@ -41,10 +44,13 @@ const CheckoutCard = ({ cartItems }: props) => {
         <Button
           variant="purple"
           size="lg"
-          className="w-full bg-purple-600 text-white">Оформить заказ</Button>
+          className="w-full bg-purple-600 text-white"
+        >
+          Оформить заказ
+        </Button>
       </CardFooter>
     </Card>
-  )
-}
+  );
+};
 
-export default CheckoutCard
+export default CheckoutCard;

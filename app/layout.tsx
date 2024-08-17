@@ -4,6 +4,9 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
+import { Suspense } from "react";
+import Loading from "./loading";
+import { Toaster } from "@/components/ui/toaster";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -20,7 +23,6 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html lang="en">
       <body
@@ -30,8 +32,9 @@ export default async function RootLayout({
         )}
       >
         <Header />
-        {children}
+        <Suspense fallback={<Loading />}>{children}</Suspense>
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

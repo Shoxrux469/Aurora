@@ -1,6 +1,7 @@
 import { ICategoryChild } from "@/interfaces/category";
 import React from "react";
 import { useRouter } from "next/navigation";
+import { SheetTrigger } from "../ui/sheet";
 
 const AsideSubcategories = ({
   subcategories,
@@ -17,12 +18,16 @@ const AsideSubcategories = ({
             key={i}
             className="cursor-pointer flex items-center justify-between group"
           >
-            <button
-              onClick={() => router.push(`/filteredProducts/${subcategory.id}`)}
-              className="flex items-center hover:opacity-75 ease-in-out duration-150 text-balance text-lg justify-center gap-3"
-            >
-              {subcategory.title}
-            </button>
+            <SheetTrigger>
+              <button
+                onClick={() =>
+                  router.push(`/filteredProducts/id/${subcategory.id}`)
+                }
+                className="flex items-center hover:opacity-75 ease-in-out duration-150 text-balance text-lg justify-center gap-3"
+              >
+                {subcategory.title}
+              </button>
+            </SheetTrigger>
           </li>
         ))}
       </ul>

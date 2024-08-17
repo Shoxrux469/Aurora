@@ -1,6 +1,5 @@
 'use client'
 
-import EmptyCart from '@/components/empty-cart/EmptyCart'
 import React, { useEffect, useState } from 'react'
 import CheckoutCard from '@/components/checkout-card/CheckoutCard'
 import { ICartProduct } from '@/interfaces/product'
@@ -9,10 +8,11 @@ import CartItemsList from '@/components/cart-items-list/CartItemsList'
 import DeliveryMethodsCard from '@/components/delivery-methods-card/DeliveryMethodsCard'
 import UserDataCard from '@/components/user-data-card/UserDataCard'
 import PaymentMethods from '@/components/payment-methods/PaymentMethods'
+import EmptyCard from '@/components/empty-card/EmptyCard'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
-  let isEmpty = cartItems.length === 0
+  let isEmpty = cartItems.length === 0;
 
   useEffect(() => {
     let cart = localStorage.getItem("cart");
@@ -20,7 +20,7 @@ const CartPage = () => {
       try {
         let arr = JSON.parse(cart).map((item: ICartProduct) => ({
           ...item,
-          cartQuantity: item.cartQuantity || 1
+          cartQuantity: item.cartQuantity || 1,
         }));
         setCartItems(arr);
       } catch (error) {
@@ -30,7 +30,10 @@ const CartPage = () => {
     }
   }, []);
 
-  if (isEmpty) return <EmptyCart />
+  if (isEmpty)
+    return <EmptyCard
+      title='В корзине пока пусто'
+      description='Начните с подборок на главной странице или найдите нужный товар через поиск' />
 
   return (
     <div className="pt-8 pb-12 bg-muted">
@@ -65,4 +68,4 @@ const CartPage = () => {
   )
 }
 
-export default CartPage
+export default CartPage;
