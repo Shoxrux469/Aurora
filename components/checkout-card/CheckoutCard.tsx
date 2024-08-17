@@ -1,15 +1,7 @@
-import React, { useEffect, useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "../ui/button";
-import { Separator } from "../ui/separator";
-import { ICartProduct } from "@/interfaces/product";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from 'react'
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
+import { Button } from '../ui/button'
+import { ICartProduct } from '@/interfaces/product'
 
 interface props {
   cartItems: ICartProduct[];
@@ -17,7 +9,6 @@ interface props {
 
 const CheckoutCard = ({ cartItems }: props) => {
   const [totalPrice, setTotalPrice] = useState(0);
-  const router = useRouter();
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -31,21 +22,20 @@ const CheckoutCard = ({ cartItems }: props) => {
   }, [cartItems]);
 
   return (
-    <Card className="bg-white border-none h-fit shadow-md sticky top-4">
-      <CardHeader>
-        <CardTitle className="mb-7 text-2xl font-medium">Ваш заказ</CardTitle>
-        <Separator />
+    <Card className='bg-white border-none h-fit shadow-md sticky top-4'>
+      <CardHeader className='py-4'>
+        <CardTitle className='text-2xl font-medium'>Ваш заказ</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex justify-between">
+        <div className="mb-4 flex justify-between">
+          <p>Оплата картой <span>-- 6261</span></p>
+        </div>
+
+        <div className="flex justify-between text-zinc-500">
           <span>Товары ({cartItems.length}):</span>
           <span>${totalPrice}.00</span>
         </div>
-        <div className="flex justify-between">
-          <span>Доставка:</span>
-          <span>$25.00</span>
-        </div>
-        <div className="flex justify-between font-medium text-lg mt-2">
+        <div className="flex justify-between font-medium text-xl mt-2">
           <span>Итого:</span>
           <span>${totalPrice + 25}.00</span>
         </div>
@@ -55,7 +45,6 @@ const CheckoutCard = ({ cartItems }: props) => {
           variant="purple"
           size="lg"
           className="w-full bg-purple-600 text-white"
-          onClick={() => router.push("/order-products/")}
         >
           Оформить заказ
         </Button>
