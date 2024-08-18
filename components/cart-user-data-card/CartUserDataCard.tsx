@@ -2,10 +2,9 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Edit2Icon } from "lucide-react";
 import { Input } from "../ui/input";
-import { getCurrentUser } from "@/lib/auth";
+import { IUser } from "@/interfaces/user";
 
-const UserDataCard = async () => {
-  const user = await getCurrentUser();
+const CartUserDataCard = async ({ user }: { user: IUser }) => {
   return (
     <div className="flex-1 p-6 rounded-xl bg-white shadow-md">
       <div className="flex justify-between">
@@ -27,7 +26,7 @@ const UserDataCard = async () => {
           <span className="text-sm text-zinc-500">Фамилия *</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={user.surname}
+            defaultValue={user.surname || "Surname"}
             readOnly
           />
         </div>
@@ -35,7 +34,7 @@ const UserDataCard = async () => {
           <span className="text-sm text-zinc-500">Отчество</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={user.middlename && "Middlename"}
+            defaultValue={user?.middlename || "Middlename"}
             readOnly
           />
         </div>
@@ -44,4 +43,4 @@ const UserDataCard = async () => {
   );
 };
 
-export default UserDataCard;
+export default CartUserDataCard;

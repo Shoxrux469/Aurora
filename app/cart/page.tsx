@@ -1,16 +1,18 @@
-
 import React from "react";
-import PaymentMethods from "@/components/payment-methods/PaymentMethods";
-import UserDataCard from "@/components/user-data-card/UserDataCard";
+import CartPamentCard from "@/components/cart-payment-card/CartPaymentCard";
+import CartUserDataCard from "@/components/cart-user-data-card/CartUserDataCard";
 import { Input } from "@/components/ui/input";
 import CartProvider from "@/components/cart-provider/CartProvider";
+import { getCurrentUser } from "@/lib/auth";
 
-const CartPage = () => {
+const CartPage = async () => {
+  const user = await getCurrentUser();
+
   return (
     <CartProvider>
       <div className="flex gap-5">
-        <PaymentMethods />
-        <UserDataCard />
+        <CartPamentCard />
+        <CartUserDataCard user={user} />
       </div>
 
       <div className="p-6 rounded-xl bg-white shadow-md">

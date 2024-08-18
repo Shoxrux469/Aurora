@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
-import LoginModal from "../login-modal/LoginModal";
+import LoginModal from "../signin-modal/LoginModal";
 import Aside from "../aside/aside";
 import { headerLinks, ShopName } from "@/constants";
 import { getCurrentUser } from "@/lib/auth";

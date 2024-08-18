@@ -1,10 +1,10 @@
 "use client";
 
 import React, { ReactNode, useEffect, useState } from "react";
-import CheckoutCard from "@/components/checkout-card/CheckoutCard";
+import CartCheckoutCard from "@/components/cart-checkout-card/CartCheckoutCard";
 import { ICartProduct } from "@/interfaces/product";
 import CartItemsList from "@/components/cart-items-list/CartItemsList";
-import DeliveryMethodsCard from "@/components/delivery-methods-card/DeliveryMethodsCard";
+import CartDeliveryCard from "@/components/cart-delivery-card/CartDeliveryCard";
 import EmptyCard from "@/components/empty-card/EmptyCard";
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
@@ -40,10 +40,10 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
       <section className="container px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
         <div className="lg:col-span-2 space-y-5 ">
           <CartItemsList cartItems={cartItems} setCartItems={setCartItems} />
-          <DeliveryMethodsCard cartItems={cartItems} />
+          <CartDeliveryCard cartItems={cartItems} />
           {children}
         </div>
-        <CheckoutCard cartItems={cartItems} />
+        <CartCheckoutCard cartItems={cartItems} />
       </section>
     </div>
   );

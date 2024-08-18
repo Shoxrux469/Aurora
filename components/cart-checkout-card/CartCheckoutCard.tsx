@@ -7,7 +7,7 @@ interface props {
   cartItems: ICartProduct[];
 }
 
-const CheckoutCard = ({ cartItems }: props) => {
+const CartCheckoutCard = ({ cartItems }: props) => {
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
@@ -53,4 +53,4 @@ const CheckoutCard = ({ cartItems }: props) => {
   );
 };
 
-export default CheckoutCard;
+export default CartCheckoutCard;
