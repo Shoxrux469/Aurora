@@ -4,6 +4,7 @@ import Image from "next/image";
 import { ICartProduct } from "@/interfaces/product";
 import { idType } from "@/interfaces";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface props {
   item: ICartProduct;
@@ -20,6 +21,7 @@ const CartProduct = ({
   onDecrease,
   onQuantityChange,
 }: props) => {
+  const router = useRouter();
   const [inputQuantity, setInputQuantity] = useState<number>(item.cartQuantity);
 
   useEffect(() => {
@@ -37,10 +39,14 @@ const CartProduct = ({
       onQuantityChange(item.id, newQuantity);
     }
     if (newQuantity > item.quantity) {
-      onQuantityChange(item.id, item.quantity)
-      setInputQuantity(item.quantity)
+      onQuantityChange(item.id, item.quantity);
+      setInputQuantity(item.quantity);
     }
-  }
+  };
+
+  const productPage = (id: string) => {
+    router.push(`/product/${id}`);
+  };
 
   return (
     <div className="flex items-start space-x-4 ">
@@ -49,11 +55,17 @@ const CartProduct = ({
         alt="Product Image"
         width={240}
         height={240}
-        className="w-28 h-full object-cover rounded-lg"
+        className="w-28 h-full cursor-pointer object-cover rounded-lg"
+        onClick={() => productPage(item.id)}
       />
       <div className="flex-1 flex items-start gap-1">
         <div className="max-w-[340px] w-full">
-          <h3 className="text-lg text-balance leading-5">{item.title}</h3>
+          <h3
+            onClick={() => productPage(item.id)}
+            className="cursor-pointer hover:underline text-lg text-balance leading-5"
+          >
+            {item.title}
+          </h3>
           <p className="mt-1 text-sm text-muted-foreground">
             {item.attributes.color}
           </p>
@@ -79,6 +91,7 @@ const CartProduct = ({
           <Button
             variant="purple"
             size="icon"
+            disabled={inputQuantity === item.quantity}
             onClick={() => onIncrease(item.id)}
           >
             +
