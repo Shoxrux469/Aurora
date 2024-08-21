@@ -5,10 +5,11 @@ import CheckoutCard from '@/components/checkout-card/CheckoutCard'
 import { ICartProduct } from '@/interfaces/product'
 import { Input } from '@/components/ui/input'
 import CartItemsList from '@/components/cart-items-list/CartItemsList'
-import DeliveryMethodsCard from '@/components/delivery-methods-card/DeliveryMethodsCard'
 import UserDataCard from '@/components/user-data-card/UserDataCard'
 import PaymentMethods from '@/components/payment-methods/PaymentMethods'
 import EmptyCard from '@/components/empty-card/EmptyCard'
+import DeliveryCard from '@/components/delivery-card/DeliveryCard'
+import { MapProvider } from '@/providers/map-provider'
 
 const CartPage = () => {
   const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
@@ -36,35 +37,37 @@ const CartPage = () => {
       description='Начните с подборок на главной странице или найдите нужный товар через поиск' />
 
   return (
-    <div className="pt-8 pb-12 bg-muted">
-      <section className="container px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-        <div className="lg:col-span-2 space-y-5 ">
-          <CartItemsList cartItems={cartItems} setCartItems={setCartItems} />
-          <DeliveryMethodsCard cartItems={cartItems} />
+    <MapProvider>
+      <div className="pt-8 pb-12 bg-muted">
+        <section className="container px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
+          <div className="lg:col-span-2 space-y-5 ">
+            <CartItemsList cartItems={cartItems} setCartItems={setCartItems} />
+            <DeliveryCard cartItems={cartItems} />
 
-          <div className='flex gap-5'>
-            <PaymentMethods />
-            <UserDataCard />
-          </div>
+            <div className='flex gap-5'>
+              <PaymentMethods />
+              <UserDataCard />
+            </div>
 
-          <div className="p-6 rounded-xl bg-white shadow-md">
-            <h2 className="text-2xl font-medium">Паспортные данные</h2>
+            <div className="p-6 rounded-xl bg-white shadow-md">
+              <h2 className="text-2xl font-medium">Паспортные данные</h2>
 
-            <div className='py-4 grid grid-cols-2 gap-4'>
-              <div>
-                <span className='text-sm text-zinc-500'>Серия и номер паспорта *</span>
-                <Input className='h-11 mt-1.5 border rounded-md' />
-              </div>
-              <div>
-                <span className='text-sm text-zinc-500'>ПИНФЛ *</span>
-                <Input className='h-11 mt-1.5 border rounded-md' />
+              <div className='py-4 grid grid-cols-2 gap-4'>
+                <div>
+                  <span className='text-sm text-zinc-500'>Серия и номер паспорта *</span>
+                  <Input className='h-11 mt-1.5 border rounded-md' />
+                </div>
+                <div>
+                  <span className='text-sm text-zinc-500'>ПИНФЛ *</span>
+                  <Input className='h-11 mt-1.5 border rounded-md' />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <CheckoutCard cartItems={cartItems} />
-      </section>
-    </div>
+          <CheckoutCard cartItems={cartItems} />
+        </section>
+      </div>
+    </MapProvider>
   )
 }
 

@@ -1,12 +1,15 @@
 'use client'
 
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { Button } from '@/components/ui/button';
+import { Navigation } from 'lucide-react';
+import { useMapContext } from '@/providers/map-provider';
 
 const containerStyle = {
   width: '100%',
-  height: '400px',
+  height: '440px',
+  borderRadius: '10px'
 };
 
 const defaultCenter = {
@@ -14,82 +17,73 @@ const defaultCenter = {
   lng: 66.9231104850769,
 };
 
-interface MapProps {
-  onLocationSelect: (lat: number, lng: number) => void;
-}
-
-const Map: React.FC<MapProps> = ({ onLocationSelect }) => {
-  const [map, setMap] = useState<google.maps.Map | null>(null);
+const Map: React.FC = () => {
+  const { location, setLocation } = useMapContext();
   const markerRef = useRef<google.maps.Marker | null>(null);
-  const [selectedLocation, setSelectedLocation] = useState(defaultCenter);
+  const mapRef = useRef<google.maps.Map | null>(null);
 
   const onLoad = useCallback((mapInstance: google.maps.Map) => {
-    setMap(mapInstance);
+    mapRef.current = mapInstance
   }, []);
 
   const onUnmount = useCallback(() => {
-    setMap(null);
+    mapRef.current = null
   }, []);
+
+  const getCurrentLocation = useCallback(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords
+          const location = { lat: latitude, lng: longitude };
+          if (mapRef.current) {
+            mapRef.current.setCenter(location);
+          }
+          setLocation(location)
+        },
+        (error) => {
+          console.error("Error getting current location: ", error);
+        }
+      )
+    } else {
+      console.error("Geolocation is not supported by this browser.");
+    }
+  }, [setLocation])
 
   const handleMapClick = useCallback((event: google.maps.MapMouseEvent) => {
     if (event.latLng) {
       const lat = event.latLng.lat();
       const lng = event.latLng.lng();
-      onLocationSelect(lat, lng);
-      setSelectedLocation({ lat, lng });
+      setLocation({ lat, lng })
 
       if (markerRef.current) {
         markerRef.current.setPosition({ lat, lng });
-      } else if (map) {
-        markerRef.current = new google.maps.Marker({
-          position: { lat, lng },
-          map,
-        });
       }
     }
-  }, [onLocationSelect, map]);
-
-  const handleGetCurrentLocation = useCallback(() => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          const location = { lat: latitude, lng: longitude };
-          setSelectedLocation(location);
-          map?.setCenter(location);
-          onLocationSelect(latitude, longitude);
-        },
-        (error) => {
-          console.error("Error getting location: ", error);
-        }
-      );
-    } else {
-      console.error("Geolocation is not supported by this browser.");
-    }
-  }, [map, onLocationSelect]);
+  }, [setLocation]);
 
   return (
-    <div>
+    <>
       <GoogleMap
         mapContainerStyle={containerStyle}
-        center={selectedLocation}
+        center={location || defaultCenter}
         zoom={16}
         options={{ disableDefaultUI: true }}
         onClick={handleMapClick}
         onLoad={onLoad}
         onUnmount={onUnmount}
       >
-        {selectedLocation && (
-          <Marker position={selectedLocation} />
+        {location && (
+          <Marker position={location} />
         )}
       </GoogleMap>
 
-      <div className="mt-4 flex justify-center">
-        <Button onClick={handleGetCurrentLocation}>
-          Use Current Location
+      <div className="mt-4 flex justify-center w-fit absolute right-8 top-16 ">
+        <Button onClick={getCurrentLocation} className='p-0 w-12 h-12 rounded-full'>
+          <Navigation size={32} />
         </Button>
       </div>
-    </div>
+    </>
   )
 };
 

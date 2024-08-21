@@ -8,3 +8,8 @@ export interface IImage {
   created_at: string;
   path: string;
 }
+
+export interface ICoordinates {
+  lat: number
+  lng: number
+}
