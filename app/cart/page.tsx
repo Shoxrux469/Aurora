@@ -1,8 +1,9 @@
 import React from "react";
 import CartPamentCard from "@/components/cart-payment-card/CartPaymentCard";
 import CartUserDataCard from "@/components/cart-user-data-card/CartUserDataCard";
-import CartProvider from "@/components/cart-provider/CartProvider";
 import { getCurrentUser } from "@/lib/auth";
+import CartProvider from "@/providers/CartProvider";
+// import CartProvider from "@/components/cart-provider/CartProvider";
 
 const CartPage = async () => {
   const user = await getCurrentUser();

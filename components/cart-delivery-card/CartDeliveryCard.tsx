@@ -9,7 +9,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { MapProvider } from "@/providers/map-provider";
+import { MapProvider } from "@/providers/MapProvider";
 import { useState } from "react";
 import Map from "../map/Map";
 
