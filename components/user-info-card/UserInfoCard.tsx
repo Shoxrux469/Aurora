@@ -1,7 +1,7 @@
 import { Button } from '../ui/button'
 import { Edit2Icon } from 'lucide-react'
 import { Input } from '../ui/input'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 interface props {
   name: string

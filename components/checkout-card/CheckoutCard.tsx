@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { Dispatch, useEffect, useState } from 'react'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from '../ui/button'
 import { ICartProduct } from '@/interfaces/product'
@@ -11,9 +11,10 @@ interface props {
   address: string
   paymentCard: string | null
   userId: idType
+  setCartItems: Dispatch<[]>
 }
 
-const CheckoutCard = ({ cartItems, address, paymentCard, userId }: props) => {
+const CheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }: props) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
@@ -37,6 +38,11 @@ const CheckoutCard = ({ cartItems, address, paymentCard, userId }: props) => {
     }
 
     let res = await OrderService.postOrder(order)
+
+    console.log(res);
+    if (res.status == 200) {
+      setCartItems([])
+    }
   }
 
   return (

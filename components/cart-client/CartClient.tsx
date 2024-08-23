@@ -55,6 +55,7 @@ const CartClient = ({ user }: props) => {
       </div>
       <CheckoutCard
         cartItems={cartItems}
+        setCartItems={setCartItems}
         address={address!}
         paymentCard={paymentCard}
         userId={user.id}
