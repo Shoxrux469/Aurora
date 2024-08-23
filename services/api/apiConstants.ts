@@ -3,4 +3,5 @@ export abstract class ApiConstants {
   static users = '/users'
   static products = '/products'
   static categories = '/categories'
+  static orders = '/orders'
 }

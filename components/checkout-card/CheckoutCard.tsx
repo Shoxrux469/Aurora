@@ -2,13 +2,19 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from '../ui/button'
 import { ICartProduct } from '@/interfaces/product'
+import { idType } from '@/interfaces';
+import { IOrder } from '@/interfaces/order';
+import OrderService from "@/services/api/order"
 
 interface props {
   cartItems: ICartProduct[];
+  address: string
+  paymentCard: string | null
+  userId: idType
 }
 
-const CheckoutCard = ({ cartItems }: props) => {
-  const [totalPrice, setTotalPrice] = useState(0);
+const CheckoutCard = ({ cartItems, address, paymentCard, userId }: props) => {
+  const [totalPrice, setTotalPrice] = useState<number>(0);
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -20,6 +26,18 @@ const CheckoutCard = ({ cartItems }: props) => {
     };
     calculateTotalPrice();
   }, [cartItems]);
+
+  const handleOrderSubmit = async () => {
+    const order: IOrder = {
+      items: cartItems,
+      address: address,
+      paymentMethod: "master",
+      totalPrice: totalPrice,
+      userId: userId
+    }
+
+    let res = await OrderService.postOrder(order)
+  }
 
   return (
     <Card className='bg-white border-none h-fit shadow-md sticky top-4'>
@@ -45,6 +63,7 @@ const CheckoutCard = ({ cartItems }: props) => {
           variant="purple"
           size="lg"
           className="w-full bg-purple-600 text-white"
+          onClick={handleOrderSubmit}
         >
           Оформить заказ
         </Button>

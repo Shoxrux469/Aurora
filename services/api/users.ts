@@ -50,13 +50,9 @@ class UsersService {
       password: hashedPassword || thirdPartyProvder,
     });
 
-    console.log(firestoreData);
-
     const res = await makeRequest.post(ApiConstants.users, {
       fields: firestoreData,
     });
-
-    console.log(res);
 
     return res;
   }

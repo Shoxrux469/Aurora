@@ -24,6 +24,7 @@ const TABS = [
     icon: <UserCog size={24} />,
   },
 ];
+
 const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
   const user = await getCurrentUser();
 

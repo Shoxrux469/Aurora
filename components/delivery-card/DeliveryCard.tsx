@@ -1,39 +1,37 @@
-import { ICartProduct } from '@/interfaces/product'
-import Image from 'next/image'
-import { Button } from '../ui/button'
-import { Edit2Icon } from 'lucide-react'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
-import { useMapContext } from '@/providers/map-provider'
-import Map from '../map/Map'
-import { useEffect, useState } from 'react'
-import { getAddressFromCoordinates } from '@/utils/geocode'
+import { ICartProduct } from '@/interfaces/product';
+import Image from 'next/image';
+import { Button } from '../ui/button';
+import { Edit2Icon } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog';
+import { useMapContext } from '@/providers/MapProvider';
+import Map from '../map/Map';
+import { useEffect } from 'react';
 
 interface props {
-  cartItems: ICartProduct[]
+  cartItems: ICartProduct[];
 }
 
 const DeliveryCard = ({ cartItems }: props) => {
-  const { location } = useMapContext()
-  const [address, setAddress] = useState<string>('');
+  const { location, address, updateLocationAndAddress } = useMapContext();
 
   useEffect(() => {
     if (location) {
-      const fetchAddress = async () => {
-        const addr = await getAddressFromCoordinates(location.lat, location.lng);
-        setAddress(addr);
-      };
-
-      fetchAddress();
+      updateLocationAndAddress(location).catch((error) => {
+        console.error('Failed to update address:', error);
+      });
     }
-  }, [location]);
+  }, [location, updateLocationAndAddress]);
 
   return (
     <div className="p-6 rounded-xl bg-white shadow-md">
       <div className='flex justify-between'>
-        <h2 className="text-2xl font-medium">Адрес доставки</h2>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant={"ghost"} size={"icon"}>
+            <Button
+              variant="ghost"
+              className='w-full p-0 flex justify-between 
+              hover:text-primary hover:bg-transparent duration-200'>
+              <h2 className="text-2xl font-medium">Адрес доставки</h2>
               <Edit2Icon color='#777777' size={20} />
             </Button>
           </DialogTrigger>
@@ -50,7 +48,7 @@ const DeliveryCard = ({ cartItems }: props) => {
       <div className="mt-6 grid grid-cols-[280px_1fr] gap-2">
         <p className="text-zinc-500">Пункт выдачи</p>
         <p className="text-zinc-800 font-medium">
-          {address.length ? address : 'Укажите адрес'}
+          {address ? address : 'Укажите адрес'}
         </p>
 
         <p className="text-zinc-500">Стоимость доставки</p>
@@ -60,17 +58,15 @@ const DeliveryCard = ({ cartItems }: props) => {
         <p className="text-zinc-800 font-medium">7-10 дней</p>
 
         <div className="mt-4 flex gap-2">
-          {
-            cartItems?.map(item => (
-              <div key={item.id}>
-                <Image src={item.images_links[0]} alt="product" width={72} height={108} />
-              </div>
-            ))
-          }
+          {cartItems?.map(item => (
+            <div key={item.id}>
+              <Image src={item.images_links[0]} alt="product" width={72} height={108} />
+            </div>
+          ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default DeliveryCard
+export default DeliveryCard;

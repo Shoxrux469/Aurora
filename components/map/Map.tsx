@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { Button } from '@/components/ui/button';
 import { Navigation } from 'lucide-react';
-import { useMapContext } from '@/providers/map-provider';
+import { useMapContext } from '@/providers/MapProvider';
 
 const containerStyle = {
   width: '100%',

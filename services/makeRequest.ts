@@ -1,6 +1,5 @@
+import { ApiConstants } from "@/services/api/apiConstants";
 import axios from "axios";
-import { ApiConstants } from "./api/apiConstants";
-
 const makeRequest = axios.create({
   baseURL: ApiConstants.baseUrl,
 });
