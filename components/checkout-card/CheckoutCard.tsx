@@ -5,6 +5,7 @@ import { ICartProduct } from '@/interfaces/product'
 import { idType } from '@/interfaces';
 import { IOrder } from '@/interfaces/order';
 import OrderService from "@/services/api/order"
+import { toast } from '../ui/use-toast';
 
 interface props {
   cartItems: ICartProduct[];
@@ -16,6 +17,7 @@ interface props {
 
 const CheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }: props) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -29,19 +31,30 @@ const CheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }:
   }, [cartItems]);
 
   const handleOrderSubmit = async () => {
-    const order: IOrder = {
-      items: cartItems,
-      address: address,
-      paymentMethod: "master",
-      totalPrice: totalPrice,
-      userId: userId
-    }
+    setIsLoading(true)
 
-    let res = await OrderService.postOrder(order)
+    try {
+      const order: IOrder = {
+        items: cartItems,
+        address: address,
+        paymentMethod: "master",
+        totalPrice: totalPrice,
+        userId: userId
+      }
+      let res = await OrderService.postOrder(order)
 
-    console.log(res);
-    if (res.status == 200) {
-      setCartItems([])
+      if (res.status == 200) {
+        setCartItems([])
+        localStorage.setItem('cart', JSON.stringify([]))
+        toast({
+          title: "Заказ оформлен!",
+          description: "Перейдите на страницу заказов чтобы следить за статусом",
+          variant: "default",
+        })
+      }
+      setIsLoading(false)
+    } catch (error) {
+      setIsLoading(false)
     }
   }
 
@@ -70,8 +83,12 @@ const CheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }:
           size="lg"
           className="w-full bg-purple-600 text-white"
           onClick={handleOrderSubmit}
+          disabled={isLoading}
         >
-          Оформить заказ
+          {
+            isLoading ? "Loading..." : "Оформить заказ"
+          }
+
         </Button>
       </CardFooter>
     </Card>
