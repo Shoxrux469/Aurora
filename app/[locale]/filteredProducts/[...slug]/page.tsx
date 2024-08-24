@@ -2,7 +2,7 @@ import React from "react";
 import ProductsService from "@/services/api/products";
 import { IProduct } from "@/interfaces/product";
 import ProductCart from "@/components/product-card/ProductCard";
-import Loading from "@/app/loading";
+import Loading from "@/app/[locale]/loading";
 
 interface params {
   params: {

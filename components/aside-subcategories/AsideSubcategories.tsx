@@ -2,6 +2,7 @@ import { ICategoryChild } from "@/interfaces/category";
 import React from "react";
 import { useRouter } from "next/navigation";
 import { SheetTrigger } from "../ui/sheet";
+import { addLocalePrefix } from "@/utils/addLocalePrefix";
 
 const AsideSubcategories = ({
   subcategories,
@@ -21,7 +22,9 @@ const AsideSubcategories = ({
             <SheetTrigger>
               <button
                 onClick={() =>
-                  router.push(`/filteredProducts/id/${subcategory.id}`)
+                  router.push(
+                    addLocalePrefix(`/filteredProducts/id/${subcategory.id}`)
+                  )
                 }
                 className="flex items-center hover:opacity-75 ease-in-out duration-150 text-balance text-lg justify-center gap-3"
               >

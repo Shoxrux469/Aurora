@@ -47,6 +47,7 @@ const CartItemsList = ({ cartItems, setCartItems }: props) => {
       type="single"
       collapsible
       className="p-6 rounded-xl bg-white shadow-md"
+      defaultValue="single-item"
     >
       <AccordionItem value="single-item">
         <AccordionTrigger className="my-0 py-0">
