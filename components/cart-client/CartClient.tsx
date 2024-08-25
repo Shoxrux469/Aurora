@@ -1,6 +1,6 @@
 "use client"
 
-import CheckoutCard from '@/components/checkout-card/CheckoutCard'
+import CartCheckoutCard from '../cart-checkout-card/CartCheckoutCard'
 import CartItemsList from '@/components/cart-items-list/CartItemsList'
 import PaymentMethods from '@/components/payment-methods/PaymentMethods'
 import EmptyCard from '@/components/empty-card/EmptyCard'
@@ -54,7 +54,7 @@ const CartClient = ({ user }: props) => {
           <UserInfoCard name={user.name} surname={user.surname} />
         </div>
       </div>
-      <CheckoutCard
+      <CartCheckoutCard
         cartItems={cartItems}
         setCartItems={setCartItems}
         address={address!}

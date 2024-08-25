@@ -11,6 +11,7 @@ import addToCart from "@/utils/addToCart";
 
 const ProductInfo = ({ product }: { product: IProduct }) => {
   const { attributes, price, quantity, title } = product;
+
   return (
     <div className="p-2">
       <h2 className="text-2xl font-medium">{title}</h2>

@@ -10,10 +10,11 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
-import LoginModal from "../login-modal/LoginModal";
+import LoginModal from "../signin-modal/LoginModal";
 import Aside from "../aside/aside";
 import { headerLinks, ShopName } from "@/constants";
 import { getCurrentUser } from "@/lib/auth";
+import { addLocalePrefix } from "@/utils/addLocalePrefix";
 
 const Header = async () => {
   const user = await getCurrentUser();
@@ -40,14 +41,17 @@ const Header = async () => {
         </div>
         <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
-          <Link href="/cart" className={headerLinks}>
+          <Link href={addLocalePrefix("/cart")} className={headerLinks}>
             <ShoppingBag size={20} />
             Корзина
           </Link>
 
           {user ? (
             <>
-              <Link href="/user-info/profile" className={headerLinks}>
+              <Link
+                href={addLocalePrefix("/user-info/profile")}
+                className={headerLinks}
+              >
                 <User2Icon size={20} />
                 {user.name?.split(" ")[0]}
               </Link>
@@ -55,10 +59,15 @@ const Header = async () => {
           ) : (
             <LoginModal />
           )}
-          <Link href="/user-info/orders" className={headerLinks}>
-            <LayoutList size={20} />
-            Заказы
-          </Link>
+          {user && (
+            <Link
+              href={addLocalePrefix("/user-info/orders")}
+              className={headerLinks}
+            >
+              <LayoutList size={20} />
+              Заказы
+            </Link>
+          )}
         </div>
       </div>
     </header>

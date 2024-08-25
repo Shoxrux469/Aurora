@@ -44,6 +44,27 @@ export const socialLinks = [
   { Icon: Linkedin, href: "#" },
 ];
 
+export const OrdersEmptryPageTabsData = [
+  {
+    value: "active",
+    title: "Нет текущих заказов",
+    description:
+      "Вы еще не сделали ни одного заказа. Ваши активные заказы появятся здесь.",
+  },
+  {
+    value: "archive",
+    title: "История заказов",
+    description:
+      "История ваших прошлых заказов пуста. Здесь будут отображаться все завершенные заказы.",
+  },
+  {
+    value: "unpaid",
+    title: "Нет неоплаченных заказов",
+    description:
+      "У вас нет неоплаченных заказов. Ваша задолженность по неоплаченным заказам будет отображаться здесь.",
+  },
+];
+
 export const SwiperImgsArr: ISwiperImgsArr[] = [
   {
     path: slide1,

@@ -10,16 +10,15 @@ import SignOut from "../signout/Signout";
 import "./index.css";
 import { Button } from "../ui/button";
 import UsersService from "@/services/api/users";
+import { toast } from "../ui/use-toast";
 
-const MyDataForm = ({ user }: { user: IUser }) => {
+const ProfileForm = ({ user }: { user: IUser }) => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<IUserPatchForm>();
   const [gender, setGender] = useState<UserGender>(user.gender || "");
-
-  // console.log(user);
 
   const onSubmit = async (data: IUserPatchForm) => {
     const isUser = await UsersService.getByEmail(user.email);
@@ -30,6 +29,20 @@ const MyDataForm = ({ user }: { user: IUser }) => {
       id: isUser!.id,
       password: isUser!.password,
     };
+
+    if (data.email !== user.email) {
+      const userExist = await UsersService.getByEmail(data.email);
+
+      if (!userExist) {
+        await UsersService.patchUser(res);
+      } else {
+        toast({
+          title: "Ошибка!",
+          description: "Пользователь с таким эмайлом уже существует!",
+          variant: "destructive",
+        });
+      }
+    }
 
     await UsersService.patchUser(res);
   };
@@ -91,7 +104,7 @@ const MyDataForm = ({ user }: { user: IUser }) => {
               maxLength: 15,
             })}
             placeholder="дд/мм/гггг"
-            defaultValue={user?.middlename}
+            defaultValue={user?.birthdate}
             id={"birthdate"}
           />
         </div>
@@ -136,10 +149,11 @@ const MyDataForm = ({ user }: { user: IUser }) => {
               pattern: {
                 value:
                   /^\+?[0-9]{1,3}[-.\s]?[0-9]{2,4}[-.\s]?[0-9]{2,4}[-.\s]?[0-9]{2,4}[-.\s]?[0-9]{2,4}$/,
-                message: "Введите действительный адрес электронной почты",
+                message: "Введите действительный номер телефона",
               },
             })}
             className="inputStyles"
+            type="tel"
             defaultValue={user.phone}
             placeholder="+998"
             style={errors.email ? InputErrorStyle : undefined}
@@ -161,4 +175,4 @@ const MyDataForm = ({ user }: { user: IUser }) => {
   );
 };
 
-export default MyDataForm;
+export default ProfileForm;

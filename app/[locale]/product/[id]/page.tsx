@@ -5,7 +5,8 @@ import ProductsService from "@/services/api/products";
 import ProductInfo from "@/components/product-info/ProductInfo";
 import ProductCard from "@/components/product-card/ProductCard";
 import { Separator } from "@/components/ui/separator";
-import Loading from "@/app/loading";
+import Loading from "../../loading";
+// import Loading from "@/app/[locale]/loading";
 
 interface params {
   params: {

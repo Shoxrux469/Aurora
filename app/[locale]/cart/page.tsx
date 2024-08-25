@@ -14,4 +14,4 @@ const CartPage = async () => {
   )
 }
 
-export default CartPage;
+export default CartPage

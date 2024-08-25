@@ -2,7 +2,7 @@ import React from "react";
 import ProductsService from "@/services/api/products";
 import { IProduct } from "@/interfaces/product";
 import ProductCart from "@/components/product-card/ProductCard";
-import Loading from "@/app/loading";
+import Loading from "@/app/[locale]/loading";
 
 interface params {
   params: {
@@ -33,7 +33,7 @@ const FilteredProducts = async ({ params: { slug } }: params) => {
         <h1 className="text-3xl text-primary text-center w-full font-semibold">
           Найденные продукты!
         </h1>
-        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product, i) => (
               <ProductCart key={i} product={product} />

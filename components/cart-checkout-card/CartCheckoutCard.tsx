@@ -15,7 +15,7 @@ interface props {
   setCartItems: Dispatch<[]>
 }
 
-const CheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }: props) => {
+const CartCheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }: props) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -95,4 +95,4 @@ const CheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }:
   );
 };
 
-export default CheckoutCard;
+export default CartCheckoutCard;

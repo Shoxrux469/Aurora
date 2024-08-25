@@ -1,11 +1,15 @@
 import { IProduct } from "@/interfaces/product";
 import Link from "next/link";
 import ProductCardInfo from "../product-card-info/ProductCardInfo";
+import { addLocalePrefix } from "@/utils/addLocalePrefix";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
     <div className="max-w-sm mx-auto space-y-2 group cursor-pointer rounded-lg">
-      <Link href={`/product/${product.id}`} className="bg-gray-100 rounded-lg">
+      <Link
+        href={addLocalePrefix(`/product/${product.id}`)}
+        className="bg-gray-100 rounded-lg"
+      >
         <div className="overflow-hidden">
           <img
             alt={product.title}
