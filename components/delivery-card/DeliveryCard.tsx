@@ -23,7 +23,7 @@ const DeliveryCard = ({ cartItems }: props) => {
   }, [location, updateLocationAndAddress]);
 
   return (
-    <div className="p-6 rounded-xl bg-white shadow-md">
+    <div className="p-6 rounded-xl bg-white shadow-md" id='order-data'>
       <div className='flex justify-between'>
         <Dialog>
           <DialogTrigger asChild>

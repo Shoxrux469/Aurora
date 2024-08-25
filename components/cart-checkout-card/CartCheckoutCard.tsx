@@ -6,6 +6,7 @@ import { idType } from '@/interfaces';
 import { IOrder } from '@/interfaces/order';
 import OrderService from "@/services/api/order"
 import { toast } from '../ui/use-toast';
+import { useRouter } from 'next/navigation';
 
 interface props {
   cartItems: ICartProduct[];
@@ -18,6 +19,7 @@ interface props {
 const CartCheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userId }: props) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter()
 
   useEffect(() => {
     const calculateTotalPrice = () => {
@@ -54,6 +56,12 @@ const CartCheckoutCard = ({ cartItems, setCartItems, address, paymentCard, userI
       }
       setIsLoading(false)
     } catch (error) {
+      toast({
+        title: "Не удалось оформить заказ!",
+        description: "Проверьте что вы указали все необходимые данные!",
+        variant: "destructive",
+      });
+      router.push("#order-data")
       setIsLoading(false)
     }
   }
