@@ -3,8 +3,11 @@
 import { LogOutIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
+import { useTranslations } from "next-intl"; // Import the translation hook
 
 const SignOut = () => {
+  const t = useTranslations("User-info.profile.profile-form"); // Access the translations for the profile form
+
   return (
     <Button
       variant="ghost"
@@ -13,7 +16,7 @@ const SignOut = () => {
       onClick={() => signOut()}
     >
       <LogOutIcon size={20} />
-      Выйти из Системы
+      {t("log-out")} {/* Use the translated text */}
     </Button>
   );
 };

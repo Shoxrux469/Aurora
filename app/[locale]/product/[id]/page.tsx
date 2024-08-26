@@ -11,10 +11,11 @@ import Loading from "../../loading";
 interface params {
   params: {
     id: string;
+    locale: string;
   };
 }
 
-const ProductPage = async ({ params: { id } }: params) => {
+const ProductPage = async ({ params: { id, locale } }: params) => {
   const product = (await ProductsService.getById(id, (progress) => (
     <Loading value={progress} />
   ))) as IProduct;
@@ -50,7 +51,11 @@ const ProductPage = async ({ params: { id } }: params) => {
         <h1>Related Products</h1>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {relatedProducts?.map((product, i) => (
-            <ProductCard key={i} product={product}></ProductCard>
+            <ProductCard
+              currentLocale={locale}
+              key={i}
+              product={product}
+            ></ProductCard>
           ))}
         </div>
       </section>

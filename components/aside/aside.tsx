@@ -6,7 +6,7 @@ import AsideCategories from "../aside-categories/AsideCategories";
 // import Loading from "@/app/loading";
 import Loading from "@/app/[locale]/loading";
 
-const Aside = async ({ side }: { side: "left" }) => {
+const Aside = async ({ side }: { side: "left"; }) => {
   let categories: ICategory[] = await CategoriesService.getAll((progress) => (
     <Loading value={progress} />
   ));

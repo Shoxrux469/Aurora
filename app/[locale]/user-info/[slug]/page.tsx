@@ -5,27 +5,31 @@ import React from "react";
 import { Box, UserCog } from "lucide-react";
 import { getCurrentUser } from "@/lib/auth";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 interface UserInfoProps {
   params: { slug: string };
 }
 
-const TABS = [
-  {
-    value: "orders",
-    label: "Заказы",
-    component: <Orders />,
-    icon: <Box size={24} />,
-  },
-  {
-    value: "profile",
-    label: "Профиль",
-    component: <Profile />,
-    icon: <UserCog size={24} />,
-  },
-];
 const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
   const user = await getCurrentUser();
+
+  const t = await getTranslations("User-info");
+
+  const TABS = [
+    {
+      value: "orders",
+      label: t("orders.title"),
+      component: <Orders />,
+      icon: <Box size={24} />,
+    },
+    {
+      value: "profile",
+      label: t("profile.title"),
+      component: <Profile />,
+      icon: <UserCog size={24} />,
+    },
+  ];
 
   const defaultTab = TABS.some((tab) => tab.value === params.slug)
     ? params.slug

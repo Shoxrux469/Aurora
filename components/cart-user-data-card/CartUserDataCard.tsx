@@ -1,24 +1,33 @@
-import React from "react";
 import { Button } from "../ui/button";
 import { Edit2Icon } from "lucide-react";
 import { Input } from "../ui/input";
-import { IUser } from "@/interfaces/user";
+import { useRouter } from "next/navigation";
 
-const CartUserDataCard = async ({ user }: { user: IUser }) => {
+interface props {
+  name: string;
+  surname?: string;
+}
+
+const CartUserDataCard = ({ name, surname }: props) => {
+  const router = useRouter();
+
   return (
     <div className="flex-1 p-6 rounded-xl bg-white shadow-md">
-      <div className="flex justify-between">
+      <Button
+        onClick={() => router.push("/user-info/profile")}
+        variant="ghost"
+        className="w-full p-0 flex justify-between 
+              hover:text-primary hover:bg-transparent duration-200"
+      >
         <h2 className="text-2xl font-medium">Мои данные</h2>
-        <Button variant={"ghost"} size={"icon"}>
-          <Edit2Icon color="#777777" size={20} />
-        </Button>
-      </div>
+        <Edit2Icon color="#777777" size={20} />
+      </Button>
       <div className="py-4 grid grid-cols-2 gap-2">
         <div>
           <span className="text-sm text-zinc-500">Имя *</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={user.name}
+            defaultValue={name}
             readOnly
           />
         </div>
@@ -26,15 +35,7 @@ const CartUserDataCard = async ({ user }: { user: IUser }) => {
           <span className="text-sm text-zinc-500">Фамилия *</span>
           <Input
             className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={user.surname || "Surname"}
-            readOnly
-          />
-        </div>
-        <div>
-          <span className="text-sm text-zinc-500">Отчество</span>
-          <Input
-            className="mt-1.5 border-none bg-muted rounded-md"
-            defaultValue={user?.middlename || "Middlename"}
+            defaultValue={surname}
             readOnly
           />
         </div>

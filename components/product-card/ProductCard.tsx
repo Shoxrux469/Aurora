@@ -3,11 +3,17 @@ import Link from "next/link";
 import ProductCardInfo from "../product-card-info/ProductCardInfo";
 import { addLocalePrefix } from "@/utils/addLocalePrefix";
 
-const ProductCard = ({ product }: { product: IProduct }) => {
+const ProductCard = ({
+  product,
+  currentLocale,
+}: {
+  product: IProduct;
+  currentLocale: string;
+}) => {
   return (
     <div className="max-w-sm mx-auto space-y-2 group cursor-pointer rounded-lg">
       <Link
-        href={addLocalePrefix(`/product/${product.id}`)}
+        href={addLocalePrefix(`/product/${product.id}`, currentLocale)}
         className="bg-gray-100 rounded-lg"
       >
         <div className="overflow-hidden">

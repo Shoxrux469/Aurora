@@ -7,10 +7,11 @@ import Loading from "@/app/[locale]/loading";
 interface params {
   params: {
     slug: string[];
+    locale: string;
   };
 }
 
-const FilteredProducts = async ({ params: { slug } }: params) => {
+const FilteredProducts = async ({ params: { slug, locale } }: params) => {
   let filteredProducts: IProduct[] = [];
 
   if (slug && slug.length > 0) {
@@ -36,7 +37,7 @@ const FilteredProducts = async ({ params: { slug } }: params) => {
         <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-6">
           {filteredProducts.length > 0 ? (
             filteredProducts.map((product, i) => (
-              <ProductCart key={i} product={product} />
+              <ProductCart currentLocale={locale} key={i} product={product} />
             ))
           ) : (
             <p className="text-3xl">No products found</p>

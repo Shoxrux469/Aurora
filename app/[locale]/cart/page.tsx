@@ -1,20 +1,22 @@
-import React from "react";
-import CartPamentCard from "@/components/cart-payment-card/CartPaymentCard";
-import CartUserDataCard from "@/components/cart-user-data-card/CartUserDataCard";
+import { MapProvider } from "@/providers/MapProvider";
+import CartClient from "@/components/cart-client/CartClient";
 import { getCurrentUser } from "@/lib/auth";
-import CartProvider from "@/providers/CartProvider";
-// import CartProvider from "@/components/cart-provider/CartProvider";
 
-const CartPage = async () => {
+interface params {
+  params: {
+    locale: string;
+  };
+}
+
+const CartPage = async ({ params: { locale } }: params) => {
   const user = await getCurrentUser();
 
   return (
-    <CartProvider>
-      <div className="flex gap-5">
-        <CartPamentCard />
-        <CartUserDataCard user={user} />
-      </div>
-    </CartProvider>
+    <div className="pt-8 pb-12 bg-muted">
+      <MapProvider>
+        <CartClient user={user} />
+      </MapProvider>
+    </div>
   );
 };
 
