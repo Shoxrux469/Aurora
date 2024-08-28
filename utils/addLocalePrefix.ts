@@ -1,6 +1,3 @@
-export const addLocalePrefix = (
-  path: string,
-  locale: string = "en"
-): string => {
+export const addLocalePrefix = (path: string, locale: string): string => {
   return `/${locale}${path}`;
 };

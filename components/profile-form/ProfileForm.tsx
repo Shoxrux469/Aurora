@@ -11,8 +11,11 @@ import "./index.css";
 import { Button } from "../ui/button";
 import UsersService from "@/services/api/users";
 import { toast } from "../ui/use-toast";
+import { useTranslations } from "next-intl";
 
 const ProfileForm = ({ user }: { user: IUser }) => {
+  const t = useTranslations("User-info.profile.profile-form");
+
   const {
     register,
     handleSubmit,
@@ -37,10 +40,11 @@ const ProfileForm = ({ user }: { user: IUser }) => {
         await UsersService.patchUser(res);
       } else {
         toast({
-          title: "Ошибка!",
-          description: "Пользователь с таким эмайлом уже существует!",
+          title: t("user-exists-error"),
+          description: t("user-exists-error"),
           variant: "destructive",
         });
+        return;
       }
     }
 
@@ -54,7 +58,7 @@ const ProfileForm = ({ user }: { user: IUser }) => {
     >
       <div className="flex items-center gap-10">
         <div className="inputDiv">
-          <label htmlFor="surname">Фамилия</label>
+          <label htmlFor="surname">{t("surname")}</label>
           <Input
             className="inputStyles"
             {...register("surname", {
@@ -67,7 +71,7 @@ const ProfileForm = ({ user }: { user: IUser }) => {
           />
         </div>
         <div className="inputDiv">
-          <label htmlFor="name">Имя*</label>
+          <label htmlFor="name">{t("name")}</label>
           <Input
             className="inputStyles"
             {...register("name", {
@@ -80,7 +84,7 @@ const ProfileForm = ({ user }: { user: IUser }) => {
           />
         </div>
         <div className="inputDiv">
-          <label htmlFor="middlename">Отчество</label>
+          <label htmlFor="middlename">{t("middlename")}</label>
           <Input
             className="inputStyles"
             {...register("middlename", {
@@ -95,7 +99,7 @@ const ProfileForm = ({ user }: { user: IUser }) => {
       </div>
       <div className="flex items-center gap-10 w-11/12">
         <div className="inputDiv">
-          <label htmlFor="birthdate">Дата рождения</label>
+          <label htmlFor="birthdate">{t("birthdate")}</label>
           <Input
             className="inputStyles"
             {...register("birthdate", {
@@ -113,26 +117,26 @@ const ProfileForm = ({ user }: { user: IUser }) => {
           onValueChange={(value) => setGender(value as "Мужской" | "Женский")}
           value={gender || ""}
         >
-          <div>Пол</div>
+          <div>{t("gender")}</div>
           <TabsList className="w-fit text-xl h-12">
             <TabsTrigger className="h-11 text-lg" value="Женский">
-              Женский
+              {t("female")}
             </TabsTrigger>
             <TabsTrigger className="h-11 text-lg" value="Мужской">
-              Мужской
+              {t("male")}
             </TabsTrigger>
           </TabsList>
         </Tabs>
       </div>
       <div className="flex items-center gap-10 w-11/12">
         <div className="inputDiv">
-          <label htmlFor="email">Электронная почта*</label>
+          <label htmlFor="email">{t("email")}</label>
           <Input
             {...register("email", {
-              required: "Email Address is required",
+              required: t("email-required"),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Введите действительный адрес электронной почты",
+                message: t("email-invalid"),
               },
             })}
             className="inputStyles"
@@ -143,20 +147,20 @@ const ProfileForm = ({ user }: { user: IUser }) => {
           />
         </div>
         <div className="inputDiv">
-          <label htmlFor="phone"> Номер телефона</label>
+          <label htmlFor="phone">{t("phone")}</label>
           <Input
             {...register("phone", {
               pattern: {
                 value:
                   /^\+?[0-9]{1,3}[-.\s]?[0-9]{2,4}[-.\s]?[0-9]{2,4}[-.\s]?[0-9]{2,4}[-.\s]?[0-9]{2,4}$/,
-                message: "Введите действительный номер телефона",
+                message: t("phone-invalid"),
               },
             })}
             className="inputStyles"
             type="tel"
             defaultValue={user.phone}
             placeholder="+998"
-            style={errors.email ? InputErrorStyle : undefined}
+            style={errors.phone ? InputErrorStyle : undefined}
             id="phone"
           />
         </div>
@@ -168,7 +172,7 @@ const ProfileForm = ({ user }: { user: IUser }) => {
           className="text-lg rounded-xl h-12"
           type="submit"
         >
-          Сохранить
+          {t("save")}
         </Button>
       </div>
     </form>

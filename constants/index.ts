@@ -25,44 +25,13 @@ export const InputErrorStyle: CSSProperties = {
   borderBottom: "1px solid red",
 };
 
-export const contactInfo = [
-  { Icon: Phone, text: "+1 (555) 123-4567" },
-  { Icon: Mail, text: "techshop@gmail.com" },
-  { Icon: Locate, text: "123 Main St, Anytown USA" },
-];
-
 export const headerLinks =
   "flex items-center h-full text-zinc-800 rounded-sm gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground";
-
-export const catalogLinks = ["Treadmills", "Ellipticals", "Bikes", "Weights"];
-
-export const companyLinks = ["About Us", "Careers", "Blog", "Contact"];
 
 export const socialLinks = [
   { Icon: Twitter, href: "#" },
   { Icon: Instagram, href: "#" },
   { Icon: Linkedin, href: "#" },
-];
-
-export const OrdersEmptryPageTabsData = [
-  {
-    value: "active",
-    title: "Нет текущих заказов",
-    description:
-      "Вы еще не сделали ни одного заказа. Ваши активные заказы появятся здесь.",
-  },
-  {
-    value: "archive",
-    title: "История заказов",
-    description:
-      "История ваших прошлых заказов пуста. Здесь будут отображаться все завершенные заказы.",
-  },
-  {
-    value: "unpaid",
-    title: "Нет неоплаченных заказов",
-    description:
-      "У вас нет неоплаченных заказов. Ваша задолженность по неоплаченным заказам будет отображаться здесь.",
-  },
 ];
 
 export const SwiperImgsArr: ISwiperImgsArr[] = [

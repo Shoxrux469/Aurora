@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import CartCheckoutCard from '../cart-checkout-card/CartCheckoutCard'
-import CartItemsList from '@/components/cart-items-list/CartItemsList'
-import PaymentMethods from '@/components/payment-methods/PaymentMethods'
-import EmptyCard from '@/components/empty-card/EmptyCard'
-import DeliveryCard from '@/components/delivery-card/DeliveryCard'
-import UserInfoCard from '../user-info-card/UserInfoCard'
-import { useEffect, useState } from 'react'
-import { useMapContext } from '@/providers/MapProvider'
-import { ICartProduct } from '@/interfaces/product'
-import { IUser } from '@/interfaces/user'
+import CartItemsList from "@/components/cart-items-list/CartItemsList";
+import EmptyCard from "@/components/empty-card/EmptyCard";
+import { useEffect, useState } from "react";
+import { useMapContext } from "@/providers/MapProvider";
+import { ICartProduct } from "@/interfaces/product";
+import { IUser } from "@/interfaces/user";
+import CartDeliveryCard from "../cart-delivery-card/CartDeliveryCard";
+import CartUserDataCard from "../cart-user-data-card/CartUserDataCard";
+import CartCheckoutCard from "../cart-checkout-card/CartCheckoutCard";
+import CartPamentCard from "../cart-payment-card/CartPaymentCard";
 
 interface props {
-  user: IUser
+  user: IUser;
 }
 
 const CartClient = ({ user }: props) => {
@@ -35,23 +35,24 @@ const CartClient = ({ user }: props) => {
       }
     }
   }, []);
-
-
   let isEmpty = cartItems.length === 0;
   if (isEmpty)
-    return <EmptyCard
-      title='В корзине пока пусто'
-      description='Начните с подборок на главной странице или найдите нужный товар через поиск' />
+    return (
+      <EmptyCard
+        title="В корзине пока пусто"
+        description="Начните с подборок на главной странице или найдите нужный товар через поиск"
+      />
+    );
 
   return (
     <section className="container px-8 grid grid-cols-1 lg:grid-cols-3 gap-8 relative">
-      <div className="lg:col-span-2 space-y-5">
+      <div className="lg:col-span-2 space-y-5 ">
         <CartItemsList cartItems={cartItems} setCartItems={setCartItems} />
-        <DeliveryCard cartItems={cartItems} />
+        <CartDeliveryCard cartItems={cartItems} />
 
-        <div className='flex gap-5'>
-          <PaymentMethods />
-          <UserInfoCard name={user.name} surname={user.surname} />
+        <div className="flex gap-5">
+          <CartPamentCard />
+          <CartUserDataCard name={user.name} surname={user.surname} />
         </div>
       </div>
       <CartCheckoutCard
@@ -62,7 +63,7 @@ const CartClient = ({ user }: props) => {
         userId={user.id}
       />
     </section>
-  )
-}
+  );
+};
 
-export default CartClient
+export default CartClient;

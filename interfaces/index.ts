@@ -19,5 +19,8 @@ export interface MapContextType {
   address: string | null;
   setAddress: (address: string) => void;
   setLocation: (location: { lat: number; lng: number }) => void;
-  updateLocationAndAddress: (location: { lat: number; lng: number }) => Promise<void>;
+  updateLocationAndAddress: (location: {
+    lat: number;
+    lng: number;
+  }) => Promise<void>;
 }

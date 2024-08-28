@@ -38,7 +38,7 @@ export default async function LocaleLayout({
           fontSans.variable
         )}
       >
-        <Header />
+        <Header currentLocale={locale} />
         <Suspense fallback={<Loading />}>
           <NextIntlClientProvider messages={messages}>
             {children}

@@ -15,10 +15,13 @@ import Aside from "../aside/aside";
 import { headerLinks, ShopName } from "@/constants";
 import { getCurrentUser } from "@/lib/auth";
 import { addLocalePrefix } from "@/utils/addLocalePrefix";
+import { getTranslations } from "next-intl/server";
+import HeaderLangSelector from "../header-lang-selector/HeaderLangSelector";
 
-const Header = async () => {
+const Header = async ({ currentLocale }: { currentLocale: string }) => {
   const user = await getCurrentUser();
   const SHEET_SIDES = ["left"] as const;
+  const t = await getTranslations("Header");
 
   return (
     <header className="bg-white px-8">
@@ -32,7 +35,10 @@ const Header = async () => {
               <Aside side={side} />
             </Sheet>
           ))}
-          <Link className="flex items-center" href="/">
+          <Link
+            className="flex items-center"
+            href={addLocalePrefix("/", currentLocale)}
+          >
             <span className="mr-1 text-primary text-xl font-bold">
               {ShopName}
             </span>
@@ -41,15 +47,18 @@ const Header = async () => {
         </div>
         <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
-          <Link href={addLocalePrefix("/cart")} className={headerLinks}>
+          <Link
+            href={addLocalePrefix("/cart", currentLocale)}
+            className={headerLinks}
+          >
             <ShoppingBag size={20} />
-            Корзина
+            {t("bag")}
           </Link>
 
           {user ? (
             <>
               <Link
-                href={addLocalePrefix("/user-info/profile")}
+                href={addLocalePrefix("/user-info/profile", currentLocale)}
                 className={headerLinks}
               >
                 <User2Icon size={20} />
@@ -61,14 +70,15 @@ const Header = async () => {
           )}
           {user && (
             <Link
-              href={addLocalePrefix("/user-info/orders")}
+              href={addLocalePrefix("/user-info/orders", currentLocale)}
               className={headerLinks}
             >
               <LayoutList size={20} />
-              Заказы
+              {t("orders")}
             </Link>
           )}
         </div>
+        <HeaderLangSelector />
       </div>
     </header>
   );

@@ -5,7 +5,13 @@ import ProductCard from "@/components/product-card/ProductCard";
 import { getTranslations } from "next-intl/server";
 import Loading from "./loading";
 
-const Home = async () => {
+interface params {
+  params: {
+    locale: string;
+  };
+}
+
+const Home = async ({ params: { locale } }: params) => {
   const t = await getTranslations("HomePage");
 
   const products = (await ProductsService.getAll((progress: number) => {
@@ -16,10 +22,10 @@ const Home = async () => {
     <div className="bg-white container px-8">
       <MainSwiper />
       <section className="mx-auto py-12">
-        <h3 className="text-3xl font-bold text-center">{t("title")}</h3>
+        <h3 className="text-3xl font-bold text-center">{t("best_sellers")}</h3>
         <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-6">
           {products?.map((product, i) => (
-            <ProductCard key={i} product={product}></ProductCard>
+            <ProductCard currentLocale={locale} key={i} product={product}></ProductCard>
           ))}
         </div>
       </section>

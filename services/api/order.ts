@@ -6,11 +6,13 @@ import { ApiConstants } from "./apiConstants";
 
 class OrderService {
   async postOrder(order: IOrder) {
-      const firestoreFormat = FirestoreTransformer.toFirestoreFormat(order)
-      const res = await makeRequest.post(ApiConstants.orders, { fields: firestoreFormat })
+    const firestoreFormat = FirestoreTransformer.toFirestoreFormat(order);
+    const res = await makeRequest.post(ApiConstants.orders, {
+      fields: firestoreFormat,
+    });
 
-      return res
+    return res;
   }
 }
 
-export default new OrderService()
+export default new OrderService();
