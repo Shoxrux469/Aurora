@@ -18,7 +18,7 @@ interface props {
 const CartClient = ({ user }: props) => {
   const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
   const [paymentCard, setPaymentCard] = useState<null>(null);
-  const { address } = useMapContext();
+  const { address } = useMapContext()
 
   useEffect(() => {
     let cart = localStorage.getItem("cart");
@@ -35,7 +35,6 @@ const CartClient = ({ user }: props) => {
       }
     }
   }, []);
-
   let isEmpty = cartItems.length === 0;
   if (isEmpty)
     return (

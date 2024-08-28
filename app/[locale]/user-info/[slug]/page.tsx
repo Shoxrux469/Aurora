@@ -10,7 +10,6 @@ import { getTranslations } from "next-intl/server";
 interface UserInfoProps {
   params: { slug: string };
 }
-
 const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
   const user = await getCurrentUser();
 

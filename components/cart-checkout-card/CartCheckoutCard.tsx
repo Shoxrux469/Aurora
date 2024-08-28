@@ -30,7 +30,6 @@ const CartCheckoutCard = ({
 }: props) => {
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     const calculateTotalPrice = () => {
       const total = cartItems.reduce(
@@ -44,7 +43,6 @@ const CartCheckoutCard = ({
 
   const handleOrderSubmit = async () => {
     setIsLoading(true);
-
     try {
       const order: IOrder = {
         items: cartItems,
@@ -70,7 +68,6 @@ const CartCheckoutCard = ({
       setIsLoading(false);
     }
   };
-
   return (
     <Card className="bg-white border-none h-fit shadow-md sticky top-4">
       <CardHeader className="py-4">
@@ -99,7 +96,6 @@ const CartCheckoutCard = ({
           className="w-full bg-purple-600 text-white"
           onClick={handleOrderSubmit}
           disabled={isLoading}
-        >
           {isLoading ? "Loading..." : "Оформить заказ"}
         </Button>
       </CardFooter>

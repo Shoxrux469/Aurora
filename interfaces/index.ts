@@ -10,8 +10,8 @@ export interface IImage {
 }
 
 export interface ICoordinates {
-  lat: number;
-  lng: number;
+  lat: number
+  lng: number
 }
 
 export interface MapContextType {
