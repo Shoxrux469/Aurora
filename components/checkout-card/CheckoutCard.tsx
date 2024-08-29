@@ -21,7 +21,7 @@ interface props {
   setCartItems: Dispatch<[]>;
 }
 
-const CartCheckoutCard = ({
+const CheckoutCard = ({
   cartItems,
   setCartItems,
   address,
@@ -96,6 +96,7 @@ const CartCheckoutCard = ({
           className="w-full bg-purple-600 text-white"
           onClick={handleOrderSubmit}
           disabled={isLoading}
+        >
           {isLoading ? "Loading..." : "Оформить заказ"}
         </Button>
       </CardFooter>
@@ -103,4 +104,4 @@ const CartCheckoutCard = ({
   );
 };
 
-export default CartCheckoutCard;
+export default CheckoutCard;

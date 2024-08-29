@@ -4,14 +4,14 @@ import { Edit2Icon, Plus } from 'lucide-react'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '../ui/dialog'
 
 const PaymentMethods = () => {
-  let methods = []
+  let methods = []  
 
   return (
     <div className='flex-1 p-6 rounded-xl bg-white shadow-md'>
       <div className='flex justify-between'>
         <Dialog>
           <DialogTrigger asChild>
-            <Button
+            <Button 
               variant="ghost"
               className='w-full p-0 flex justify-between 
               hover:text-primary hover:bg-transparent duration-200'>
