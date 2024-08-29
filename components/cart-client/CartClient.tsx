@@ -8,8 +8,8 @@ import { ICartProduct } from "@/interfaces/product";
 import { IUser } from "@/interfaces/user";
 import CartDeliveryCard from "../cart-delivery-card/CartDeliveryCard";
 import CartUserDataCard from "../cart-user-data-card/CartUserDataCard";
-import CheckoutCard from "../checkout-card/CheckoutCard";
-import PaymentMethods from "../payment-methods/PaymentMethods";
+import CardPaymentCards from "../cart-payment-card/CartPaymentCard";
+import CartCheckoutCard from "../cart-checkout-card/CartCheckoutCard";
 
 interface props {
   user: IUser;
@@ -51,11 +51,11 @@ const CartClient = ({ user }: props) => {
         <CartDeliveryCard cartItems={cartItems} />
 
         <div className="flex gap-5">
-          <PaymentMethods />
+          <CardPaymentCards />
           <CartUserDataCard name={user.name} surname={user.surname} />
         </div>
       </div>
-      <CheckoutCard
+      <CartCheckoutCard
         cartItems={cartItems}
         setCartItems={setCartItems}
         address={address!}

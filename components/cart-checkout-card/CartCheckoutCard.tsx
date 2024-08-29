@@ -21,7 +21,7 @@ interface props {
   setCartItems: Dispatch<[]>;
 }
 
-const CheckoutCard = ({
+const CartCheckoutCard = ({
   cartItems,
   setCartItems,
   address,
@@ -104,4 +104,4 @@ const CheckoutCard = ({
   );
 };
 
-export default CheckoutCard;
+export default CartCheckoutCard;
