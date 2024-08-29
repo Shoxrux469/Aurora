@@ -12,6 +12,7 @@ import { idType } from "@/interfaces";
 import { IOrder } from "@/interfaces/order";
 import OrderService from "@/services/api/order";
 import { toast } from "../ui/use-toast";
+import { useTranslations } from "next-intl";
 
 interface props {
   cartItems: ICartProduct[];
@@ -25,9 +26,9 @@ const CartCheckoutCard = ({
   cartItems,
   setCartItems,
   address,
-  paymentCard,
   userId,
 }: props) => {
+  const t = useTranslations("Cart.cart-checkout");
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,9 +60,8 @@ const CartCheckoutCard = ({
         setCartItems([]);
         localStorage.setItem("cart", JSON.stringify([]));
         toast({
-          title: "Заказ оформлен!",
-          description:
-            "Перейдите на страницу заказов чтобы следить за статусом",
+          title: t("orderPlacedTitle"),
+          description: t("orderPlacedDescription"),
           variant: "default",
         });
       }
@@ -74,21 +74,21 @@ const CartCheckoutCard = ({
   return (
     <Card className="bg-white border-none h-fit shadow-md sticky top-4">
       <CardHeader className="py-4">
-        <CardTitle className="text-2xl font-medium">Ваш заказ</CardTitle>
+        <CardTitle className="text-2xl font-medium">{t("yourOrder")}</CardTitle>
       </CardHeader>
       <CardContent>
         <div className="mb-4 flex justify-between">
           <p>
-            Оплата картой <span>-- 6261</span>
+            {t("payWithCard")} <span>-- 6261</span>
           </p>
         </div>
 
         <div className="flex justify-between text-zinc-500">
-          <span>Товары ({cartItems.length}):</span>
+          <span>{t("items", { count: cartItems.length })}:</span>
           <span>${totalPrice}.00</span>
         </div>
         <div className="flex justify-between font-medium text-xl mt-2">
-          <span>Итого:</span>
+          <span>{t("total")}:</span>
           <span>${totalPrice + 25}.00</span>
         </div>
       </CardContent>
@@ -100,7 +100,7 @@ const CartCheckoutCard = ({
           onClick={handleOrderSubmit}
           disabled={isLoading}
         >
-          {isLoading ? "Loading..." : "Оформить заказ"}
+          {isLoading ? t("loading") : t("placeOrder")}
         </Button>
       </CardFooter>
     </Card>

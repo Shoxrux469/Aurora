@@ -25,7 +25,11 @@ const Home = async ({ params: { locale } }: params) => {
         <h3 className="text-3xl font-bold text-center">{t("best_sellers")}</h3>
         <div className="mt-6 grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2 lg:grid-cols-6">
           {products?.map((product, i) => (
-            <ProductCard currentLocale={locale} key={i} product={product}></ProductCard>
+            <ProductCard
+              currentLocale={locale}
+              key={i}
+              product={product}
+            ></ProductCard>
           ))}
         </div>
       </section>

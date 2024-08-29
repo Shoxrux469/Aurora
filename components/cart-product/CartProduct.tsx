@@ -5,6 +5,7 @@ import { ICartProduct } from "@/interfaces/product";
 import { idType } from "@/interfaces";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface props {
   item: ICartProduct;
@@ -23,6 +24,7 @@ const CartProduct = ({
 }: props) => {
   const router = useRouter();
   const [inputQuantity, setInputQuantity] = useState<number>(item.cartQuantity);
+  const t = useTranslations("Cart");
 
   useEffect(() => {
     if (item.cartQuantity == 0 && isNaN(item.cartQuantity)) {
@@ -107,7 +109,7 @@ const CartProduct = ({
         </div>
         <Button variant="ghost" size="icon" onClick={() => onDelete(item.id)}>
           <TrashIcon className="w-5 h-5" />
-          <span className="sr-only">Удалить</span>
+          <span className="sr-only">{t("delete")}</span>
         </Button>
       </div>
     </div>

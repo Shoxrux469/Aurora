@@ -52,7 +52,7 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
             className={headerLinks}
           >
             <ShoppingBag size={20} />
-            {t("bag")}
+            {t("cart")}
           </Link>
 
           {user ? (

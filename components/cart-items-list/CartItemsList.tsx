@@ -9,6 +9,7 @@ import {
   AccordionContent,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useTranslations } from "next-intl";
 
 interface props {
   cartItems: ICartProduct[];
@@ -16,6 +17,14 @@ interface props {
 }
 
 const CartItemsList = ({ cartItems, setCartItems }: props) => {
+  const t = useTranslations("Cart.cart-items-list");
+
+  const getItemLabel = (count: number) => {
+    if (count === 1) return t("item.single");
+    if (count >= 2 && count <= 4) return t("item.few");
+    return t("item.many");
+  };
+
   const handleDelete = (id: idType) => {
     const updatedCart = cartItems.filter((item) => item.id !== id);
     setCartItems(updatedCart);
@@ -52,16 +61,9 @@ const CartItemsList = ({ cartItems, setCartItems }: props) => {
       <AccordionItem value="single-item">
         <AccordionTrigger className="my-0 py-0">
           <div className="flex flex-col items-start">
-            <h2 className="text-2xl font-medium">Корзина</h2>
+            <h2 className="text-2xl font-medium">{t("title")}</h2>
             <p className="mb-5 font-thin italic">
-              {cartItems.length}{" "}
-              {cartItems.length === 1 ? (
-                <span>товар</span>
-              ) : cartItems.length >= 2 && cartItems.length <= 4 ? (
-                <span>товара</span>
-              ) : (
-                <span>товаров</span>
-              )}
+              {cartItems.length} {getItemLabel(cartItems.length)}
             </p>
           </div>
         </AccordionTrigger>

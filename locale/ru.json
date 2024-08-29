@@ -4,7 +4,7 @@
   },
   "Header": {
     "orders": "Заказы",
-    "bag": "Сумка"
+    "bag": "Корзина"
   },
   "Footer": {
     "contacts": {
@@ -73,5 +73,51 @@
         "log-out": "Выйти из Системы"
       }
     }
+  },
+  "filtered-products": {
+    "foundProducts": "Найденные продукты!",
+    "noProductsFound": "Продукты не найдены"
+  },
+  "Cart": {
+    "cart-items-list": {
+      "title": "Корзина",
+      "item": {
+        "single": "товар",
+        "few": "товара",
+        "many": "товаров"
+      }
+    },
+    "cart-delivery": {
+      "deliveryMethod": "Способ доставки",
+      "specifyLocation": "Укажите ваше местоположение",
+      "pickupPoint": "Пункт выдачи",
+      "pickupAddress": "Самаркандская область, Самарканд, улица Мухаммада Аль-Хорезми, 77",
+      "deliveryCost": "Стоимость доставки",
+      "free": "Бесплатно",
+      "deliveryTime": "Время доставки",
+      "deliveryDuration": "7-10 дней"
+    },
+    "cart-payment": {
+      "paymentMethod": "Способ оплаты",
+      "noCards": "У вас нет привязанных карт",
+      "addNewCard": "Привязать новую карту",
+      "mastercard": "Mastercard"
+    },
+    "cart-user-data": {
+      "myData": "Мои данные",
+      "firstName": "Имя",
+      "lastName": "Фамилия"
+    },
+    "cart-checkout": {
+      "yourOrder": "Ваш заказ",
+      "payWithCard": "Оплата картой",
+      "items": "Товары ({count})",
+      "total": "Итого",
+      "placeOrder": "Оформить заказ",
+      "loading": "Загрузка...",
+      "orderPlacedTitle": "Заказ оформлен!",
+      "orderPlacedDescription": "Перейдите на страницу заказов чтобы следить за статусом"
+    },
+    "delete": "Удалить"
   }
 }

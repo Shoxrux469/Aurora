@@ -12,6 +12,7 @@ import {
 import { MapProvider } from "@/providers/MapProvider";
 import { useState } from "react";
 import Map from "../map/Map";
+import { useTranslations } from "next-intl";
 
 interface props {
   cartItems: ICartProduct[];
@@ -24,15 +25,17 @@ interface ICoordinates {
 
 const CartDeliveryCard = ({ cartItems }: props) => {
   const [location, setLocation] = useState<ICoordinates | null>(null);
+  const t = useTranslations("Cart.cart-delivery");
 
   const handleLocationSelect = (lat: number, lng: number) => {
     setLocation({ lat, lng });
   };
+
   return (
     <MapProvider>
       <div className="p-6 rounded-xl bg-white shadow-md">
         <div className="flex justify-between">
-          <h2 className="text-2xl font-medium">Способ доставки</h2>
+          <h2 className="text-2xl font-medium">{t("deliveryMethod")}</h2>
           <Dialog>
             <DialogTrigger asChild>
               <Button variant={"ghost"} size={"icon"}>
@@ -43,7 +46,7 @@ const CartDeliveryCard = ({ cartItems }: props) => {
             <DialogContent className="w-1/2">
               <DialogHeader>
                 <DialogTitle className="text-2xl font-medium">
-                  Укажите ваше местоположение
+                  {t("specifyLocation")}
                 </DialogTitle>
               </DialogHeader>
 
@@ -53,16 +56,16 @@ const CartDeliveryCard = ({ cartItems }: props) => {
         </div>
 
         <div className="mt-6 grid grid-cols-[280px_1fr] gap-2">
-          <p className="text-zinc-500">Пункт выдачи</p>
+          <p className="text-zinc-500">{t("pickupPoint")}</p>
           <p className="text-zinc-800 font-medium text-balance">
-            Самаркандская область, Самарканд, улица Мухаммада Аль-Хорезми, 77,
+            {t("pickupAddress")}
           </p>
 
-          <p className="text-zinc-500">Стоимость доставки</p>
-          <p className="text-zinc-800 font-medium">Бесплатно</p>
+          <p className="text-zinc-500">{t("deliveryCost")}</p>
+          <p className="text-zinc-800 font-medium">{t("free")}</p>
 
-          <p className="text-zinc-500">Время доставки</p>
-          <p className="text-zinc-800 font-medium">7-10 дней</p>
+          <p className="text-zinc-500">{t("deliveryTime")}</p>
+          <p className="text-zinc-800 font-medium">{t("deliveryDuration")}</p>
 
           <div className="mt-4 flex gap-2">
             {cartItems?.map((item) => (

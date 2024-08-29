@@ -8,14 +8,16 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
+import { useTranslations } from "next-intl";
 
-const CartPamentCard = () => {
+const CartPaymentCard = () => {
   let methods = [];
+  const t = useTranslations("Cart.cart-payment");
 
   return (
     <div className="flex-1 p-6 rounded-xl bg-white shadow-md">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-medium">Способ оплаты</h2>
+        <h2 className="text-2xl font-medium">{t("paymentMethod")}</h2>
         <Dialog>
           <DialogTrigger asChild>
             <Button variant={"ghost"} size={"icon"}>
@@ -26,29 +28,29 @@ const CartPamentCard = () => {
           <DialogContent>
             <DialogHeader>
               <DialogTitle className="text-2xl font-medium">
-                Способ оплаты
+                {t("paymentMethod")}
               </DialogTitle>
             </DialogHeader>
 
-            {!methods.length && <p>У вас нет привязанных карт</p>}
+            {!methods.length && <p>{t("noCards")}</p>}
 
             <Button
               variant="outline"
               className="h-12 p-4 flex items-center justify-start gap-2 rounded-lg"
             >
               <Plus size={20} />
-              <span className="font-light">Привязать новую карту</span>
+              <span className="font-light">{t("addNewCard")}</span>
             </Button>
           </DialogContent>
         </Dialog>
       </div>
       <div>
         <p>
-          Matercard <span>-- 6261</span>
+          {t("mastercard")} <span>-- 6261</span>
         </p>
       </div>
     </div>
   );
 };
 
-export default CartPamentCard;
+export default CartPaymentCard;

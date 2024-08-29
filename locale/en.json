@@ -4,7 +4,7 @@
   },
   "Header": {
     "orders": "Orders",
-    "bag": "Bag"
+    "cart": "Cart"
   },
   "Footer": {
     "contacts": {
@@ -73,5 +73,51 @@
         "log-out": "Log Out"
       }
     }
+  },
+  "filtered-products": {
+    "foundProducts": "Found Products!",
+    "noProductsFound": "No products found"
+  },
+  "Cart": {
+    "cart-items-list": {
+      "title": "Cart",
+      "item": {
+        "single": "item",
+        "few": "items",
+        "many": "items"
+      }
+    },
+    "cart-delivery": {
+      "deliveryMethod": "Delivery Method",
+      "specifyLocation": "Specify your location",
+      "pickupPoint": "Pickup Point",
+      "pickupAddress": "Samarkand Region, Samarkand, Muhammad al-Khwarizmi Street, 77",
+      "deliveryCost": "Delivery Cost",
+      "free": "Free",
+      "deliveryTime": "Delivery Time",
+      "deliveryDuration": "7-10 days"
+    },
+    "cart-payment": {
+      "paymentMethod": "Payment Method",
+      "noCards": "You have no linked cards",
+      "addNewCard": "Add a new card",
+      "mastercard": "Mastercard"
+    },
+    "cart-user-data": {
+      "myData": "My Data",
+      "firstName": "First Name",
+      "lastName": "Last Name"
+    },
+    "cart-checkout": {
+      "yourOrder": "Your Order",
+      "payWithCard": "Pay with card",
+      "items": "Items ({count})",
+      "total": "Total",
+      "placeOrder": "Place Order",
+      "loading": "Loading...",
+      "orderPlacedTitle": "Order Placed!",
+      "orderPlacedDescription": "Go to the orders page to track the status."
+    },
+    "delete": "Delete"
   }
 }
