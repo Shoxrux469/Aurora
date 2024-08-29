@@ -4,11 +4,13 @@ import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog";
 import { Button } from "../ui/button";
 import { LogIn } from "lucide-react";
 import SignUpForm from "../signup-form/SignUpForm";
-import { SessionProvider, signIn } from "next-auth/react";
+import { SessionProvider } from "next-auth/react";
 import SignInForm from "../signin-form/SigninForm";
+import { useTranslations } from "next-intl";
 
 const LoginModal = () => {
   const [isLogged, setIsLogged] = useState<boolean>(true);
+  const t = useTranslations("Login");
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -18,7 +20,7 @@ const LoginModal = () => {
           className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out"
         >
           <LogIn size={20} />
-          Войти
+          {t("title")}
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[380px]">

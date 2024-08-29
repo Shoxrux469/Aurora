@@ -7,6 +7,7 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { InputErrorStyle } from "@/constants";
 import UsersService from "@/services/api/users";
 import { toast } from "../ui/use-toast";
+import { useTranslations } from "next-intl";
 
 interface Props {
   setIsLogged: (logged: boolean) => void;
@@ -20,6 +21,7 @@ type Inputs = {
 };
 
 const SignUpForm = ({ setIsLogged }: Props) => {
+  const t = useTranslations("Login.sign-up");
   const {
     register,
     handleSubmit,
@@ -34,16 +36,15 @@ const SignUpForm = ({ setIsLogged }: Props) => {
       if (!userExist) {
         await UsersService.postUser(user);
         toast({
-          title: "Успешно!",
-          description:
-            "Регистрация прошла успешно, теперь в можете войти в аккаунт!",
+          title: t("successTitle"),
+          description: t("successDescription"),
           variant: "default",
         });
         reset();
       } else {
         toast({
-          title: "Ошибка!",
-          description: "Пользователь с таким эмайлом уже существует!",
+          title: t("errorTitle"),
+          description: t("errorDescription"),
           variant: "destructive",
         });
       }
@@ -57,7 +58,7 @@ const SignUpForm = ({ setIsLogged }: Props) => {
     <>
       <DialogHeader>
         <DialogTitle className="text-center text-3xl font-medium">
-          Регистрация
+          {t("title")}
         </DialogTitle>
       </DialogHeader>
 
@@ -70,11 +71,11 @@ const SignUpForm = ({ setIsLogged }: Props) => {
               maxLength: 15,
             })}
             id={"name"}
-            placeholder="Имя"
+            placeholder={t("namePlaceholder")}
           />
           {errors.name?.type === "required" && (
             <span role="alert" className="text-xs">
-              Name is required
+              {t("namePlaceholder")} is required
             </span>
           )}
           <Input
@@ -87,11 +88,11 @@ const SignUpForm = ({ setIsLogged }: Props) => {
             }
             id={"email"}
             // aria-invalid={errors.email ? "true" : "false"}
-            placeholder="Эмайл"
+            placeholder={t("emailPlaceholder")}
           />
           {errors.email?.type === "required" && (
             <span role="alert" className="text-xs">
-              Email Address is required
+              {t("emailPlaceholder")} is required
             </span>
           )}
           <Input
@@ -105,28 +106,28 @@ const SignUpForm = ({ setIsLogged }: Props) => {
             style={
               errors.password?.type === "pattern" ? InputErrorStyle : undefined
             }
-            placeholder="Пароль"
+            placeholder={t("passwordPlaceholder")}
           />
           {errors.password?.type === "required" && (
             <span role="alert" className="text-xs mt-0">
-              Password is required
+              {t("passwordPlaceholder")} is required
             </span>
           )}
           <Button type="submit" className="w-full" size="lg">
-            Зарегистрироваться
+            {t("registerButton")}
           </Button>
         </div>
       </form>
       <Separator />
       <DialogFooter>
         <div className="text-sm">
-          У вас уже есть аккаунт? &nbsp;
+          {t("alreadyHaveAccount")}
           <Button
             onClick={() => setIsLogged(true)}
             variant="link"
             className="text-sm px-0 text-blue-600"
           >
-            Войти в аккаунт
+            {t("loginButton")}
           </Button>
         </div>
       </DialogFooter>

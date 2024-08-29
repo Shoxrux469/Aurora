@@ -4,7 +4,7 @@
   },
   "Header": {
     "orders": "Заказы",
-    "bag": "Корзина"
+    "cart": "Корзина"
   },
   "Footer": {
     "contacts": {
@@ -119,5 +119,39 @@
       "orderPlacedDescription": "Перейдите на страницу заказов чтобы следить за статусом"
     },
     "delete": "Удалить"
+  },
+  "Login": {
+    "title": "Вход",
+    "sign-in": {
+      "title": "Вход в аккаунт",
+      "email": {
+        "title": "Эмайл",
+        "required": "Электронная почта обязательна",
+        "pattern": "Введите действительный адрес электронной почты"
+      },
+      "password": {
+        "title": "Пароль",
+        "required": "Пароль обязателен",
+        "pattern": "Пароль должен содержать как минимум 8 символов, включая буквы и цифры",
+        "minLength": "Пароль должен быть не менее 6 символов"
+      },
+      "button": "Войти",
+      "forgot-password": "Забыли пароль?",
+      "no-account": "У вас нет аккаунта?",
+      "create-account": "Создать аккаунт"
+    },
+    "sign-up": {
+      "title": "Регистрация",
+      "namePlaceholder": "Имя",
+      "emailPlaceholder": "Эмайл",
+      "passwordPlaceholder": "Пароль",
+      "registerButton": "Зарегистрироваться",
+      "alreadyHaveAccount": "У вас уже есть аккаунт? ",
+      "loginButton": "Войти в аккаунт",
+      "successTitle": "Успешно!",
+      "successDescription": "Регистрация прошла успешно, теперь вы можете войти в аккаунт!",
+      "errorTitle": "Ошибка!",
+      "errorDescription": "Пользователь с таким email уже существует!"
+    }
   }
 }

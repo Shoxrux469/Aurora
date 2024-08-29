@@ -15,13 +15,15 @@ import Aside from "../aside/aside";
 import { headerLinks, ShopName } from "@/constants";
 import { getCurrentUser } from "@/lib/auth";
 import { addLocalePrefix } from "@/utils/addLocalePrefix";
-import { getTranslations } from "next-intl/server";
+import { getMessages, getTranslations } from "next-intl/server";
 import HeaderLangSelector from "../header-lang-selector/HeaderLangSelector";
+import { NextIntlClientProvider } from "next-intl";
 
 const Header = async ({ currentLocale }: { currentLocale: string }) => {
   const user = await getCurrentUser();
   const SHEET_SIDES = ["left"] as const;
   const t = await getTranslations("Header");
+  const messages = await getMessages();
 
   return (
     <header className="bg-white px-8">
@@ -66,7 +68,9 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
               </Link>
             </>
           ) : (
-            <LoginModal />
+            <NextIntlClientProvider messages={messages}>
+              <LoginModal />
+            </NextIntlClientProvider>
           )}
           {user && (
             <Link

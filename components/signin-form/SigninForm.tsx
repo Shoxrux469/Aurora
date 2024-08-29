@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { DialogFooter, DialogHeader, DialogTitle } from "../ui/dialog";
 import { Button } from "../ui/button";
@@ -12,6 +13,7 @@ import bcrypt from "bcryptjs";
 import { signIn } from "next-auth/react";
 import { Facebook, Linkedin } from "lucide-react";
 import { toast } from "../ui/use-toast";
+import { useTranslations } from "next-intl";
 interface Props {
   setIsLogged: (logged: boolean) => void;
 }
@@ -22,6 +24,8 @@ type Inputs = {
 };
 
 const SignInForm = ({ setIsLogged }: Props) => {
+  const t = useTranslations("Login.sign-in");
+
   const {
     register,
     handleSubmit,
@@ -73,7 +77,7 @@ const SignInForm = ({ setIsLogged }: Props) => {
     <>
       <DialogHeader>
         <DialogTitle className="text-center text-3xl font-medium">
-          Вход в аккаунт
+          {t("title")}
         </DialogTitle>
       </DialogHeader>
 
@@ -98,15 +102,15 @@ const SignInForm = ({ setIsLogged }: Props) => {
         <div className="space-y-5">
           <Input
             {...register("email", {
-              required: "Email Address is required",
+              required: t("email.required"),
               pattern: {
                 value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-                message: "Введите действительный адрес электронной почты",
+                message: t("email.pattern"),
               },
             })}
             style={errors.email ? InputErrorStyle : undefined}
             id="email"
-            placeholder="Эмайл"
+            placeholder={t("email.title")}
           />
           {errors.email && (
             <span role="alert" className="text-xs">
@@ -115,21 +119,20 @@ const SignInForm = ({ setIsLogged }: Props) => {
           )}
           <Input
             {...register("password", {
-              required: "Password is required",
+              required: t("password.required"),
               pattern: {
                 value: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-                message:
-                  "Пароль должен содержать как минимум 8 символов, включая буквы и цифры",
+                message: t("password.pattern"),
               },
               minLength: {
                 value: 6,
-                message: "Пароль должен быть не менее 6 символов",
+                message: t("password.minLength"),
               },
             })}
             id="password"
             aria-invalid={errors.password ? "true" : "false"}
             style={errors.password ? InputErrorStyle : undefined}
-            placeholder="Пароль"
+            placeholder={t("password.title")}
           />
           {errors.password && (
             <span role="alert" className="text-xs">
@@ -138,7 +141,7 @@ const SignInForm = ({ setIsLogged }: Props) => {
           )}
 
           <Button type="submit" className="w-full" size="lg">
-            Войти
+            {t("button")}
           </Button>
         </div>
       </form>
@@ -147,18 +150,20 @@ const SignInForm = ({ setIsLogged }: Props) => {
         href="/reset"
         className="block w-fit mx-auto text-center text-sm text-blue-600"
       >
-        Забыли пароль?
+        {t("forgot-password")}
       </Link>
+
       <Separator />
+
       <DialogFooter>
         <div className="text-sm">
-          У вас нет аккаунта? &nbsp;
+          {t("no-account")}&nbsp;
           <Button
             onClick={() => setIsLogged(false)}
             variant="link"
             className="text-sm px-0 text-blue-600"
           >
-            Создать аккаунт
+            {t("create-account")}
           </Button>
         </div>
       </DialogFooter>

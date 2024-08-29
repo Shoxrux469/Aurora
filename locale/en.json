@@ -119,5 +119,39 @@
       "orderPlacedDescription": "Go to the orders page to track the status."
     },
     "delete": "Delete"
+  },
+  "Login": {
+    "title": "Login",
+    "sign-in": {
+      "title": "Sign in accaunt",
+      "email": {
+        "title": "Email",
+        "required": "Email is required",
+        "pattern": "Enter a valid email address"
+      },
+      "password": {
+        "title": "Password",
+        "required": "Password is required",
+        "pattern": "Password must contain at least 8 characters, including letters and numbers",
+        "minLength": "Password must be at least 6 characters long"
+      },
+      "button": "Sign in",
+      "forgot-password": "Forgot password?",
+      "no-account": "Don't have an account?",
+      "create-account": "Create an account"
+    },
+    "sign-up": {
+      "title": "Sign Up",
+      "namePlaceholder": "Name",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "registerButton": "Register",
+      "alreadyHaveAccount": "Already have an account? ",
+      "loginButton": "Log in",
+      "successTitle": "Success!",
+      "successDescription": "Registration was successful, you can now log in to your account!",
+      "errorTitle": "Error!",
+      "errorDescription": "A user with this email already exists!"
+    }
   }
 }
