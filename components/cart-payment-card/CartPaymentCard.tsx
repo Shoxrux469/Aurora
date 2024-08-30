@@ -17,10 +17,14 @@ const CartPaymentCard = () => {
   return (
     <div className="flex-1 p-6 rounded-xl bg-white shadow-md">
       <div className="flex justify-between">
-        <h2 className="text-2xl font-medium">{t("paymentMethod")}</h2>
         <Dialog>
           <DialogTrigger asChild>
-            <Button variant={"ghost"} size={"icon"}>
+            <Button
+              variant="ghost"
+              className="w-full p-0 flex justify-between 
+              hover:text-primary hover:bg-transparent duration-200"
+            >
+              <h2 className="text-2xl font-medium">{t("paymentMethod")}</h2>
               <Edit2Icon color="#777777" size={20} />
             </Button>
           </DialogTrigger>

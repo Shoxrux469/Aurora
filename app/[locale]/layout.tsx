@@ -38,14 +38,12 @@ export default async function LocaleLayout({
           fontSans.variable
         )}
       >
-        <Header currentLocale={locale} />
-        <Suspense fallback={<Loading />}>
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </Suspense>
-        <Toaster />
-        <Footer />
+        <NextIntlClientProvider messages={messages}>
+          <Header currentLocale={locale} />
+          <Suspense fallback={<Loading />}>{children}</Suspense>
+          <Toaster />
+          <Footer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

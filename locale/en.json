@@ -4,7 +4,13 @@
   },
   "Header": {
     "orders": "Orders",
-    "cart": "Cart"
+    "cart": "Cart",
+    "aside": {
+      "title": "Discover perfection with every purchase"
+    },
+    "searcher": {
+      "placeholder": "Search products..."
+    }
   },
   "Footer": {
     "contacts": {
@@ -91,7 +97,7 @@
       "deliveryMethod": "Delivery Method",
       "specifyLocation": "Specify your location",
       "pickupPoint": "Pickup Point",
-      "pickupAddress": "Samarkand Region, Samarkand, Muhammad al-Khwarizmi Street, 77",
+      "enterAdress": "Enter the address",
       "deliveryCost": "Delivery Cost",
       "free": "Free",
       "deliveryTime": "Delivery Time",

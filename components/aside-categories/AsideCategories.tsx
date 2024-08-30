@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Separator } from "../ui/separator";
 import { ShopName } from "@/constants";
+import { useTranslations } from "next-intl";
 
 type ICategoryIcons = {
   [key: string]: JSX.Element;
@@ -29,6 +30,7 @@ interface ICategoryState {
 const AsideCategories = ({ categories }: { categories: ICategory[] }) => {
   const [isChild, setIsChild] = useState<ICategoryState | null>(null);
   let categoryIconClass = cn("opacity-70 text-primary");
+  const t = useTranslations("Header.aside");
 
   const categoriesIcons: ICategoryIcons = {
     "Умные часы и фитнес браслеты": (
@@ -65,7 +67,7 @@ const AsideCategories = ({ categories }: { categories: ICategory[] }) => {
                 <h2 className="text-3xl ml-1">{ShopName}</h2>
               </div>
               <p className="text-lg text-balance italic font-medium ">
-                Откройте для себя совершенство с каждой покупкой
+                {t("title")}
               </p>
             </div>
             <ul className="mt-4 text-lg flex flex-col gap-3">

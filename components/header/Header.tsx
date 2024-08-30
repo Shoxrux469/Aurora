@@ -34,7 +34,9 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
               <SheetTrigger>
                 <AlignJustify size={24} className={cn("text-primary")} />
               </SheetTrigger>
-              <Aside side={side} />
+              <NextIntlClientProvider messages={messages}>
+                <Aside side={side} />
+              </NextIntlClientProvider>
             </Sheet>
           ))}
           <Link
@@ -68,9 +70,7 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
               </Link>
             </>
           ) : (
-            <NextIntlClientProvider messages={messages}>
-              <LoginModal />
-            </NextIntlClientProvider>
+            <LoginModal />
           )}
           {user && (
             <Link

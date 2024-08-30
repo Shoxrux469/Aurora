@@ -57,7 +57,7 @@ const CartDeliveryCard = ({ cartItems }: props) => {
         <div className="mt-6 grid grid-cols-[280px_1fr] gap-2">
           <p className="text-zinc-500">{t("pickupPoint")}</p>
           <p className="text-zinc-800 font-medium text-balance">
-            {t("pickupAddress")}
+            {address ? address : t("enterAdress")}
           </p>
 
           <p className="text-zinc-500">{t("deliveryCost")}</p>
