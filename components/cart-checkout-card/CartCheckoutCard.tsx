@@ -96,6 +96,7 @@ const CartCheckoutCard = ({
           className="w-full bg-purple-600 text-white"
           onClick={handleOrderSubmit}
           disabled={isLoading}
+        >
           {isLoading ? "Loading..." : "Оформить заказ"}
         </Button>
       </CardFooter>
