@@ -9,8 +9,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "../ui/dialog";
-import { MapProvider } from "@/providers/MapProvider";
-import { useState } from "react";
+import { MapProvider, useMapContext } from "@/providers/MapProvider";
+import { useEffect, useState } from "react";
 import Map from "../map/Map";
 import { useTranslations } from "next-intl";
 
@@ -18,18 +18,17 @@ interface props {
   cartItems: ICartProduct[];
 }
 
-interface ICoordinates {
-  lat: number;
-  lng: number;
-}
-
 const CartDeliveryCard = ({ cartItems }: props) => {
-  const [location, setLocation] = useState<ICoordinates | null>(null);
+  const { location, address, updateLocationAndAddress } = useMapContext();
   const t = useTranslations("Cart.cart-delivery");
 
-  const handleLocationSelect = (lat: number, lng: number) => {
-    setLocation({ lat, lng });
-  };
+  useEffect(() => {
+    if (location) {
+      updateLocationAndAddress(location).catch((error: any) => {
+        console.error("Failed to update address:", error);
+      });
+    }
+  }, [location, updateLocationAndAddress]);
 
   return (
     <MapProvider>
@@ -50,7 +49,7 @@ const CartDeliveryCard = ({ cartItems }: props) => {
                 </DialogTitle>
               </DialogHeader>
 
-              <Map onLocationSelect={handleLocationSelect} />
+              <Map />
             </DialogContent>
           </Dialog>
         </div>

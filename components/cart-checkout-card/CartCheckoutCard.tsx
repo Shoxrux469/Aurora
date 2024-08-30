@@ -31,7 +31,6 @@ const CartCheckoutCard = ({
   const t = useTranslations("Cart.cart-checkout");
   const [totalPrice, setTotalPrice] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(false);
-
   useEffect(() => {
     const calculateTotalPrice = () => {
       const total = cartItems.reduce(
@@ -45,7 +44,6 @@ const CartCheckoutCard = ({
 
   const handleOrderSubmit = async () => {
     setIsLoading(true);
-
     try {
       const order: IOrder = {
         items: cartItems,
@@ -70,7 +68,6 @@ const CartCheckoutCard = ({
       setIsLoading(false);
     }
   };
-
   return (
     <Card className="bg-white border-none h-fit shadow-md sticky top-4">
       <CardHeader className="py-4">

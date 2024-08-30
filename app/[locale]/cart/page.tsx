@@ -19,5 +19,4 @@ const CartPage = async ({ params: { locale } }: params) => {
     </div>
   );
 };
-
-export default CartPage;
+export default CartPage

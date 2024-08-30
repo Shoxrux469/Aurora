@@ -35,7 +35,6 @@ const CartClient = ({ user }: props) => {
       }
     }
   }, []);
-
   let isEmpty = cartItems.length === 0;
   if (isEmpty)
     return (
