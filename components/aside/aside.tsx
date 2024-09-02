@@ -3,9 +3,13 @@ import { SheetContent } from "@/components/ui/sheet";
 import { ICategory } from "@/interfaces/category";
 import CategoriesService from "@/services/api/categories";
 import AsideCategories from "../aside-categories/AsideCategories";
+// import Loading from "@/app/loading";
+import Loading from "@/app/[locale]/loading";
 
-const Aside = async ({ side }: { side: "left" }) => {
-  let categories: ICategory[] = await CategoriesService.getAll();
+const Aside = async ({ side }: { side: "left"; }) => {
+  let categories: ICategory[] = await CategoriesService.getAll((progress) => (
+    <Loading value={progress} />
+  ));
 
   return (
     <SheetContent

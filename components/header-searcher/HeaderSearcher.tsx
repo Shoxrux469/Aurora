@@ -4,9 +4,12 @@ import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const HeaderSearcher = () => {
   const router = useRouter();
+
+  const t = useTranslations("Header.searcher");
 
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
@@ -14,12 +17,12 @@ const HeaderSearcher = () => {
       router.push(`/filteredProducts/text/${encodeURIComponent(text)}`);
     }
   };
-  
+
   return (
     <div className="relative w-full max-w-2xl">
       <Input
         className="w-full h-10 rounded-lg text-base px-4 relative z-20 py-4 pr-10 focus:outline-none focus:ring-2 focus:ring-primary"
-        placeholder="Search products..."
+        placeholder={t("placeholder")}
         onKeyUp={handleKeyUp}
       />
       <Button

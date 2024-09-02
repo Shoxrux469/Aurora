@@ -1,0 +1,7 @@
+.inputStyles {
+    @apply text-lg border rounded-xl w-full h-12;
+}
+
+.inputDiv {
+    @apply flex flex-col space-y-2 w-1/3;
+}
