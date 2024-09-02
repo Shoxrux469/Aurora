@@ -1,29 +1,24 @@
 import Link from "next/link";
 import React from "react";
+import { Button } from "../ui/button";
+import { Input } from "../ui/input";
 import { Sheet, SheetTrigger } from "../ui/sheet";
 import {
   AlignJustify,
+  Search,
   Mountain,
   ShoppingBag,
-  LayoutList,
-  User2Icon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import Aside from "../aside/Aside";
+import LoginForm from "../login-form/LoginForm";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
-import LoginModal from "../signin-modal/LoginModal";
-import Aside from "../aside/aside";
-import { headerLinks, ShopName } from "@/constants";
-import { getCurrentUser } from "@/lib/auth";
-import { addLocalePrefix } from "@/utils/addLocalePrefix";
-import { getMessages, getTranslations } from "next-intl/server";
-import HeaderLangSelector from "../header-lang-selector/HeaderLangSelector";
-import { NextIntlClientProvider } from "next-intl";
 
-const Header = async ({ currentLocale }: { currentLocale: string }) => {
-  const user = await getCurrentUser();
+const Header = () => {
   const SHEET_SIDES = ["left"] as const;
-  const t = await getTranslations("Header");
-  const messages = await getMessages();
+
+  const buttonsClass =
+    "flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out";
 
   return (
     <header className="bg-white px-8">
@@ -34,55 +29,24 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
               <SheetTrigger>
                 <AlignJustify size={24} className={cn("text-primary")} />
               </SheetTrigger>
-              <NextIntlClientProvider messages={messages}>
-                <Aside side={side} />
-              </NextIntlClientProvider>
+              <Aside side={side} />
             </Sheet>
           ))}
-          <Link
-            className="flex items-center"
-            href={addLocalePrefix("/", currentLocale)}
-          >
-            <span className="mr-1 text-primary text-xl font-bold">
-              {ShopName}
-            </span>
+          <Link className="flex items-center" href="/">
+            <span className="mr-1 text-primary text-xl font-bold">TechShop</span>
             <Mountain size={24} className="text-primary" />
           </Link>
         </div>
         <HeaderSearcher />
         <div className="flex h-full item-center gap-2">
+          <LoginForm />
           <Link
-            href={addLocalePrefix("/cart", currentLocale)}
-            className={headerLinks}
-          >
+            href='/cart'
+            className="flex items-center h-full text-zinc-800 gap-2 py-2 px-2 duration-150 ease-in-out hover:bg-accent hover:text-accent-foreground">
             <ShoppingBag size={20} />
-            {t("cart")}
+            Корзина
           </Link>
-
-          {user ? (
-            <>
-              <Link
-                href={addLocalePrefix("/user-info/profile", currentLocale)}
-                className={headerLinks}
-              >
-                <User2Icon size={20} />
-                {user.name?.split(" ")[0]}
-              </Link>
-            </>
-          ) : (
-            <LoginModal />
-          )}
-          {user && (
-            <Link
-              href={addLocalePrefix("/user-info/orders", currentLocale)}
-              className={headerLinks}
-            >
-              <LayoutList size={20} />
-              {t("orders")}
-            </Link>
-          )}
         </div>
-        <HeaderLangSelector />
       </div>
     </header>
   );

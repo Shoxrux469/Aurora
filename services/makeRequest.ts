@@ -1,5 +1,6 @@
-import { ApiConstants } from "@/services/api/apiConstants";
 import axios from "axios";
+import { ApiConstants } from "./api/apiConstants";
+
 const makeRequest = axios.create({
   baseURL: ApiConstants.baseUrl,
 });
@@ -7,7 +8,6 @@ const makeRequest = axios.create({
 makeRequest.interceptors.request.use(
   async (config) => {
     config.headers["Content-Type"] = "application/json";
-    // config.token = ""
 
     return config;
   },

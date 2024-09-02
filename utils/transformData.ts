@@ -34,8 +34,8 @@ export class FirestoreTransformer {
     );
     return key
       ? FirestoreTransformer.transformFunctions[key](
-          field[key as keyof FirestoreValue]
-        )
+        field[key as keyof FirestoreValue]
+      )
       : null;
   }
 
@@ -51,7 +51,7 @@ export class FirestoreTransformer {
 
   static transformDocument(doc: FirestoreDocument): any {
     return {
-      id: doc?.name?.split("/").pop(),
+      id: doc.name?.split("/").pop(),
       ...FirestoreTransformer.transformFields(doc.fields),
       createTime: doc.createTime,
       updateTime: doc.updateTime,
@@ -82,8 +82,8 @@ export class FirestoreTransformer {
       } else if (Array.isArray(value)) {
         return {
           arrayValue: {
-            values: value?.map((v) => transformValue(v)),
-          },
+            values: value?.map(v => transformValue(v))
+          }
         };
       } else if (typeof value === "object" && value !== null) {
         return {
