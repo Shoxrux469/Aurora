@@ -10,9 +10,17 @@ import {
   ShoppingBag,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import Aside from "../aside/Aside";
+import Aside from "../aside/aside";
 import LoginForm from "../login-form/LoginForm";
 import HeaderSearcher from "../header-searcher/HeaderSearcher";
+import LoginModal from "../signin-modal/LoginModal";
+import { headerLinks, ShopName } from "@/constants";
+import { getCurrentUser } from "@/lib/auth";
+import { addLocalePrefix } from "@/utils/addLocalePrefix";
+import { getMessages, getTranslations } from "next-intl/server";
+import HeaderLangSelector from "../header-lang-selector/HeaderLangSelector";
+import { NextIntlClientProvider } from "next-intl";
+import Aside from "../aside/aside";
 
 const Header = () => {
   const SHEET_SIDES = ["left"] as const;
