@@ -1,16 +1,9 @@
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin();
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ["images.uzum.uz", "cdn4.iconfinder.com", "cdn0.iconfinder.com"],
-  },
-  async rewrites() {
-    return [
-    ];
+    domains: ["images.uzum.uz", "cdn4.iconfinder.com","cdn0.iconfinder.com"],
   },
 };
 
-export default withNextIntl(nextConfig);
+export default nextConfig;
+  

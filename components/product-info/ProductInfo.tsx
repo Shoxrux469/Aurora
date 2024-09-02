@@ -1,17 +1,21 @@
-"use client";
+import React from "react";
 
 import { Button } from "@/components/ui/button";
-import { Check, Dot } from "lucide-react";
+import { Check, Heart, Dot } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
 import { paymentIcons } from "@/constants";
 import { Separator } from "../ui/separator";
-import { IProduct } from "@/interfaces/product";
-import addToCart from "@/utils/addToCart";
 
-const ProductInfo = ({ product }: { product: IProduct }) => {
-  const { attributes, price, quantity, title } = product;
+interface props {
+  title: string;
+  price: number;
+  specific?: string[];
+  quantity: number;
+  color: string;
+}
 
+const ProductInfo = ({ title, price, specific, quantity }: props) => {
   return (
     <div className="p-2">
       <h2 className="text-2xl font-medium">{title}</h2>
@@ -36,10 +40,7 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
       </div>
 
       <div className="my-6 flex items-center gap-3">
-        <Button
-          onClick={() => addToCart(product)}
-          className="w-full py-6 text-base uppercase rounded-none"
-        >
+        <Button className="w-full py-6 text-base uppercase rounded-none">
           Добавить в корзину
         </Button>
       </div>
@@ -69,7 +70,7 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
         <span className="text-sm font-medium text-zinc-500">
           Кратко о товаре:
         </span>
-        {attributes.specific?.map((item) => (
+        {specific?.map((item) => (
           <li key={item} className="flex items-center">
             <Dot size={32} color="#71717a" />
             <p className="text-base">{item}</p>
