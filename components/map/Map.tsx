@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef } from "react";
 import { GoogleMap, Marker } from "@react-google-maps/api";
 import { Button } from "@/components/ui/button";
 import { Navigation } from "lucide-react";
@@ -30,6 +30,13 @@ const Map: React.FC = () => {
     mapRef.current = null;
   }, []);
 
+  const setLocationCallback = useCallback(
+    (location: google.maps.LatLngLiteral) => {
+      setLocation(location);
+    },
+    [setLocation]
+  );
+
   const getCurrentLocation = useCallback(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -39,7 +46,8 @@ const Map: React.FC = () => {
           if (mapRef.current) {
             mapRef.current.setCenter(location);
           }
-          setLocation(location);
+
+          setLocationCallback(location);
         },
         (error) => {
           console.error("Error getting current location: ", error);
@@ -48,21 +56,35 @@ const Map: React.FC = () => {
     } else {
       console.error("Geolocation is not supported by this browser.");
     }
-  }, [setLocation]);
+  }, [setLocationCallback]);
 
   const handleMapClick = useCallback(
     (event: google.maps.MapMouseEvent) => {
       if (event.latLng) {
         const lat = event.latLng.lat();
         const lng = event.latLng.lng();
-        setLocation({ lat, lng });
+        const location = { lat, lng };
 
-        if (markerRef.current) {
-          markerRef.current.setPosition({ lat, lng });
+        // Update location state
+        setLocationCallback(location);
+
+        if (!markerRef.current) {
+          // Create the marker if it doesn't exist
+          if (mapRef.current) {
+            markerRef.current = new google.maps.Marker({
+              position: location,
+              map: mapRef.current,
+            });
+          }
+        } else {
+          // If marker already exists, update its position
+          markerRef.current.setPosition(location);
         }
+
+        console.log({ lat, lng });
       }
     },
-    [setLocation]
+    [setLocationCallback]
   );
 
   return (

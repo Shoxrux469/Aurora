@@ -19,6 +19,7 @@ interface props {
   address: string;
   paymentCard: string | null;
   userId: idType;
+  userEmail: string;
   setCartItems: Dispatch<[]>;
 }
 
@@ -26,6 +27,7 @@ const CartCheckoutCard = ({
   cartItems,
   setCartItems,
   address,
+  userEmail,
   userId,
 }: props) => {
   const t = useTranslations("Cart.cart-checkout");
@@ -49,8 +51,12 @@ const CartCheckoutCard = ({
         items: cartItems,
         address: address,
         paymentMethod: "master",
+        status: 0,
         totalPrice: totalPrice,
-        userId: userId,
+        user: {
+          id: userId,
+          email: userEmail
+        },
       };
       let res = await OrderService.postOrder(order);
 
@@ -91,9 +97,9 @@ const CartCheckoutCard = ({
       </CardContent>
       <CardFooter>
         <Button
-          variant="purple"
+          variant="default"
           size="lg"
-          className="w-full bg-purple-600 text-white"
+          className="w-full text-white"
           onClick={handleOrderSubmit}
           disabled={isLoading}
         >

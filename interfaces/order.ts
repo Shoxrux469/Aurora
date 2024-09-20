@@ -8,6 +8,10 @@ export interface IOrder {
   items: ICartProduct[];
   address: Address;
   paymentMethod: PaymentMethod;
+  status: 0 | 1 | 2;
   totalPrice: number;
-  userId: idType;
+  user: {
+    id: idType;
+    email: string;
+  };
 }

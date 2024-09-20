@@ -61,6 +61,7 @@ const CartClient = ({ user }: props) => {
         address={address!}
         paymentCard={paymentCard}
         userId={user.id}
+        userEmail={user.email}
       />
     </section>
   );
