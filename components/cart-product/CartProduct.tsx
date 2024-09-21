@@ -71,12 +71,12 @@ const CartProduct = ({
           <p className="mt-1 text-sm text-muted-foreground">
             {item.attributes.color}
           </p>
-          <p className="mt-1 text-sm text-purple-600">{item.category.title}</p>
+          <p className="mt-1 text-sm font-medium text-purple-600">{item.category.title}</p>
         </div>
 
         <div className="flex items-center space-x-3 mt-2">
           <Button
-            variant="purple"
+            variant="default"
             size="icon"
             disabled={item.cartQuantity <= 1}
             onClick={() => onDecrease(item.id)}
@@ -91,7 +91,7 @@ const CartProduct = ({
             className="w-9 h-9 text-center text-lg font-medium border rounded outline-none"
           />
           <Button
-            variant="purple"
+            variant="default"
             size="icon"
             disabled={inputQuantity === item.quantity}
             onClick={() => onIncrease(item.id)}

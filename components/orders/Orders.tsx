@@ -32,8 +32,8 @@ const Orders = async () => {
             {tab.value === "active"
               ? t("active.title")
               : tab.value === "archive"
-              ? t("archive.title")
-              : t("unpaid.title")}
+                ? t("archive.title")
+                : t("unpaid.title")}
           </TabsTrigger>
         ))}
       </TabsList>
