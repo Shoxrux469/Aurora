@@ -49,7 +49,7 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
             <Mountain size={24} className="text-primary" />
           </Link>
         </div>
-        <HeaderSearcher />
+        <HeaderSearcher currentLocale={currentLocale} />
         <div className="flex h-full item-center gap-2">
           <Link
             href={addLocalePrefix("/cart", currentLocale)}

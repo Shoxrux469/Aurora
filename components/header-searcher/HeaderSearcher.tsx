@@ -6,7 +6,7 @@ import { Search } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-const HeaderSearcher = () => {
+const HeaderSearcher = ({ currentLocale }: { currentLocale: string }) => {
   const router = useRouter();
 
   const t = useTranslations("Header.searcher");
@@ -14,7 +14,9 @@ const HeaderSearcher = () => {
   const handleKeyUp = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       const text = e.currentTarget.value;
-      router.push(`/filteredProducts/text/${encodeURIComponent(text)}`);
+      router.push(
+        `/${currentLocale}/filteredProducts/text/${encodeURIComponent(text)}`
+      );
     }
   };
 
