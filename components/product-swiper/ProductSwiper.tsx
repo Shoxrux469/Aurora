@@ -26,7 +26,7 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
     "--swiper-navigation-border-radius": "100%",
     "--swiper-navigation-font-size": "16px",
     "--swiper-navigation-background-color": "rgba(0, 0, 0, 0.4)",
-  };  
+  };
 
   return (
     <div className="flex h-full gap-2">
@@ -50,13 +50,15 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
       <Swiper
         direction="horizontal"
         style={customStyle}
         navigation={true}
         spaceBetween={3}
         effect={"fade"}
-        thumbs={{ swiper: thumbsSwiper }}
+        // Проверка на наличие thumbsSwiper
+        thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
         modules={[EffectFade, FreeMode, Navigation, Thumbs]}
         className="w-10/12 h-full"
       >

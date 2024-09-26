@@ -15,6 +15,9 @@ interface Params {
 const FilteredProducts = async ({ params: { slug, locale } }: Params) => {
   const t = await getTranslations("filtered-products");
   let filteredProducts: IProduct[] = [];
+
+  console.log(slug);
+
   if (slug && slug.length > 0) {
     if (slug[0] === "id") {
       filteredProducts = await ProductsService.getBySubcategoryid(
