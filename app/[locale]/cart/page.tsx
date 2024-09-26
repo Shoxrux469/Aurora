@@ -2,13 +2,7 @@ import { MapProvider } from "@/providers/MapProvider";
 import CartClient from "@/components/cart-client/CartClient";
 import { getCurrentUser } from "@/lib/auth";
 
-interface params {
-  params: {
-    locale: string;
-  };
-}
-
-const CartPage = async ({ params: { locale } }: params) => {
+const CartPage = async () => {
   const user = await getCurrentUser();
 
   return (

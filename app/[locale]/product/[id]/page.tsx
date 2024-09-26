@@ -6,16 +6,16 @@ import ProductInfo from "@/components/product-info/ProductInfo";
 import ProductCard from "@/components/product-card/ProductCard";
 import { Separator } from "@/components/ui/separator";
 import Loading from "../../loading";
-// import Loading from "@/app/[locale]/loading";
+import { useRouter } from "next/router";
 
-interface params {
+interface Params {
   params: {
     id: string;
     locale: string;
   };
 }
 
-const ProductPage = async ({ params: { id, locale } }: params) => {
+const ProductPage = async ({ params: { id, locale } }: Params) => {
   const product = (await ProductsService.getById(id, (progress) => (
     <Loading value={progress} />
   ))) as IProduct;
@@ -32,7 +32,7 @@ const ProductPage = async ({ params: { id, locale } }: params) => {
   return (
     <div className="container px-8">
       <section className="product-overview flex gap-8 pt-8">
-        <div className="h-full w-1/2">
+        <div className="h-fit w-1/2">
           <ProductSwiper images={product.images_links}></ProductSwiper>
         </div>
 
@@ -50,7 +50,7 @@ const ProductPage = async ({ params: { id, locale } }: params) => {
       <section className="related-products mt-5 text-center text-3xl">
         <h1>Related Products</h1>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {relatedProducts?.map((product, i) => (
+          {relatedProducts.map((product, i) => (
             <ProductCard
               currentLocale={locale}
               key={i}
