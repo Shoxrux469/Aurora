@@ -57,6 +57,33 @@
         "no_orders": "No unpaid orders",
         "no_orders_text": "You have no unpaid orders. Your outstanding unpaid orders will appear here."
       },
+      "order_details": {
+        "item": {
+          "single": "item",
+          "few": "items",
+          "many": "items"
+        },
+        "order_identifier": "Order ID:",
+        "status": {
+          "label": "Status:",
+          "in_progress": "In Progress",
+          "delivered": "Delivered",
+          "canceled": "Canceled"
+        },
+        "delivery_date": {
+          "label": "Delivery Date:"
+        },
+        "delivery_address": {
+          "label": "Delivery Address:"
+        },
+        "order_date": {
+          "label": "Order Date:"
+        },
+        "order_total": {
+          "label": "Order Total:"
+        },
+        "product_count": "product(s)"
+      },
       "go_to_home": "Go to homepage"
     },
     "profile": {
