@@ -57,7 +57,6 @@ const ProductSwiper: React.FC<ProductSwiperProps> = ({ images }) => {
         navigation={true}
         spaceBetween={3}
         effect={"fade"}
-        // Проверка на наличие thumbsSwiper
         thumbs={thumbsSwiper ? { swiper: thumbsSwiper } : undefined}
         modules={[EffectFade, FreeMode, Navigation, Thumbs]}
         className="w-10/12 h-full"
