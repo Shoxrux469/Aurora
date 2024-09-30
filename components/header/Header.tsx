@@ -81,8 +81,8 @@ const Header = async ({ currentLocale }: { currentLocale: string }) => {
               {t("orders")}
             </Link>
           )}
+          <HeaderLangSelector />
         </div>
-        <HeaderLangSelector />
       </div>
     </header>
   );

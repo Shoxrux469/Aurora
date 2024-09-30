@@ -25,7 +25,7 @@ const HeaderLangSelector = () => {
 
   return (
     <Select onValueChange={handleValueChange} defaultValue={currentLocale}>
-      <SelectTrigger className="pr-3 w-fit relative">
+      <SelectTrigger className="pr-3 h-fit w-fit relative">
         <SelectValue placeholder={currentLocale.toUpperCase()} />
       </SelectTrigger>
       <SelectContent className="w-fit">
