@@ -4,16 +4,19 @@ import { LogOutIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const SignOut = () => {
   const t = useTranslations("User-info.profile.profile-form");
   const router = useRouter();
+  const pathname = usePathname();
+
+  const currentLocale = pathname.split("/")[1] || "en";
 
   const handleSignOut = () => {
-    signOut();
-    window.location.href = "/";
-    router.replace("/");
+    window.location.href = `/${currentLocale}`;
+    router.replace(`/${currentLocale}`);
+    signOut({ callbackUrl: currentLocale });
   };
 
   return (

@@ -7,6 +7,7 @@ import ProductCard from "@/components/product-card/ProductCard";
 import { Separator } from "@/components/ui/separator";
 import Loading from "../../loading";
 import { useRouter } from "next/router";
+import { getTranslations } from "next-intl/server";
 
 interface Params {
   params: {
@@ -19,6 +20,7 @@ const ProductPage = async ({ params: { id, locale } }: Params) => {
   const product = (await ProductsService.getById(id, (progress) => (
     <Loading value={progress} />
   ))) as IProduct;
+  const t = await getTranslations("filtered-products");
 
   let relatedProducts = (
     await ProductsService.getBySubcategoryid(
@@ -48,7 +50,7 @@ const ProductPage = async ({ params: { id, locale } }: Params) => {
       </section>
 
       <section className="related-products mt-5 text-center text-3xl">
-        <h1>Related Products</h1>
+        <h1>{t("foundProducts")}</h1>
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {relatedProducts.map((product, i) => (
             <ProductCard

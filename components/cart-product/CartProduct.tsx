@@ -4,7 +4,7 @@ import Image from "next/image";
 import { ICartProduct } from "@/interfaces/product";
 import { idType } from "@/interfaces";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
 interface props {
@@ -23,8 +23,11 @@ const CartProduct = ({
   onQuantityChange,
 }: props) => {
   const router = useRouter();
+  const pathname = usePathname();
   const [inputQuantity, setInputQuantity] = useState<number>(item.cartQuantity);
   const t = useTranslations("Cart");
+
+  const currentLocale = pathname.split("/")[1] || "en";
 
   useEffect(() => {
     if (item.cartQuantity == 0 && isNaN(item.cartQuantity)) {
@@ -47,7 +50,7 @@ const CartProduct = ({
   };
 
   const productPage = (id: string) => {
-    router.push(`/product/${id}`);
+    router.push(`/${currentLocale}/product/${id}`);
   };
 
   return (
@@ -71,7 +74,9 @@ const CartProduct = ({
           <p className="mt-1 text-sm text-muted-foreground">
             {item.attributes.color}
           </p>
-          <p className="mt-1 text-sm font-medium text-purple-600">{item.category.title}</p>
+          <p className="mt-1 text-sm font-medium text-purple-600">
+            {item.category.title}
+          </p>
         </div>
 
         <div className="flex items-center space-x-3 mt-2">

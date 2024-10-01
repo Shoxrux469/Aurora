@@ -1,9 +1,18 @@
 import EmptyCard from "@/components/empty-card/EmptyCard";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { getTranslations } from "next-intl/server";
+import OrdersService from "../../services/api/order";
+import { getCurrentUser } from "@/lib/auth";
+import { IOrder } from "@/interfaces/order";
+import { OrderDetails } from "../order-details/OrderDetails";
 
 const Orders = async () => {
   const t = await getTranslations("User-info.orders");
+  const user = await getCurrentUser();
+
+  const userOrders = await OrdersService.getByUserid(user.id);
+
+  if (userOrders) console.log(userOrders);
 
   const OrdersEmptryPageTabsData = [
     {
@@ -32,14 +41,22 @@ const Orders = async () => {
             {tab.value === "active"
               ? t("active.title")
               : tab.value === "archive"
-                ? t("archive.title")
-                : t("unpaid.title")}
+              ? t("archive.title")
+              : t("unpaid.title")}
           </TabsTrigger>
         ))}
       </TabsList>
       {OrdersEmptryPageTabsData.map((tab) => (
         <TabsContent key={tab.value} value={tab.value}>
-          <EmptyCard title={tab.title} description={tab.description} />
+          {tab.value === "archive" && userOrders && userOrders.length > 0 ? (
+            <div>
+              {userOrders.map((order) => (
+                <OrderDetails key={order.id} order={order} />
+              ))}
+            </div>
+          ) : (
+            <EmptyCard title={tab.title} description={tab.description} />
+          )}
         </TabsContent>
       ))}
     </Tabs>

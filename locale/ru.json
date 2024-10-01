@@ -57,6 +57,33 @@
         "no_orders": "Нет неоплаченных заказов",
         "no_orders_text": "У вас нет неоплаченных заказов. Ваша задолженность по неоплаченным заказам будет отображаться здесь."
       },
+      "order_details": {
+        "item": {
+          "single": "товар",
+          "few": "товара",
+          "many": "товаров"
+        },
+        "order_identifier": "ID заказа:",
+        "status": {
+          "label": "Статус:",
+          "in_progress": "В процессе",
+          "delivered": "Доставлен",
+          "canceled": "Отменен"
+        },
+        "delivery_date": {
+          "label": "Дата доставки:"
+        },
+        "delivery_address": {
+          "label": "Адрес доставки:"
+        },
+        "order_date": {
+          "label": "Дата заказа:"
+        },
+        "order_total": {
+          "label": "Итог заказа:"
+        },
+        "product_count": "товар(ов)"
+      },
       "go_to_home": "Перейти на главную"
     },
     "profile": {
