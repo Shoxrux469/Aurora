@@ -13,10 +13,7 @@ const SignOut = ({ locale }: { locale: string }) => {
   const currentLocale = pathname.split("/")[1] || "en";
 
   const handleSignOut = () => {
-    // window.location.href = `/${currentLocale}`;
-    // router.replace(`/${currentLocale}`);
     signOut({ callbackUrl: `/${currentLocale}` });
-    // signOut();
   };
 
   return (

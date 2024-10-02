@@ -153,6 +153,18 @@
     },
     "delete": "Удалить"
   },
+  "Product-page": {
+    "product-info": {
+      "price": "Цена:",
+      "in_stock": "В наличии",
+      "add_to_cart": "Добавить в корзину",
+      "fast_delivery": "Быстрая доставка",
+      "secure_payment": "Безопасная оплата удобным способом",
+      "easy_returns": "Простой и быстрый возврат",
+      "product_description": "Краткое описание товара:",
+      "pcs": "шт"
+    }
+  },
   "Login": {
     "title": "Вход",
     "sign-in": {
