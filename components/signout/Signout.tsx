@@ -1,12 +1,11 @@
 "use client";
-
 import { LogOutIcon } from "lucide-react";
 import { Button } from "../ui/button";
 import { signOut } from "next-auth/react";
 import { useTranslations } from "next-intl";
 import { usePathname, useRouter } from "next/navigation";
 
-const SignOut = () => {
+const SignOut = ({ locale }: { locale: string }) => {
   const t = useTranslations("User-info.profile.profile-form");
   const router = useRouter();
   const pathname = usePathname();
@@ -14,9 +13,10 @@ const SignOut = () => {
   const currentLocale = pathname.split("/")[1] || "en";
 
   const handleSignOut = () => {
-    window.location.href = `/${currentLocale}`;
-    router.replace(`/${currentLocale}`);
-    signOut({ callbackUrl: currentLocale });
+    // window.location.href = `/${currentLocale}`;
+    // router.replace(`/${currentLocale}`);
+    signOut({ callbackUrl: `/${currentLocale}` });
+    // signOut();
   };
 
   return (
@@ -27,7 +27,7 @@ const SignOut = () => {
       onClick={handleSignOut}
     >
       <LogOutIcon size={20} />
-      {t("log-out")} {/* Use the translated text */}
+      {t("log-out")}
     </Button>
   );
 };
