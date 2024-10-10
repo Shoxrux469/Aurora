@@ -47,7 +47,7 @@ const CartCheckoutCard = ({
   const handleOrderSubmit = async () => {
     setIsLoading(true);
     try {
-      const order: IOrder = {
+      const order: Partial<IOrder> = {
         items: cartItems,
         address: address,
         paymentMethod: "master",
@@ -55,7 +55,7 @@ const CartCheckoutCard = ({
         totalPrice: totalPrice,
         user: {
           id: userId,
-          email: userEmail
+          email: userEmail,
         },
       };
       let res = await OrderService.postOrder(order);
