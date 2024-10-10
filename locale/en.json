@@ -118,6 +118,11 @@
         "single": "item",
         "few": "items",
         "many": "items"
+      },
+      "empty-cart": {
+        "title": "The cart is currently empty!",
+        "description": "Start with selections on the homepage or find the desired product through the search",
+        "to_the_homepage_btn": "To the homepage"
       }
     },
     "cart-delivery": {

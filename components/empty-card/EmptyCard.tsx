@@ -2,6 +2,7 @@
 import { useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "../ui/button";
+import { useTranslations } from "next-intl";
 
 const EmptyCard = ({
   title,
@@ -11,6 +12,7 @@ const EmptyCard = ({
   description: string;
 }) => {
   const router = useRouter();
+  const t = useTranslations("Cart.cart-items-list.empty-cart");
 
   return (
     <div className="flex flex-col items-center h-80  justify-center text-center place-content-center">
@@ -23,7 +25,7 @@ const EmptyCard = ({
         className="w-fit"
         onClick={() => router.push("/")}
       >
-        На главную
+        {t("to_the_homepage_btn")}
       </Button>
     </div>
   );
