@@ -153,6 +153,18 @@
     },
     "delete": "Delete"
   },
+  "Product-page": {
+    "product_info": {
+      "price": "Price:",
+      "in_stock": "In stock",
+      "add_to_cart": "Add to Cart",
+      "fast_delivery": "Fast delivery",
+      "secure_payment": "Secure payment in a convenient way",
+      "easy_returns": "Easy and quick return",
+      "product_description": "Brief description of the product:",
+      "pcs": "pcs"
+    }
+  },
   "Login": {
     "title": "Login",
     "sign-in": {

@@ -8,7 +8,7 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 interface UserInfoProps {
-  params: { slug: string };
+  params: { slug: string; locale: string };
 }
 const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
   const user = await getCurrentUser();
@@ -25,7 +25,7 @@ const UserInfo: React.FC<UserInfoProps> = async ({ params }) => {
     {
       value: "profile",
       label: t("profile.title"),
-      component: <Profile />,
+      component: <Profile locale={params.locale} />,
       icon: <UserCog size={24} />,
     },
   ];

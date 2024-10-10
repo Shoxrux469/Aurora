@@ -8,16 +8,19 @@ import { paymentIcons } from "@/constants";
 import { Separator } from "../ui/separator";
 import { IProduct } from "@/interfaces/product";
 import addToCart from "@/utils/addToCart";
+import { useTranslations } from "next-intl";
 
 const ProductInfo = ({ product }: { product: IProduct }) => {
   const { attributes, price, quantity, title } = product;
+
+  const t = useTranslations("Product-page.product_info");
 
   return (
     <div className="p-2">
       <h2 className="text-2xl font-medium">{title}</h2>
       <Separator className="my-4" />
       <div>
-        <span className="font-medium text-zinc-500">Цена:</span>
+        <span className="font-medium text-zinc-500">{t("price")}</span>
         <p className="text-2xl font-medium tracking-wider">${price}.00</p>
       </div>
 
@@ -31,7 +34,7 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
           ${quantity > 5 ? "text-primary" : "text-[#f3c326]"} 
           `}
         >
-          В наличии {quantity}
+          {t("in_stock")} {quantity}
         </p>
       </div>
 
@@ -40,17 +43,17 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
           onClick={() => addToCart(product)}
           className="w-full py-6 text-base uppercase rounded-none"
         >
-          Добавить в корзину
+          {t("add_to_cart")}
         </Button>
       </div>
 
       <div className="mt-10 p-3 rounded-xl border border-border">
-        <div className="px-1 text-sm font-medium">Быстрая доставка</div>
+        <div className="px-1 text-sm font-medium">{t("fast_delivery")}</div>
 
         <Separator className="my-4" />
 
         <div className="px-1 text-sm font-medium">
-          Безопасная оплата удобным способом
+          {t("secure_payment")}
           <div className="flex gap-2">
             {paymentIcons.map((item) => (
               <Image src={item} alt={item} width={36} height={32} key={item} />
@@ -60,14 +63,12 @@ const ProductInfo = ({ product }: { product: IProduct }) => {
 
         <Separator className="my-4" />
 
-        <div className="px-1 text-sm font-medium">
-          Простой и быстрый возврат
-        </div>
+        <div className="px-1 text-sm font-medium">{t("easy_returns")}</div>
       </div>
 
       <ul className="mt-10 flex flex-col">
         <span className="text-sm font-medium text-zinc-500">
-          Кратко о товаре:
+          {t("product_description")}
         </span>
         {attributes.specific?.map((item) => (
           <li key={item} className="flex items-center">
