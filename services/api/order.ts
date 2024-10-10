@@ -23,14 +23,13 @@ class OrderService {
         FirestoreTransformer.transformFirebaseData(
           res.data.map((doc: any) => doc.document)
         );
-
       console.log(transformedData);
 
       return transformedData;
     }
   }
 
-  async postOrder(order: IOrder) {
+  async postOrder(order: Partial<IOrder>) {
     const firestoreFormat = FirestoreTransformer.toFirestoreFormat(order);
     const res = await makeRequest.post(ApiConstants.orders, {
       fields: firestoreFormat,
