@@ -1,4 +1,5 @@
 "use client";
+
 import { IProduct } from "@/interfaces/product";
 import { Button } from "../ui/button";
 import { ShoppingCartIcon } from "lucide-react";

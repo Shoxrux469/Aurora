@@ -118,6 +118,11 @@
         "single": "товар",
         "few": "товара",
         "many": "товаров"
+      },
+      "empty-cart": {
+        "title": "В корзине пока пусто!",
+        "description": "Начните с подборок на главной странице или найдите нужный товар через поиск",
+        "to_the_homepage_btn": "На главную"
       }
     },
     "cart-delivery": {
@@ -154,7 +159,7 @@
     "delete": "Удалить"
   },
   "Product-page": {
-    "product-info": {
+    "product_info": {
       "price": "Цена:",
       "in_stock": "В наличии",
       "add_to_cart": "Добавить в корзину",
