@@ -52,7 +52,7 @@ const CartClient = ({ user }: props) => {
 
         <div className="flex gap-5">
           <CardPaymentCards />
-          <CartUserDataCard name={user.name} surname={user.surname} />
+          <CartUserDataCard name={user ? user.name : ""} surname={user ? user.name : ""} />
         </div>
       </div>
       <CartCheckoutCard
@@ -60,8 +60,8 @@ const CartClient = ({ user }: props) => {
         setCartItems={setCartItems}
         address={address!}
         paymentCard={paymentCard}
-        userId={user.id}
-        userEmail={user.email}
+        userId={user ? user.id : ""}
+        userEmail={user ? user.email : ""}
       />
     </section>
   );

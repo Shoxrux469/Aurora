@@ -9,6 +9,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { getMessages } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import Loading from "./loading";
+import Script from "next/script";
 // import Loading from "./[locale]/loading";
 
 const fontSans = FontSans({
@@ -32,6 +33,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
+
+      <head>
+        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
+      </head>
+
       <body
         className={cn(
           "min-h-screen bg-background font-sans antialiased",
