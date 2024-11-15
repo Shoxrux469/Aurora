@@ -13,7 +13,7 @@ import UsersService from "@/services/api/users";
 import { toast } from "../ui/use-toast";
 import { useTranslations } from "next-intl";
 
-const ProfileForm = ({ user }: { user: IUser }) => {
+const ProfileForm = ({ user, locale }: { user: IUser; locale: string }) => {
   const t = useTranslations("User-info.profile.profile-form");
 
   const {
@@ -166,7 +166,7 @@ const ProfileForm = ({ user }: { user: IUser }) => {
         </div>
       </div>
       <div className="pt-6 flex justify-between items-center">
-        <SignOut />
+        <SignOut locale={locale} />
         <Button
           variant="purple"
           className="text-lg rounded-xl h-12"

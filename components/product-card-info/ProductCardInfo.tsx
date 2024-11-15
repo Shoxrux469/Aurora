@@ -1,10 +1,14 @@
 "use client";
+
 import { IProduct } from "@/interfaces/product";
 import { Button } from "../ui/button";
 import { ShoppingCartIcon } from "lucide-react";
 import addToCart from "@/utils/addToCart";
+import { useTranslations } from "next-intl";
 
 const ProductCardInfo = ({ product }: { product: IProduct }) => {
+  const t = useTranslations("Product-page.product_info");
+
   return (
     <div className="h-32 flex flex-col justify-between">
       <div className="space-y-1 flex flex-col text-start">
@@ -12,8 +16,8 @@ const ProductCardInfo = ({ product }: { product: IProduct }) => {
           {product.title}
         </h4>
         <span className="text-base font-medium text-purple-600">
-          В наличии {product.quantity}
-          <span className="text-xs">шт</span>
+          {t("in_stock")} {product.quantity}
+          <span className="text-xs">{t("pcs")}</span>
         </span>
       </div>
       <div className="flex items-end justify-between mt-4">

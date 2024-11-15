@@ -118,6 +118,11 @@
         "single": "item",
         "few": "items",
         "many": "items"
+      },
+      "empty-cart": {
+        "title": "The cart is currently empty!",
+        "description": "Start with selections on the homepage or find the desired product through the search",
+        "to_the_homepage_btn": "To the homepage"
       }
     },
     "cart-delivery": {
@@ -152,6 +157,18 @@
       "orderPlacedDescription": "Go to the orders page to track the status."
     },
     "delete": "Delete"
+  },
+  "Product-page": {
+    "product_info": {
+      "price": "Price:",
+      "in_stock": "In stock",
+      "add_to_cart": "Add to Cart",
+      "fast_delivery": "Fast delivery",
+      "secure_payment": "Secure payment in a convenient way",
+      "easy_returns": "Easy and quick return",
+      "product_description": "Brief description of the product:",
+      "pcs": "pcs"
+    }
   },
   "Login": {
     "title": "Login",

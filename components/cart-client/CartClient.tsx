@@ -10,6 +10,7 @@ import CartUserDataCard from "../cart-user-data-card/CartUserDataCard";
 import CardPaymentCards from "../cart-payment-card/CartPaymentCard";
 import CartCheckoutCard from "../cart-checkout-card/CartCheckoutCard";
 import CartDeliveryCard from "../cart-delivery-card/CartDeliveryCard";
+import { useTranslations } from "next-intl";
 
 interface props {
   user: IUser;
@@ -19,6 +20,7 @@ const CartClient = ({ user }: props) => {
   const [cartItems, setCartItems] = useState<ICartProduct[]>([]);
   const [paymentCard, setPaymentCard] = useState<null>(null);
   const { address } = useMapContext();
+  const t = useTranslations("Cart.cart-items-list");
 
   useEffect(() => {
     let cart = localStorage.getItem("cart");
@@ -39,8 +41,8 @@ const CartClient = ({ user }: props) => {
   if (isEmpty)
     return (
       <EmptyCard
-        title="В корзине пока пусто"
-        description="Начните с подборок на главной странице или найдите нужный товар через поиск"
+        title={t("empty-cart.title")}
+        description={t("empty-cart.description")}
       />
     );
 
